@@ -8,6 +8,9 @@ function App() {
   const [selectedDevice, setSelectedDevice] = useState(null);
 
   const CC = 0xB0;
+  const NRPN_MSB = 0x63;
+  const NRPN_LSB = 0x62;
+  const NRPN_VAL = 0x06;
 
   useEffect(() => {
     const detectDevices = access => {
@@ -50,6 +53,18 @@ function App() {
     device.send([CC, 13, 0]); // keyboard octave
   };
 
+  const activateArp = () => {
+    device.send([CC, NRPN_MSB, 0]);
+    device.send([CC, NRPN_LSB, 122]);
+    device.send([CC, NRPN_VAL, 47]);
+  };
+
+  const deactivateArp = () => {
+    device.send([CC, NRPN_MSB, 0]);
+    device.send([CC, NRPN_LSB, 122]);
+    device.send([CC, NRPN_VAL, 46]);
+  };
+
   return (
     <div>
       <p>Available devices:</p>
@@ -64,9 +79,11 @@ function App() {
           </li>
         ))}
       </ul>
-      {device && (
+      {device && <>
         <button onClick={changeOctave}>Change octave</button>
-      )}
+        <button onClick={activateArp}>Arp ON</button>
+        <button onClick={deactivateArp}>Arp OFF</button>
+      </>}
     </div>
   );
 }
