@@ -4,6 +4,7 @@ import NotSupported from './components/NotSupported.js';
 function App() {
   const [midiSupport, setMidiSupport] = useState(true);
   const [devices, setDevices] = useState(null);
+  const [selectedDevice, setSelectedDevice] = useState(null);
 
   useEffect(() => {
     const detectDevices = access => {
@@ -45,7 +46,13 @@ function App() {
       <p>Available devices:</p>
       <ul>
         {devices.map(device => (
-          <li key={device.id}>{device.name}</li>
+          <li key={device.id}>
+            {device.name}
+            {device.id === selectedDevice
+              ? ' (selected)'
+              : <button onClick={() => setSelectedDevice(device.id)}>select</button>
+            }
+          </li>
         ))}
       </ul>
     </div>
