@@ -1,24 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import NotSupported from './components/NotSupported.js';
 
 function App() {
+  const [midiSupport, setMidiSupport] = useState(true);
+  const [devices, setDevices] = useState(null);
+
+  useEffect(() => {
+    const detectDevices = access => {
+      const found = [];
+      const outputs = access.outputs.values();
+      let output = outputs.next();
+      while (!output.done) {
+        found.push(output.value);
+        output = outputs.next();
+      }
+      setDevices(found);
+    };
+
+    if (!navigator.requestMIDIAccess) {
+      setMidiSupport(false);
+      return;
+    }
+
+    navigator.requestMIDIAccess().then(detectDevices);
+  }, []);
+
+  if (!midiSupport) {
+    return <NotSupported />;
+  }
+
+  if (null === devices) {
+    return <div>Detecting MIDI devices...</div>;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <p>Available devices:</p>
+      <ul>
+        {devices.map(device => (
+          <li key={device.id}>{device.name}</li>
+        ))}
+      </ul>
     </div>
   );
 }
