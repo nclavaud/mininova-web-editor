@@ -49,21 +49,22 @@ function App() {
 
   const device = R.find(R.propEq('id', selectedDevice))(devices);
 
-  const changeOctave = () => {
-    device.send([CC, 13, 0]); // keyboard octave
-  };
+  const cc = (control, value) => [
+    [CC, control, value]
+  ];
 
-  const activateArp = () => {
-    device.send([CC, NRPN_MSB, 0]);
-    device.send([CC, NRPN_LSB, 122]);
-    device.send([CC, NRPN_VAL, 47]);
-  };
+  const nrpn = (msb, lsb, value) => [
+    [CC, NRPN_MSB, msb],
+    [CC, NRPN_LSB, lsb],
+    [CC, NRPN_VAL, value],
+  ];
 
-  const deactivateArp = () => {
-    device.send([CC, NRPN_MSB, 0]);
-    device.send([CC, NRPN_LSB, 122]);
-    device.send([CC, NRPN_VAL, 46]);
-  };
+  const sendMessage = msg => device.send(msg);
+  const send = messages => messages.forEach(sendMessage);
+
+  const changeOctave = () => send(cc(13, 0));
+  const activateArp = () => send(nrpn(0, 122, 47));
+  const deactivateArp = () => send(nrpn(0, 122, 46));
 
   return (
     <div>
