@@ -7,6 +7,8 @@ function App() {
 
   useEffect(() => {
     const detectDevices = access => {
+      console.log('Detecting devices');
+
       const found = [];
       const outputs = access.outputs.values();
       let output = outputs.next();
@@ -22,7 +24,12 @@ function App() {
       return;
     }
 
-    navigator.requestMIDIAccess().then(detectDevices);
+    navigator.requestMIDIAccess().then(access => {
+      access.onstatechange = e => {
+        detectDevices(access);
+      }
+      detectDevices(access);
+    });
   }, []);
 
   if (!midiSupport) {
