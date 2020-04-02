@@ -1,5 +1,6 @@
 import * as R from 'ramda';
 import React, { useState, useEffect } from 'react';
+import NoDeviceFound from './components/NoDeviceFound.js';
 import NotSupported from './components/NotSupported.js';
 
 function App() {
@@ -65,6 +66,10 @@ function App() {
   const changeOctave = () => send(cc(13, 0));
   const activateArp = () => send(nrpn(0, 122, 47));
   const deactivateArp = () => send(nrpn(0, 122, 46));
+
+  if (!devices.length) {
+    return <NoDeviceFound />;
+  }
 
   return (
     <div>
