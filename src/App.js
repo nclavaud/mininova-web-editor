@@ -53,6 +53,8 @@ function App() {
   const changeOctave = () => send(device, cc(13, 0));
   const activateArp = () => send(device, nrpn(0, 122, 47));
   const deactivateArp = () => send(device, nrpn(0, 122, 46));
+  const selectPrevPatch = () => send(device, nrpn(63, 0, 0));
+  const selectNextPatch = () => send(device, nrpn(63, 0, 2));
 
   if (!devices.length) {
     return <NoDeviceFound />;
@@ -73,9 +75,13 @@ function App() {
         ))}
       </ul>
       {device && <>
+        <h3>Oct / Arp</h3>
         <button onClick={changeOctave}>Change octave</button>
         <button onClick={activateArp}>Arp ON</button>
         <button onClick={deactivateArp}>Arp OFF</button>
+        <h3>Patch</h3>
+        <button onClick={selectPrevPatch}>Prev patch</button>
+        <button onClick={selectNextPatch}>Next patch</button>
       </>}
     </div>
   );
