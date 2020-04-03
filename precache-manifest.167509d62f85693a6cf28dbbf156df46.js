@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "50f6c47daf1638ea92c83ed786b37af4",
+    "revision": "7bdbc864b635789d0d6bf11aa402528d",
     "url": "/mininova-web-editor/index.html"
   },
   {
-    "revision": "8ffafbdc9aafb3073f51",
+    "revision": "98d2afbb838980944bf5",
     "url": "/mininova-web-editor/static/css/main.5ecd60fb.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/mininova-web-editor/static/js/2.13d30da2.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "8ffafbdc9aafb3073f51",
-    "url": "/mininova-web-editor/static/js/main.31fe679b.chunk.js"
+    "revision": "98d2afbb838980944bf5",
+    "url": "/mininova-web-editor/static/js/main.73739c5a.chunk.js"
   },
   {
     "revision": "2cdf69fcc1fa89fd9271",

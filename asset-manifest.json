@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/mininova-web-editor/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/mininova-web-editor/static/js/main.31fe679b.chunk.js",
-    "main.js.map": "/mininova-web-editor/static/js/main.31fe679b.chunk.js.map",
+    "main.js": "/mininova-web-editor/static/js/main.73739c5a.chunk.js",
+    "main.js.map": "/mininova-web-editor/static/js/main.73739c5a.chunk.js.map",
     "runtime-main.js": "/mininova-web-editor/static/js/runtime-main.ef3d85bd.js",
     "runtime-main.js.map": "/mininova-web-editor/static/js/runtime-main.ef3d85bd.js.map",
     "static/js/2.13d30da2.chunk.js": "/mininova-web-editor/static/js/2.13d30da2.chunk.js",
     "static/js/2.13d30da2.chunk.js.map": "/mininova-web-editor/static/js/2.13d30da2.chunk.js.map",
     "index.html": "/mininova-web-editor/index.html",
-    "precache-manifest.555811063a8529a5d13d8d8ae1397600.js": "/mininova-web-editor/precache-manifest.555811063a8529a5d13d8d8ae1397600.js",
+    "precache-manifest.167509d62f85693a6cf28dbbf156df46.js": "/mininova-web-editor/precache-manifest.167509d62f85693a6cf28dbbf156df46.js",
     "service-worker.js": "/mininova-web-editor/service-worker.js",
     "static/css/main.5ecd60fb.chunk.css.map": "/mininova-web-editor/static/css/main.5ecd60fb.chunk.css.map",
     "static/js/2.13d30da2.chunk.js.LICENSE.txt": "/mininova-web-editor/static/js/2.13d30da2.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.ef3d85bd.js",
     "static/js/2.13d30da2.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.31fe679b.chunk.js"
+    "static/js/main.73739c5a.chunk.js"
   ]
 }
