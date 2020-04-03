@@ -2,7 +2,7 @@ import * as R from 'ramda';
 import React, { useState, useEffect } from 'react';
 import NoDeviceFound from './components/NoDeviceFound.js';
 import NotSupported from './components/NotSupported.js';
-import { cc, nrpn } from './midi';
+import { cc, nrpn, sysex } from './midi';
 
 const send = (device, messages) => {
   messages.forEach(msg => device.send(msg));
@@ -32,7 +32,7 @@ function App() {
       return;
     }
 
-    navigator.requestMIDIAccess().then(access => {
+    navigator.requestMIDIAccess({ sysex: true }).then(access => {
       access.onstatechange = e => {
         detectDevices(access);
       }
@@ -53,6 +53,7 @@ function App() {
   const changeOctave = () => send(device, cc(13, 0));
   const activateArp = () => send(device, nrpn(0, 122, 47));
   const deactivateArp = () => send(device, nrpn(0, 122, 46));
+  const loadPatch = () => send(device, sysex([0x7F, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00]));
   const selectPrevPatch = () => send(device, nrpn(63, 0, 0));
   const selectNextPatch = () => send(device, nrpn(63, 0, 2));
 
@@ -82,6 +83,7 @@ function App() {
         <h3>Patch</h3>
         <button onClick={selectPrevPatch}>Prev patch</button>
         <button onClick={selectNextPatch}>Next patch</button>
+        <button onClick={loadPatch}>Load patch</button>
       </>}
     </div>
   );
