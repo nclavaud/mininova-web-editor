@@ -2,16 +2,16 @@ import * as R from 'ramda';
 import React, { useState, useEffect } from 'react';
 import NoDeviceFound from './components/NoDeviceFound.js';
 import NotSupported from './components/NotSupported.js';
+import { cc, nrpn } from './midi';
+
+const send = (device, messages) => {
+  messages.forEach(msg => device.send(msg));
+};
 
 function App() {
   const [midiSupport, setMidiSupport] = useState(true);
   const [devices, setDevices] = useState(null);
   const [selectedDevice, setSelectedDevice] = useState(null);
-
-  const CC = 0xB0;
-  const NRPN_MSB = 0x63;
-  const NRPN_LSB = 0x62;
-  const NRPN_VAL = 0x06;
 
   useEffect(() => {
     const detectDevices = access => {
@@ -50,22 +50,9 @@ function App() {
 
   const device = R.find(R.propEq('id', selectedDevice))(devices);
 
-  const cc = (control, value) => [
-    [CC, control, value]
-  ];
-
-  const nrpn = (msb, lsb, value) => [
-    [CC, NRPN_MSB, msb],
-    [CC, NRPN_LSB, lsb],
-    [CC, NRPN_VAL, value],
-  ];
-
-  const sendMessage = msg => device.send(msg);
-  const send = messages => messages.forEach(sendMessage);
-
-  const changeOctave = () => send(cc(13, 0));
-  const activateArp = () => send(nrpn(0, 122, 47));
-  const deactivateArp = () => send(nrpn(0, 122, 46));
+  const changeOctave = () => send(device, cc(13, 0));
+  const activateArp = () => send(device, nrpn(0, 122, 47));
+  const deactivateArp = () => send(device, nrpn(0, 122, 46));
 
   if (!devices.length) {
     return <NoDeviceFound />;
