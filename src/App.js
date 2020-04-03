@@ -2,7 +2,7 @@ import * as R from 'ramda';
 import React, { useState, useEffect } from 'react';
 import NoDeviceFound from './components/NoDeviceFound.js';
 import NotSupported from './components/NotSupported.js';
-import { cc, nrpn, sysex } from './midi';
+import { cc, nrpn, sysex, PROGRAM_CHANGE } from './midi';
 
 const send = (device, messages) => {
   messages.forEach(msg => device.send(msg));
@@ -12,8 +12,15 @@ function App() {
   const [midiSupport, setMidiSupport] = useState(true);
   const [devices, setDevices] = useState(null);
   const [selectedDevice, setSelectedDevice] = useState(null);
+  const [currentPatch, setCurrentPatch] = useState(null);
 
   useEffect(() => {
+    const onMidiMessage = message => {
+      if (message.data[0] === PROGRAM_CHANGE) {
+        setCurrentPatch(message.data[1]);
+      }
+    };
+
     const detectDevices = access => {
       console.log('Detecting devices');
 
@@ -25,6 +32,10 @@ function App() {
         output = outputs.next();
       }
       setDevices(found);
+
+      const inputs = access.inputs.values();
+      const input = inputs.next().value;
+      input.onmidimessage = onMidiMessage;
     };
 
     if (!navigator.requestMIDIAccess) {
@@ -81,6 +92,7 @@ function App() {
         <button onClick={activateArp}>Arp ON</button>
         <button onClick={deactivateArp}>Arp OFF</button>
         <h3>Patch</h3>
+        <p>Current patch: {currentPatch}</p>
         <button onClick={selectPrevPatch}>Prev patch</button>
         <button onClick={selectNextPatch}>Next patch</button>
         <button onClick={loadPatch}>Load patch</button>
