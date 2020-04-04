@@ -14,6 +14,14 @@ function App() {
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [currentPatch, setCurrentPatch] = useState(null);
 
+  const selectPatch = device => send(device, nrpn(63, 0, 1));
+
+  const selectDevice = deviceId => {
+    setSelectedDevice(deviceId);
+    const device = R.find(R.propEq('id', deviceId))(devices);
+    selectPatch(device);
+  };
+
   useEffect(() => {
     const onMidiMessage = message => {
       if (message.data[0] === PROGRAM_CHANGE) {
@@ -81,7 +89,7 @@ function App() {
             {device.name}
             {device.id === selectedDevice
               ? ' (selected)'
-              : <button onClick={() => setSelectedDevice(device.id)}>select</button>
+              : <button onClick={() => selectDevice(device.id)}>select</button>
             }
           </li>
         ))}
