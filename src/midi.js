@@ -7,15 +7,15 @@ const SYSEX_END = 0xF7;
 const MIDINOVA_SIGNATURE = [0x00, 0x20, 0x29, 0x03, 0x01];
 export const PROGRAM_CHANGE = 0xC0;
 
-export const cc = (control, value) => [
-  [CC, control, value]
-];
+export const cc = (control, value) => new Uint8Array([
+  CC, control, value,
+]);
 
-export const nrpn = (msb, lsb, value) => [
-  [CC, NRPN_MSB, msb],
-  [CC, NRPN_LSB, lsb],
-  [CC, NRPN_VAL, value],
-];
+export const nrpn = (msb, lsb, value) => new Uint8Array([
+  CC, NRPN_MSB, msb,
+  CC, NRPN_LSB, lsb,
+  CC, NRPN_VAL, value,
+]);
 
 const isValidSysexValue = value => value >= 0x00 && value <= 0x7F;
 
@@ -24,10 +24,10 @@ export const sysex = values => {
     throw new RangeError("Sequence contains invalid sysex value");
   }
 
-  return [
+  return new Uint8Array(
     [SYSEX_START]
       .concat(MIDINOVA_SIGNATURE)
       .concat(values)
       .concat([SYSEX_END])
-  ];
+  );
 };
