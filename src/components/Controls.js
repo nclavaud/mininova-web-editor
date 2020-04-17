@@ -1,12 +1,9 @@
 import React from 'react';
 import * as R from 'ramda';
 import { cc, nrpn } from '../midi';
+import Oscillator from './Oscillator';
 
-const waveforms = [
-  0, 'Sine',
-  1, 'Triangle',
-  2, 'Sawtooth',
-];
+const _cc = R.curry(cc);
 
 function Controls({ currentPatch, loadPatch, emit }) {
   const changeOctave = () => emit(cc(13, 0));
@@ -14,7 +11,17 @@ function Controls({ currentPatch, loadPatch, emit }) {
   const deactivateArp = () => emit(nrpn(0, 122, 46));
   const selectPrevPatch = () => emit(nrpn(63, 0, 0));
   const selectNextPatch = () => emit(nrpn(63, 0, 2));
-  const selectOsc1Wave = event => emit(cc(19, event.target.value));
+  const osc = {
+    1: {
+      wave: _cc(19),
+    },
+    2: {
+      wave: _cc(29),
+    },
+    3: {
+      wave: _cc(41),
+    },
+  };
 
   return (
     <div>
@@ -28,12 +35,14 @@ function Controls({ currentPatch, loadPatch, emit }) {
       <button onClick={activateArp}>Arp ON</button>
       <button onClick={deactivateArp}>Arp OFF</button>
       <h3>Oscillators</h3>
-      <h4>Oscillator 1</h4>
-      <select onClick={selectOsc1Wave}>
-        {R.map(([waveform, label]) => (
-          <option key={waveform} value={waveform}>{label}</option>
-        ), R.splitEvery(2, waveforms))}
-      </select>
+      {[1, 2, 3].map(i => (
+        <Oscillator
+          key={i}
+          emit={emit}
+          controls={osc[i]}
+          number={i}
+        />
+      ))}
     </div>
   );
 }
