@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import { Controls, Devices } from './components';
 import { nrpn, sysex, PROGRAM_CHANGE } from './midi';
-import { send } from './webmidi';
 
 // is it really handshake?
 const sequenceHandshake = [0x7F, 0x60, 0x21, 0x00, 0x00, 0x00, 0x00];
 const sequencePreHandshake = [0x7F, 0x62, 0x01, 0x00, 0x00, 0x00, 0x00];
 const sequenceLoadCurrentPatch = [0x7F, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00];
 
+const consoleOutput = new class {
+  send(message) {
+    const bytes = message.map(d => d).join(' ');
+    console.log(`Output: ${bytes}`);
+  }
+}();
+
 function App() {
   const [input, setInput] = useState(null);
-  const [output, setOutput] = useState(null);
+  const [output, setOutput] = useState(consoleOutput);
   const [currentPatch, setCurrentPatch] = useState(null);
 
   const onIncomingMidiMessage = message => {
