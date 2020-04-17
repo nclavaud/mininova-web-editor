@@ -1,7 +1,6 @@
 import React from 'react';
 import * as R from 'ramda';
 import { cc, nrpn } from '../midi';
-import { send } from '../webmidi';
 
 const waveforms = [
   0, 'Sine',
@@ -9,13 +8,13 @@ const waveforms = [
   2, 'Sawtooth',
 ];
 
-function Controls({ currentPatch, loadPatch, output }) {
-  const changeOctave = () => send(output, cc(13, 0));
-  const activateArp = () => send(output, nrpn(0, 122, 47));
-  const deactivateArp = () => send(output, nrpn(0, 122, 46));
-  const selectPrevPatch = () => send(output, nrpn(63, 0, 0));
-  const selectNextPatch = () => send(output, nrpn(63, 0, 2));
-  const selectOsc1Wave = event => send(output, cc(19, event.target.value));
+function Controls({ currentPatch, loadPatch, emit }) {
+  const changeOctave = () => emit(cc(13, 0));
+  const activateArp = () => emit(nrpn(0, 122, 47));
+  const deactivateArp = () => emit(nrpn(0, 122, 46));
+  const selectPrevPatch = () => emit(nrpn(63, 0, 0));
+  const selectNextPatch = () => emit(nrpn(63, 0, 2));
+  const selectOsc1Wave = event => emit(cc(19, event.target.value));
 
   return (
     <div>

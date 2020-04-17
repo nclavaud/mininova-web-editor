@@ -21,14 +21,17 @@ function App() {
     }
   };
 
-  const loadPatch = () => send(output, sysex(sequenceLoadCurrentPatch));
+  const emit = message => output && output.send(message);
+
+  const loadPatch = () => emit(sysex(sequenceLoadCurrentPatch));
 
   const selectPatch = output => {
-    send(output, sysex(sequencePreHandshake));
-    setTimeout(() => send(output, sysex(sequenceHandshake)), 1000);
-    setTimeout(() => send(output, nrpn(63, 0, 1)), 2000);
+    emit(sysex(sequencePreHandshake));
+    setTimeout(() => emit(sysex(sequenceHandshake)), 1000);
+    setTimeout(() => emit(nrpn(63, 0, 1)), 2000);
     setTimeout(loadPatch, 3000);
   };
+
 
   return (
     <div>
@@ -43,8 +46,7 @@ function App() {
       <Controls
         currentPatch={currentPatch}
         loadPatch={loadPatch}
-        input={input}
-        output={output}
+        emit={emit}
       />
     </div>
   );
