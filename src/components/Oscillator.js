@@ -13,7 +13,7 @@ function Oscillator({ emit, controls, number }) {
   return (
     <div>
       <h4>Oscillator {number}</h4>
-      <select onClick={selectWave}>
+      <select onChange={selectWave}>
         {R.map(([waveform, label]) => (
           <option key={waveform} value={waveform}>{label}</option>
         ), R.splitEvery(2, waveforms))}
