@@ -9,6 +9,7 @@ const waveforms = [
 
 function Oscillator({ emit, controls, number }) {
   const selectWave = event => emit(controls.wave(event.target.value));
+  const selectWTInt = event => emit(controls.wtint(event.target.value));
   const selectVSync = event => emit(controls.vsync(event.target.value));
 
   return (
@@ -27,6 +28,16 @@ function Oscillator({ emit, controls, number }) {
           min="0"
           max="127"
           onChange={selectVSync}
+        />
+      </div>
+      <div>
+        <label htmlFor={`osc-${number}-wtint`}>Wave Table Interpolation</label>
+        <input
+          id={`osc-${number}-wtint`}
+          type="number"
+          min="0"
+          max="127"
+          onChange={selectWTInt}
         />
       </div>
     </div>

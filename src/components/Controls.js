@@ -14,14 +14,17 @@ function Controls({ currentPatch, loadPatch, emit }) {
   const osc = {
     1: {
       wave: _cc(19),
+      wtint: _cc(20),
       vsync: _cc(22),
     },
     2: {
       wave: _cc(29),
+      wtint: _cc(30),
       vsync: _cc(33),
     },
     3: {
       wave: _cc(41),
+      wtint: _cc(42),
       vsync: _cc(44),
     },
   };
