@@ -1,9 +1,6 @@
 import React from 'react';
-import * as R from 'ramda';
 import { cc, nrpn } from '../midi';
 import Oscillator from './Oscillator';
-
-const _cc = R.curry(cc);
 
 function Controls({ currentPatch, loadPatch, emit }) {
   const changeOctave = () => emit(cc(13, 0));
@@ -11,23 +8,6 @@ function Controls({ currentPatch, loadPatch, emit }) {
   const deactivateArp = () => emit(nrpn(0, 122, 46));
   const selectPrevPatch = () => emit(nrpn(63, 0, 0));
   const selectNextPatch = () => emit(nrpn(63, 0, 2));
-  const osc = {
-    1: {
-      wave: _cc(19),
-      wtint: _cc(20),
-      vsync: _cc(22),
-    },
-    2: {
-      wave: _cc(29),
-      wtint: _cc(30),
-      vsync: _cc(33),
-    },
-    3: {
-      wave: _cc(41),
-      wtint: _cc(42),
-      vsync: _cc(44),
-    },
-  };
 
   return (
     <div>
@@ -45,7 +25,6 @@ function Controls({ currentPatch, loadPatch, emit }) {
         <Oscillator
           key={i}
           emit={emit}
-          controls={osc[i]}
           number={i}
         />
       ))}
