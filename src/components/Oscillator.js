@@ -7,6 +7,7 @@ function Oscillator({ emit, number }) {
     'wave',
     'vsync',
     'wtint',
+    'hardness',
   ];
 
   return (

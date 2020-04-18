@@ -28,6 +28,12 @@ export const controls = {
     range: [0, 127],
     msg: _cc(22),
   },
+  'osc-1-hardness': {
+    label: 'Hardness',
+    type: 'range',
+    range: [0, 127],
+    msg: _cc(23),
+  },
   'osc-2-wave': {
     label: 'Wave',
     type: 'enum',
@@ -46,6 +52,12 @@ export const controls = {
     range: [0, 127],
     msg: _cc(33),
   },
+  'osc-2-hardness': {
+    label: 'Hardness',
+    type: 'range',
+    range: [0, 127],
+    msg: _cc(34),
+  },
   'osc-3-wave': {
     label: 'Wave',
     type: 'enum',
@@ -63,5 +75,11 @@ export const controls = {
     type: 'range',
     range: [0, 127],
     msg: _cc(44),
+  },
+  'osc-3-hardness': {
+    label: 'Hardness',
+    type: 'range',
+    range: [0, 127],
+    msg: _cc(45),
   },
 };
