@@ -1,5 +1,6 @@
 import React from 'react';
 import * as R from 'ramda';
+import InputRange from './InputRange';
 
 const waveforms = [
   0, 'Sine',
@@ -20,26 +21,18 @@ function Oscillator({ emit, controls, number }) {
           <option key={waveform} value={waveform}>{label}</option>
         ), R.splitEvery(2, waveforms))}
       </select>
-      <div>
-        <label htmlFor={`osc-${number}-vsync`}>Virtual Sync</label>
-        <input
-          id={`osc-${number}-vsync`}
-          type="number"
-          min="0"
-          max="127"
-          onChange={selectVSync}
-        />
-      </div>
-      <div>
-        <label htmlFor={`osc-${number}-wtint`}>Wave Table Interpolation</label>
-        <input
-          id={`osc-${number}-wtint`}
-          type="number"
-          min="0"
-          max="127"
-          onChange={selectWTInt}
-        />
-      </div>
+      <InputRange
+        id={`osc-${number}-vsync`}
+        label="Virtual Sync"
+        range={[0, 127]}
+        onChange={selectVSync}
+      />
+      <InputRange
+        id={`osc-${number}-wtint`}
+        label="Wave Table Interpolation"
+        range={[0, 127]}
+        onChange={selectWTInt}
+      />
     </div>
   );
 };
