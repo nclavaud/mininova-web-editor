@@ -20,7 +20,7 @@ function Oscillator({ emit, controls, number }) {
         ), R.splitEvery(2, waveforms))}
       </select>
       <div>
-        <label for={`osc-${number}-vsync`}>Virtual Sync</label>
+        <label htmlFor={`osc-${number}-vsync`}>Virtual Sync</label>
         <input
           id={`osc-${number}-vsync`}
           type="number"
