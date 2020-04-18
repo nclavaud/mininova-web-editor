@@ -16,11 +16,14 @@ function Control({ id, control, emit }) {
     };
 
     return (
-      <select onChange={onChange}>
-        {control.enum.map((label, value) => (
-          <option key={value} value={value}>{label}</option>
-        ))}
-      </select>
+      <div>
+        <label htmlFor={control.id}>{control.label}</label>
+        <select onChange={onChange}>
+          {control.enum.map((label, value) => (
+            <option key={value} value={value}>{label}</option>
+          ))}
+        </select>
+      </div>
     );
   }
 
