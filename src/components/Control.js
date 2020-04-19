@@ -5,7 +5,7 @@ import InputRange from './InputRange';
 function Control(props) {
   const { control } = props;
 
-  if (control.type === 'enum') {
+  if (control.hasOwnProperty('enum')) {
     return <InputEnum {...props} />;
   }
 
