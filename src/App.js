@@ -23,7 +23,8 @@ function App() {
     if (message.data[0] === PROGRAM_CHANGE) {
       setCurrentPatch(message.data[1]);
     } else {
-      console.log(message);
+      const bytes = message.data.map(d => d).join(' ');
+      console.log(`Input: ${bytes}`);
     }
   };
 
