@@ -91,8 +91,14 @@ export const controls = {
   'osc-1-wtint': {
     label: 'Wave Table Interpolation',
     range: [0, 127],
-    init: 0,
+    init: 127,
     msg: _cc(20),
+  },
+  'osc-1-pwwti': {
+    label: 'Pulse Width / Wave Table index',
+    range: [0, 127],
+    init: 64,
+    msg: _cc(21),
   },
   'osc-1-vsync': {
     label: 'Virtual Sync',
@@ -106,6 +112,36 @@ export const controls = {
     init: 0,
     msg: _cc(23),
   },
+  'osc-1-density': {
+    label: 'Density',
+    range: [0, 127],
+    init: 0,
+    msg: _cc(24),
+  },
+  'osc-1-densitydetune': {
+    label: 'Density Detune',
+    range: [0, 127],
+    init: 0,
+    msg: _cc(25),
+  },
+  'osc-1-semitones': {
+    label: 'Semitones',
+    range: [0, 127],
+    init: 64,
+    msg: _cc(26),
+  },
+  'osc-1-cents': {
+    label: 'Detune cents',
+    range: [0, 127],
+    init: 64,
+    msg: _cc(27),
+  },
+  'osc-1-pitch': {
+    range: [52, 76],
+    label: 'Pitch Wheel',
+    init: 76,
+    msg: _cc(28),
+  },
   'osc-2-wave': {
     label: 'Wave',
     enum: waveforms,
@@ -115,8 +151,14 @@ export const controls = {
   'osc-2-wtint': {
     label: 'Wave Table Interpolation',
     range: [0, 127],
-    init: 0,
+    init: 127,
     msg: _cc(30),
+  },
+  'osc-2-pwwti': {
+    label: 'Pulse Width / Wave Table index',
+    range: [0, 127],
+    init: 64,
+    msg: _cc(43),
   },
   'osc-2-vsync': {
     label: 'Virtual Sync',
@@ -130,6 +172,36 @@ export const controls = {
     init: 0,
     msg: _cc(34),
   },
+  'osc-2-density': {
+    label: 'Density',
+    range: [0, 127],
+    init: 0,
+    msg: _cc(35),
+  },
+  'osc-2-densitydetune': {
+    label: 'Density Detune',
+    range: [0, 127],
+    init: 0,
+    msg: _cc(36),
+  },
+  'osc-2-semitones': {
+    label: 'Semitones',
+    range: [0, 127],
+    init: 64,
+    msg: _cc(37),
+  },
+  'osc-2-cents': {
+    label: 'Detune cents',
+    range: [0, 127],
+    init: 64,
+    msg: _cc(39),
+  },
+  'osc-2-pitch': {
+    label: 'Pitch Wheel',
+    range: [52, 76],
+    init: 76,
+    msg: _cc(40),
+  },
   'osc-3-wave': {
     label: 'Wave',
     enum: waveforms,
@@ -139,8 +211,14 @@ export const controls = {
   'osc-3-wtint': {
     label: 'Wave Table Interpolation',
     range: [0, 127],
-    init: 0,
+    init: 127,
     msg: _cc(42),
+  },
+  'osc-3-pwwti': {
+    label: 'Pulse Width / Wave Table index',
+    range: [0, 127],
+    init: 64,
+    msg: _cc(43),
   },
   'osc-3-vsync': {
     label: 'Virtual Sync',
@@ -153,5 +231,35 @@ export const controls = {
     range: [0, 127],
     init: 0,
     msg: _cc(45),
+  },
+  'osc-3-density': {
+    label: 'Density',
+    range: [0, 127],
+    init: 0,
+    msg: _cc(46),
+  },
+  'osc-3-densitydetune': {
+    label: 'Density Detune',
+    range: [0, 127],
+    init: 0,
+    msg: _cc(47),
+  },
+  'osc-3-semitones': {
+    label: 'Semitones',
+    range: [0, 127],
+    init: 64,
+    msg: _cc(48),
+  },
+  'osc-3-cents': {
+    label: 'Detune cents',
+    range: [0, 127],
+    init: 64,
+    msg: _cc(49),
+  },
+  'osc-3-pitch': {
+    label: 'Pitch Wheel',
+    range: [52, 76],
+    init: 76,
+    msg: _cc(50),
   },
 };

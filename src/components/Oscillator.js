@@ -5,9 +5,15 @@ import { controls } from '../mininova';
 function Oscillator({ emit, number }) {
   const params = [
     'wave',
+    'semitones',
+    'cents',
     'vsync',
-    'wtint',
+    'pwwti',
     'hardness',
+    'density',
+    'densitydetune',
+    'pitch',
+    'wtint',
   ];
 
   return (
