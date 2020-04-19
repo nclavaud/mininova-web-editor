@@ -3,12 +3,13 @@ import * as R from 'ramda';
 import NotSupported from './NotSupported.js';
 
 function Devices({
+  onChangeOutput,
   onIncomingMidiMessage,
-  selectPatch,
   input,
   setInput,
   output,
-  setOutput
+  setOutput,
+  emit
 }) {
   const [midiSupport, setMidiSupport] = useState(null);
   const [availableInputs, setAvailableInputs] = useState(null);
@@ -17,7 +18,7 @@ function Devices({
   const selectOutput = id => {
     const device = R.find(R.propEq('id', id))(availableOutputs);
     setOutput(device);
-    selectPatch(device);
+    onChangeOutput();
   };
 
   const selectInput = id => {

@@ -1,5 +1,19 @@
 import * as R from 'ramda';
-import { cc } from './midi';
+import { cc, nrpn, sysex } from './midi';
+
+// is it really handshake?
+const sequenceHandshake = [0x7F, 0x60, 0x21, 0x00, 0x00, 0x00, 0x00];
+const sequencePreHandshake = [0x7F, 0x62, 0x01, 0x00, 0x00, 0x00, 0x00];
+const sequenceLoadCurrentPatch = [0x7F, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00];
+
+export const loadPatch = sysex(sequenceLoadCurrentPatch);
+
+export const selectPatch = emit => {
+  emit(sysex(sequencePreHandshake));
+  setTimeout(() => emit(sysex(sequenceHandshake)), 1000);
+  setTimeout(() => emit(nrpn(63, 0, 1)), 2000);
+  setTimeout(() => emit(loadPatch), 3000);
+};
 
 const _cc = R.curry(cc);
 

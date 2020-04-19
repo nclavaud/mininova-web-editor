@@ -1,18 +1,8 @@
 import React, { useState } from 'react';
 import { Controls, Devices } from './components';
-import { nrpn, sysex, PROGRAM_CHANGE } from './midi';
-
-// is it really handshake?
-const sequenceHandshake = [0x7F, 0x60, 0x21, 0x00, 0x00, 0x00, 0x00];
-const sequencePreHandshake = [0x7F, 0x62, 0x01, 0x00, 0x00, 0x00, 0x00];
-const sequenceLoadCurrentPatch = [0x7F, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00];
-
-const consoleOutput = new class {
-  send(message) {
-    const bytes = message.map(d => d).join(' ');
-    console.log(`Output: ${bytes}`);
-  }
-}();
+import { PROGRAM_CHANGE } from './midi';
+import { selectPatch } from './mininova';
+import { debugMidiMessage, consoleOutput } from './debug';
 
 function App() {
   const [input, setInput] = useState(null);
@@ -20,31 +10,22 @@ function App() {
   const [currentPatch, setCurrentPatch] = useState(null);
 
   const onIncomingMidiMessage = message => {
+    debugMidiMessage(message.data, 'Input: ');
     if (message.data[0] === PROGRAM_CHANGE) {
       setCurrentPatch(message.data[1]);
-    } else {
-      const bytes = message.data.map(d => d).join(' ');
-      console.log(`Input: ${bytes}`);
     }
   };
 
   const emit = message => output && output.send(message);
 
-  const loadPatch = () => emit(sysex(sequenceLoadCurrentPatch));
-
-  const selectPatch = output => {
-    emit(sysex(sequencePreHandshake));
-    setTimeout(() => emit(sysex(sequenceHandshake)), 1000);
-    setTimeout(() => emit(nrpn(63, 0, 1)), 2000);
-    setTimeout(loadPatch, 3000);
-  };
-
+  const onChangeOutput = () => selectPatch(emit);
 
   return (
     <div>
       <Devices
+        onChangeOutput={onChangeOutput}
+        emit={emit}
         onIncomingMidiMessage={onIncomingMidiMessage}
-        selectPatch={selectPatch}
         input={input}
         setInput={setInput}
         output={output}
@@ -52,7 +33,6 @@ function App() {
       />
       <Controls
         currentPatch={currentPatch}
-        loadPatch={loadPatch}
         emit={emit}
       />
     </div>
