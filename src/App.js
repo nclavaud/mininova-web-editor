@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Controls, Devices } from './components';
 import { PROGRAM_CHANGE } from './midi';
-import { selectPatch } from './mininova';
+import { isPatch, selectPatch } from './mininova';
 import { debugMidiMessage, consoleOutput } from './debug';
 
 function App() {
@@ -9,10 +9,16 @@ function App() {
   const [output, setOutput] = useState(consoleOutput);
   const [currentPatch, setCurrentPatch] = useState(null);
 
+  const decodePatch = data => {
+    console.log('Received patch.');
+  }
+
   const onIncomingMidiMessage = message => {
     debugMidiMessage(message.data, 'Input: ');
     if (message.data[0] === PROGRAM_CHANGE) {
       setCurrentPatch(message.data[1]);
+    } else if (isPatch(message.data)) {
+      decodePatch(message.data);
     }
   };
 
