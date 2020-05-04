@@ -18,10 +18,11 @@ function InputRange({ id, control, emit }) {
   };
 
   return (
-    <div>
-      <label htmlFor={id}>{control.label}</label>
+    <div className="control">
+      <label htmlFor={id} className="control-label">{control.label}</label>
       <input
         id={id}
+        className="control-input"
         type="number"
         min={control.range[0]}
         max={control.range[1]}

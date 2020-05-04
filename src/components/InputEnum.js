@@ -16,9 +16,9 @@ function InputEnum({ id, control, emit }) {
   };
 
   return (
-    <div>
-      <label htmlFor={control.id}>{control.label}</label>
-      <select onChange={onChange} value={value}>
+    <div className="control">
+      <label htmlFor={control.id} className="control-label">{control.label}</label>
+      <select onChange={onChange} value={value} className="control-input">
         {control.enum.map((label, value) => (
           <option key={value} value={value}>{label}</option>
         ))}

@@ -76,7 +76,7 @@ function Devices({
   }
 
   return (
-    <div>
+    <div className="devices">
       <p>Available devices:</p>
       <ul>
         {availableInputs.map(device => (

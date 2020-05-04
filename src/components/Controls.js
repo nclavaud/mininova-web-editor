@@ -11,7 +11,7 @@ function Controls({ currentPatch, emit }) {
   const selectNextPatch = () => emit(nrpn(63, 0, 2));
 
   return (
-    <div>
+    <div className="controls">
       <h3>Patch</h3>
       <p>Current patch: {currentPatch}</p>
       <button onClick={selectPrevPatch}>Prev patch</button>
@@ -22,13 +22,15 @@ function Controls({ currentPatch, emit }) {
       <button onClick={activateArp}>Arp ON</button>
       <button onClick={deactivateArp}>Arp OFF</button>
       <h3>Oscillators</h3>
-      {[1, 2, 3].map(i => (
-        <Oscillator
-          key={i}
-          emit={emit}
-          number={i}
-        />
-      ))}
+      <div className="oscillators">
+        {[1, 2, 3].map(i => (
+          <Oscillator
+            key={i}
+            emit={emit}
+            number={i}
+          />
+        ))}
+      </div>
     </div>
   );
 }
