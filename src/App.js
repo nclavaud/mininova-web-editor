@@ -30,7 +30,6 @@ function App() {
     <div>
       <DeviceSetup
         onChangeOutput={onChangeOutput}
-        emit={emit}
         onIncomingMidiMessage={onIncomingMidiMessage}
         input={input}
         setInput={setInput}

@@ -10,8 +10,7 @@ function DeviceSetup({
   input,
   setInput,
   output,
-  setOutput,
-  emit
+  setOutput
 }) {
   const [midiSupport, setMidiSupport] = useState(null);
   const [availableInputs, setAvailableInputs] = useState(null);
