@@ -10,7 +10,8 @@ function DeviceSetup({
   input,
   setInput,
   output,
-  setOutput
+  setOutput,
+  onClose
 }) {
   const [midiSupport, setMidiSupport] = useState(null);
   const [availableInputs, setAvailableInputs] = useState(null);
@@ -130,6 +131,7 @@ function DeviceSetup({
           </li>
         ))}
       </ul>
+      <button onClick={onClose}>Close</button>
     </div>
   );
 }
