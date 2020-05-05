@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Controls, Devices } from './components';
+import { Controls, DeviceSetup } from './components';
 import { PROGRAM_CHANGE } from './midi';
 import { isPatch, selectPatch } from './mininova';
 import { debugMidiMessage, consoleOutput } from './debug';
@@ -28,7 +28,7 @@ function App() {
 
   return (
     <div>
-      <Devices
+      <DeviceSetup
         onChangeOutput={onChangeOutput}
         emit={emit}
         onIncomingMidiMessage={onIncomingMidiMessage}

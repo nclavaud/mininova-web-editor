@@ -4,7 +4,7 @@ import NotSupported from './NotSupported.js';
 import { cc } from '../midi';
 import { debugMidiMessage } from '../debug';
 
-function Devices({
+function DeviceSetup({
   onChangeOutput,
   onIncomingMidiMessage,
   input,
@@ -108,7 +108,7 @@ function Devices({
   }
 
   return (
-    <div className="devices">
+    <div className="deviceSetup">
       <button onClick={detectUSB}>Connect to USB device</button>
       <p>Available devices:</p>
       <ul>
@@ -135,4 +135,4 @@ function Devices({
   );
 }
 
-export default Devices;
+export default DeviceSetup;

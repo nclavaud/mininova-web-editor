@@ -1,7 +1,7 @@
 import Controls from './Controls';
-import Devices from './Devices';
+import DeviceSetup from './DeviceSetup';
 
 export {
   Controls,
-  Devices,
+  DeviceSetup,
 };
