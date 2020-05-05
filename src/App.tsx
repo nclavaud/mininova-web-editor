@@ -5,15 +5,15 @@ import { isPatch, selectPatch } from './mininova';
 import { debugMidiMessage, consoleOutput } from './debug';
 
 function App() {
-  const [input, setInput] = useState(null);
+  const [input, setInput] = useState(undefined);
   const [output, setOutput] = useState(consoleOutput);
-  const [currentPatch, setCurrentPatch] = useState(null);
+  const [currentPatch, setCurrentPatch] = useState<number | undefined>(undefined);
 
-  const decodePatch = data => {
+  const decodePatch = (data: Uint8Array) => {
     console.log('Received patch.');
   }
 
-  const onIncomingMidiMessage = message => {
+  const onIncomingMidiMessage = (message: WebMidi.MIDIMessageEvent) => {
     debugMidiMessage(message.data, 'Input: ');
     if (message.data[0] === PROGRAM_CHANGE) {
       setCurrentPatch(message.data[1]);
@@ -22,7 +22,7 @@ function App() {
     }
   };
 
-  const emit = message => output && output.send(message);
+  const emit = (message: Uint8Array) => output && output.send(message);
 
   const onChangeOutput = () => selectPatch(emit);
 
