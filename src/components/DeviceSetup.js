@@ -10,12 +10,12 @@ function DeviceSetup({
   input,
   setInput,
   output,
-  setOutput,
-  onClose
+  setOutput
 }) {
   const [midiSupport, setMidiSupport] = useState(null);
   const [availableInputs, setAvailableInputs] = useState(null);
   const [availableOutputs, setAvailableOutputs] = useState(null);
+  const [visible, setVisible] = useState(false);
 
   const selectOutput = id => {
     const device = R.find(R.propEq('id', id))(availableOutputs);
@@ -97,41 +97,55 @@ function DeviceSetup({
     });
   }, []);
 
-  if (null === midiSupport) {
-    return <p>Detecting MIDI support...</p>;
-  } else if (!midiSupport) {
-    return <NotSupported />;
+  if (!visible) {
+    return (
+      <button onClick={() => setVisible(true)}>Choose device</button>
+    );
   }
 
-  if (null === availableInputs || null === availableOutputs) {
-    return <div>Detecting MIDI devices...</div>;
-  }
+  const renderMidiDevices = () => {
+    if (null === midiSupport) {
+      return <p>Detecting MIDI support...</p>;
+    } else if (!midiSupport) {
+      return <NotSupported />;
+    }
+
+    if (null === availableInputs || null === availableOutputs) {
+      return <div>Detecting MIDI devices...</div>;
+    }
+
+    return (
+      <div>
+        <p>Available devices:</p>
+        <ul>
+          {availableInputs.map(device => (
+            <li key={device.id}>
+              IN {device.name}
+              {input && device.id === input.id
+                ? ' (selected)'
+                : <button onClick={() => selectInput(device.id)}>select</button>
+              }
+            </li>
+          ))}
+          {availableOutputs.map(device => (
+            <li key={device.id}>
+              OUT {device.name}
+              {output && device.id === output.id
+                ? ' (selected)'
+                : <button onClick={() => selectOutput(device.id)}>select</button>
+              }
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
 
   return (
     <div className="deviceSetup">
       <button onClick={detectUSB}>Connect to USB device</button>
-      <p>Available devices:</p>
-      <ul>
-        {availableInputs.map(device => (
-          <li key={device.id}>
-            IN {device.name}
-            {input && device.id === input.id
-              ? ' (selected)'
-              : <button onClick={() => selectInput(device.id)}>select</button>
-            }
-          </li>
-        ))}
-        {availableOutputs.map(device => (
-          <li key={device.id}>
-            OUT {device.name}
-            {output && device.id === output.id
-              ? ' (selected)'
-              : <button onClick={() => selectOutput(device.id)}>select</button>
-            }
-          </li>
-        ))}
-      </ul>
-      <button onClick={onClose}>Close</button>
+      {renderMidiDevices()}
+      <button onClick={() => setVisible(false)}>Close</button>
     </div>
   );
 }

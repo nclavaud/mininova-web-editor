@@ -8,7 +8,6 @@ function App() {
   const [input, setInput] = useState(null);
   const [output, setOutput] = useState(consoleOutput);
   const [currentPatch, setCurrentPatch] = useState(null);
-  const [showDeviceSetup, setShowDeviceSetup] = useState(false);
 
   const decodePatch = data => {
     console.log('Received patch.');
@@ -29,20 +28,14 @@ function App() {
 
   return (
     <div>
-      {showDeviceSetup && (
-        <DeviceSetup
-          onChangeOutput={onChangeOutput}
-          onIncomingMidiMessage={onIncomingMidiMessage}
-          input={input}
-          setInput={setInput}
-          output={output}
-          setOutput={setOutput}
-          onClose={() => setShowDeviceSetup(false)}
-        />
-      )}
-      {!showDeviceSetup && (
-        <button onClick={() => setShowDeviceSetup(true)}>Choose device</button>
-      )}
+      <DeviceSetup
+        onChangeOutput={onChangeOutput}
+        onIncomingMidiMessage={onIncomingMidiMessage}
+        input={input}
+        setInput={setInput}
+        output={output}
+        setOutput={setOutput}
+      />
       <Controls
         currentPatch={currentPatch}
         emit={emit}
