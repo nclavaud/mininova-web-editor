@@ -2,14 +2,7 @@ import React, { useState } from 'react';
 import MIDIDeviceSetup from './MIDIDeviceSetup';
 import USBDeviceSetup from './USBDeviceSetup';
 
-function DeviceSetup({
-  onChangeOutput,
-  onIncomingMidiMessage,
-  input,
-  setInput,
-  output,
-  setOutput
-}) {
+function DeviceSetup(props) {
   const [visible, setVisible] = useState(false);
 
   if (!visible) {
@@ -21,7 +14,7 @@ function DeviceSetup({
   return (
     <div className="deviceSetup">
       <USBDeviceSetup />
-      <MIDIDeviceSetup />
+      <MIDIDeviceSetup {...props} />
       <button onClick={() => setVisible(false)}>Close</button>
     </div>
   );
