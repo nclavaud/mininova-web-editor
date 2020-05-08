@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/mininova-web-editor/static/css/main.3bb17a14.chunk.css",
-    "main.js": "/mininova-web-editor/static/js/main.7d3cf1ff.chunk.js",
-    "main.js.map": "/mininova-web-editor/static/js/main.7d3cf1ff.chunk.js.map",
+    "main.js": "/mininova-web-editor/static/js/main.6b7d5c43.chunk.js",
+    "main.js.map": "/mininova-web-editor/static/js/main.6b7d5c43.chunk.js.map",
     "runtime-main.js": "/mininova-web-editor/static/js/runtime-main.161543d9.js",
     "runtime-main.js.map": "/mininova-web-editor/static/js/runtime-main.161543d9.js.map",
-    "static/js/2.2418d54a.chunk.js": "/mininova-web-editor/static/js/2.2418d54a.chunk.js",
-    "static/js/2.2418d54a.chunk.js.map": "/mininova-web-editor/static/js/2.2418d54a.chunk.js.map",
+    "static/js/2.796d6ae9.chunk.js": "/mininova-web-editor/static/js/2.796d6ae9.chunk.js",
+    "static/js/2.796d6ae9.chunk.js.map": "/mininova-web-editor/static/js/2.796d6ae9.chunk.js.map",
     "index.html": "/mininova-web-editor/index.html",
-    "precache-manifest.06fcc9547ca57abfeb2283b57043e06e.js": "/mininova-web-editor/precache-manifest.06fcc9547ca57abfeb2283b57043e06e.js",
+    "precache-manifest.eba75e5d6f45969b5e0172618890ac8f.js": "/mininova-web-editor/precache-manifest.eba75e5d6f45969b5e0172618890ac8f.js",
     "service-worker.js": "/mininova-web-editor/service-worker.js",
     "static/css/main.3bb17a14.chunk.css.map": "/mininova-web-editor/static/css/main.3bb17a14.chunk.css.map",
-    "static/js/2.2418d54a.chunk.js.LICENSE.txt": "/mininova-web-editor/static/js/2.2418d54a.chunk.js.LICENSE.txt"
+    "static/js/2.796d6ae9.chunk.js.LICENSE.txt": "/mininova-web-editor/static/js/2.796d6ae9.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.161543d9.js",
-    "static/js/2.2418d54a.chunk.js",
+    "static/js/2.796d6ae9.chunk.js",
     "static/css/main.3bb17a14.chunk.css",
-    "static/js/main.7d3cf1ff.chunk.js"
+    "static/js/main.6b7d5c43.chunk.js"
   ]
 }
