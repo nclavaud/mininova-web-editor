@@ -2,23 +2,24 @@ import React, { useState } from 'react';
 import { Controls, DeviceSetup, Intro } from './components';
 import { PROGRAM_CHANGE } from './midi';
 import { isPatch, selectPatch } from './mininova';
-import { debugMidiMessage, consoleOutput } from './debug';
+import { debugMidiMessage, consoleOutput, noInput } from './debug';
+import { DeviceInput, DeviceOutput, MidiMessage } from './ports';
 
 function App() {
-  const [input, setInput] = useState(undefined);
-  const [output, setOutput] = useState(consoleOutput);
+  const [input, setInput] = useState<DeviceInput>(noInput);
+  const [output, setOutput] = useState<DeviceOutput>(consoleOutput);
   const [currentPatch, setCurrentPatch] = useState<number | undefined>(undefined);
 
   const decodePatch = (data: Uint8Array) => {
     console.log('Received patch.');
   }
 
-  const onIncomingMidiMessage = (message: WebMidi.MIDIMessageEvent) => {
-    debugMidiMessage(message.data, 'Input: ');
-    if (message.data[0] === PROGRAM_CHANGE) {
-      setCurrentPatch(message.data[1]);
-    } else if (isPatch(message.data)) {
-      decodePatch(message.data);
+  const onIncomingMidiMessage = (message: MidiMessage) => {
+    debugMidiMessage(message, 'Input: ');
+    if (message[0] === PROGRAM_CHANGE) {
+      setCurrentPatch(message[1]);
+    } else if (isPatch(message)) {
+      decodePatch(message);
     }
   };
 

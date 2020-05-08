@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-
 import NotSupported from './NotSupported.js';
+import { MidiMessage } from '../ports';
 
 function findDeviceById<T extends WebMidi.MIDIPort>(id: string, devices: Array<T>): T | null {
   return devices.filter(device => device.id === id)[0] || null;
@@ -8,11 +8,11 @@ function findDeviceById<T extends WebMidi.MIDIPort>(id: string, devices: Array<T
 
 type MIDIDeviceSetupProps = {
   onChangeOutput: () => {},
-  onIncomingMidiMessage: () => {},
+  onIncomingMidiMessage: (message: MidiMessage) => void,
   input: WebMidi.MIDIInput,
-  setInput: (device: WebMidi.MIDIInput | null) => {},
+  setInput: (device: WebMidi.MIDIInput | null) => void,
   output: WebMidi.MIDIOutput,
-  setOutput: (device: WebMidi.MIDIOutput | null) => {},
+  setOutput: (device: WebMidi.MIDIOutput | null) => void,
 };
 
 enum MidiSupport {
@@ -46,7 +46,9 @@ function MIDIDeviceSetup({
     }
     const device = findDeviceById<WebMidi.MIDIInput>(id, availableInputs);
     if (device !== null) {
-      device.onmidimessage = onIncomingMidiMessage;
+      device.onmidimessage = (e: WebMidi.MIDIMessageEvent) => {
+        onIncomingMidiMessage(e.data);
+      }
     }
     setInput(device);
   };

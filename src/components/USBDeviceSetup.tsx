@@ -1,43 +1,31 @@
 import React from 'react';
 
-import { cc } from '../midi';
-import { debugMidiMessage } from '../debug';
+import { detectUSB } from '../adapters/usb';
+import { DeviceInput, DeviceOutput, MidiMessage } from '../ports';
 
-function USBDeviceSetup() {
-  const detectUSB = async () => {
-    console.log('Detecting USB devices');
-    const device = await navigator.usb.requestDevice({
-      filters: [
-        {
-          vendorId: 0x1235,
-          productId: 0x001e,
-        }
-      ],
-    });
-    console.log(`Connected to ${device.productName}`);
-    console.log(device);
-    await device.open();
-    await device.selectConfiguration(1);
-    await device.claimInterface(0);
-    const data = cc(13, 0);
-    const [endpointIn, endpointOut] = [1, 2];
-    console.log('Sending a message to USB device');
-    device.transferOut(endpointOut, data);
+type USBDeviceSetupProps = {
+  onIncomingMidiMessage: (message: MidiMessage) => void,
+  input: DeviceInput,
+  setInput: (device: DeviceInput | null) => void,
+  output: DeviceOutput,
+  setOutput: (device: DeviceOutput | null) => void,
+};
 
-    const listen = async () => {
-      console.log('Waiting for incoming messages from USB device...');
-      const result = await device.transferIn(endpointIn, 64);
-      if (result?.data?.buffer) {
-        debugMidiMessage(new Uint8Array(result.data.buffer), 'USB Input: ');
-      }
-      listen();
-    };
-
-    listen();
+function USBDeviceSetup({
+  input,
+  onIncomingMidiMessage,
+  setInput,
+  setOutput
+}: USBDeviceSetupProps) {
+  const connectToUSBDevice = async () => {
+    const device = await detectUSB();
+    device.setIncomingMidiMessageListener(onIncomingMidiMessage);
+    setOutput(device);
+    setInput(device);
   };
 
   return (
-    <button onClick={detectUSB}>Connect to USB device</button>
+    <button onClick={connectToUSBDevice}>Connect to USB device</button>
   );
 }
 
