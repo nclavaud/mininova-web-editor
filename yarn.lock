@@ -1557,6 +1557,11 @@
     "@types/testing-library__dom" "*"
     pretty-format "^25.1.0"
 
+"@types/w3c-web-usb@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@types/w3c-web-usb/-/w3c-web-usb-1.0.4.tgz#57e4181041dc1ad2bfad59b737caa7bddc7e1a27"
+  integrity sha512-aaOB3EL5WCWBBOYX7W1MKuzspOM9ZJI9s3iziRVypr1N+QyvIgXzCM4lm1iiOQ1VFzZioUPX9bsa23myCbKK4A==
+
 "@types/webmidi@^2.0.4":
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@types/webmidi/-/webmidi-2.0.4.tgz#d1bb7287d59cc350333d225ce8b3ad4e54c5e6da"

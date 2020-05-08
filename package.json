@@ -11,6 +11,7 @@
     "@types/node": "^13.13.5",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.7",
+    "@types/w3c-web-usb": "^1.0.4",
     "@types/webmidi": "^2.0.4",
     "ramda": "^0.27.0",
     "react": "^16.13.1",
