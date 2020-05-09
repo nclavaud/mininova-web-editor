@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Controls, DeviceSetup, Intro } from './components';
 import { PROGRAM_CHANGE } from './midi';
 import { isPatch, selectPatch } from './mininova';
-import { debugMidiMessage, consoleOutput, noInput } from './debug';
+import { debugMidiMessage, noDevice } from './debug';
 import { DeviceInput, DeviceOutput, MidiMessage } from './ports';
 
 function App() {
-  const [input, setInput] = useState<DeviceInput>(noInput);
-  const [output, setOutput] = useState<DeviceOutput>(consoleOutput);
+  const [input, setInput] = useState<DeviceInput>(noDevice);
+  const [output, setOutput] = useState<DeviceOutput>(noDevice);
   const [currentPatch, setCurrentPatch] = useState<number | undefined>(undefined);
 
   const decodePatch = (data: Uint8Array) => {
@@ -23,7 +23,13 @@ function App() {
     }
   };
 
-  const emit = (message: Uint8Array) => output && output.send(message);
+  const emit = (message: Uint8Array) => {
+    if (!output) {
+      return;
+    }
+    debugMidiMessage(message, 'Output: ');
+    output.send(message);
+  };
 
   const onChangeOutput = () => selectPatch(emit);
 

@@ -33,7 +33,6 @@ class USBDeviceIO implements DeviceIO
   }
 
   private async listen() {
-    console.log('Waiting for incoming messages from USB device...');
     const result = await this.device.transferIn(MININOVA_ENDPOINT_IN, MININOVA_BUFFER_LENGTH);
     if (result?.data?.buffer) {
       const message = new Uint8Array(result.data.buffer);
@@ -67,7 +66,6 @@ class USBDeviceIO implements DeviceIO
 }
 
 export const detectUSB = async () => {
-  console.log('Detecting USB devices');
   const device = await navigator.usb.requestDevice({
     filters: [
       {
@@ -77,7 +75,6 @@ export const detectUSB = async () => {
     ],
   });
   console.log(`Connected to ${device.productName}`);
-  console.log(device);
   await device.open();
   await device.selectConfiguration(MININOVA_CONFIGURATION);
   await device.claimInterface(MININOVA_INTERFACE);
