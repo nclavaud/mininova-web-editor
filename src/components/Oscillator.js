@@ -22,7 +22,7 @@ function Oscillator({ emit, number }) {
       {params.map(param => (
         <Control
           key={param}
-          id={param}
+          id={`osc-${number}-${param}`}
           control={controls[`osc-${number}-${param}`]}
           emit={emit}
         />

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Controls, DeviceSetup, Intro } from './components';
 import { PROGRAM_CHANGE } from './midi';
 import { isPatch, selectPatch } from './mininova';
@@ -9,9 +10,16 @@ function App() {
   const [input, setInput] = useState<DeviceInput>(noDevice);
   const [output, setOutput] = useState<DeviceOutput>(noDevice);
   const [currentPatch, setCurrentPatch] = useState<number | undefined>(undefined);
+  const dispatch = useDispatch();
 
   const decodePatch = (data: Uint8Array) => {
     console.log('Received patch.');
+    dispatch({
+      type: 'PATCH_DUMP_RECEIVED',
+      payload: {
+        data,
+      },
+    });
   }
 
   const onIncomingMidiMessage = (message: MidiMessage) => {

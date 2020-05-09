@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const inRange = (value, range) => (value >= range[0] && value <= range[1]);
 
 function InputRange({ id, control, emit }) {
-  const [value, setValue] = useState(control.init);
+  const dispatch = useDispatch();
+  const value = useSelector(state => state[id]);
 
   const onChange = event => {
     const value = Number(event.target.value);
@@ -12,7 +14,13 @@ function InputRange({ id, control, emit }) {
       return;
     }
 
-    setValue(value);
+    dispatch({
+      type: 'CONTROL_CHANGED',
+      payload: {
+        id,
+        value,
+      },
+    });
 
     emit(control.msg(value));
   };

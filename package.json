@@ -11,12 +11,15 @@
     "@types/node": "^13.13.5",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.7",
+    "@types/react-redux": "^7.1.8",
     "@types/w3c-web-usb": "^1.0.4",
     "@types/webmidi": "^2.0.4",
     "ramda": "^0.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
     "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
     "typescript": "^3.8.3"
   },
   "scripts": {
@@ -43,6 +46,7 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^2.2.0"
+    "gh-pages": "^2.2.0",
+    "redux-devtools": "^3.5.0"
   }
 }

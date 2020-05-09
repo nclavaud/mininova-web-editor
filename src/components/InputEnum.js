@@ -1,16 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 function InputEnum({ id, control, emit }) {
-  const [value, setValue] = useState(control.init);
+  const dispatch = useDispatch();
+  const value = useSelector(state => state[id]);
 
   const onChange = event => {
     const value = Number(event.target.value);
 
     if (!Array.from(control.enum.keys()).includes(value)) {
+      console.log('Wrong value: ' + value);
       return;
     }
 
-    setValue(value);
+    dispatch({
+      type: 'CONTROL_CHANGED',
+      payload: {
+        id,
+        value,
+      },
+    });
 
     emit(control.msg(value));
   };
