@@ -4,7 +4,6 @@ const NRPN_LSB = 0x62;
 const NRPN_VAL = 0x06;
 const SYSEX_START = 0xF0;
 const SYSEX_END = 0xF7;
-const MIDINOVA_SIGNATURE = [0x00, 0x20, 0x29, 0x03, 0x01];
 export const PROGRAM_CHANGE = 0xC0;
 
 export const cc = (control, value) => new Uint8Array([
@@ -26,7 +25,6 @@ export const sysex = values => {
 
   return new Uint8Array(
     [SYSEX_START]
-      .concat(MIDINOVA_SIGNATURE)
       .concat(values)
       .concat([SYSEX_END])
   );

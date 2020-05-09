@@ -7,14 +7,17 @@ const sequencePreHandshake = [0x7F, 0x62, 0x01, 0x00, 0x00, 0x00, 0x00];
 const sequenceLoadCurrentPatch = [0x7F, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00];
 const sequencePatchResponse = [0xF0, 0x00, 0x20, 0x29, 0x03, 0x01, 0x7F, 0x00, 0x00, 0x09, 0x04];
 
+const MIDINOVA_SIGNATURE = [0x00, 0x20, 0x29, 0x03, 0x01];
+export const mininovaSysex = values => sysex(MIDINOVA_SIGNATURE.concat(values));
+
 export const isPatch = message =>
   R.equals(R.take(sequencePatchResponse.length, Array.from(message)), sequencePatchResponse);
 
-export const loadPatch = sysex(sequenceLoadCurrentPatch);
+export const loadPatch = mininovaSysex(sequenceLoadCurrentPatch);
 
 export const selectPatch = emit => {
-  emit(sysex(sequencePreHandshake));
-  setTimeout(() => emit(sysex(sequenceHandshake)), 1000);
+  emit(mininovaSysex(sequencePreHandshake));
+  setTimeout(() => emit(mininovaSysex(sequenceHandshake)), 1000);
   setTimeout(() => emit(nrpn(63, 0, 1)), 2000);
   setTimeout(() => emit(loadPatch), 3000);
 };
