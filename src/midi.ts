@@ -6,19 +6,19 @@ const SYSEX_START = 0xF0;
 const SYSEX_END = 0xF7;
 export const PROGRAM_CHANGE = 0xC0;
 
-export const cc = (control, value) => new Uint8Array([
+export const cc = (control: number, value: number) => new Uint8Array([
   CC, control, value,
 ]);
 
-export const nrpn = (msb, lsb, value) => new Uint8Array([
+export const nrpn = (msb: number, lsb: number, value: number) => new Uint8Array([
   CC, NRPN_MSB, msb,
   CC, NRPN_LSB, lsb,
   CC, NRPN_VAL, value,
 ]);
 
-const isValidSysexValue = value => value >= 0x00 && value <= 0x7F;
+const isValidSysexValue = (value: number) => value >= 0x00 && value <= 0x7F;
 
-export const sysex = values => {
+export const sysex = (values: number[]) => {
   if (!values.every(isValidSysexValue)) {
     throw new RangeError("Sequence contains invalid sysex value");
   }
