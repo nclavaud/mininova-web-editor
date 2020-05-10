@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/mininova-web-editor/precache-manifest.eba75e5d6f45969b5e0172618890ac8f.js"
+  "/mininova-web-editor/precache-manifest.08158d88ac43e25e1a6058d4c7966bdb.js"
 );
 
 self.addEventListener('message', (event) => {
