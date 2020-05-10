@@ -7,9 +7,7 @@ type MIDIDeviceSetupProps = {
   onChangeOutput: () => {},
   onIncomingMidiMessage: (message: MidiMessage) => void,
   input: WebMidi.MIDIInput,
-  setInput: (device: WebMidi.MIDIInput | null) => void,
   output: WebMidi.MIDIOutput,
-  setOutput: (device: WebMidi.MIDIOutput | null) => void,
 };
 
 interface RootState {
@@ -25,9 +23,7 @@ function MIDIDeviceSetup({
   onChangeOutput,
   onIncomingMidiMessage,
   input,
-  setInput,
   output,
-  setOutput
 }: MIDIDeviceSetupProps) {
   const dispatch = useDispatch();
   const isSupported = useSelector((state: RootState) => state.midi.isSupported);
@@ -37,7 +33,12 @@ function MIDIDeviceSetup({
 
   const selectOutput = (id: string) => {
     const device = findDeviceById<WebMidi.MIDIOutput>(id, availableOutputs);
-    setOutput(device);
+    dispatch({
+      type: 'DEVICE_SELECT_OUTPUT',
+      payload: {
+        device,
+      },
+    });
     onChangeOutput();
   };
 
@@ -51,7 +52,12 @@ function MIDIDeviceSetup({
         onIncomingMidiMessage(e.data);
       }
     }
-    setInput(device);
+    dispatch({
+      type: 'DEVICE_SELECT_INPUT',
+      payload: {
+        device,
+      },
+    });
   };
 
   useEffect(() => {

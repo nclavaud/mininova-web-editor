@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Controls, DeviceSetup, Intro } from './components';
 import { PROGRAM_CHANGE } from './midi';
 import { isPatch, selectPatch } from './mininova';
-import { debugMidiMessage, noDevice } from './debug';
+import { debugMidiMessage } from './debug';
 import { DeviceInput, DeviceOutput, MidiMessage } from './ports';
 
+interface RootState {
+  device: {
+    input: DeviceInput,
+    output: DeviceOutput,
+  }
+}
+
 function App() {
-  const [input, setInput] = useState<DeviceInput>(noDevice);
-  const [output, setOutput] = useState<DeviceOutput>(noDevice);
+  const input = useSelector((state: RootState) => state.device.input);
+  const output = useSelector((state: RootState) => state.device.output);
   const [currentPatch, setCurrentPatch] = useState<number | undefined>(undefined);
   const dispatch = useDispatch();
 
@@ -49,9 +56,7 @@ function App() {
         onChangeOutput={onChangeOutput}
         onIncomingMidiMessage={onIncomingMidiMessage}
         input={input}
-        setInput={setInput}
         output={output}
-        setOutput={setOutput}
       />
       <Controls
         currentPatch={currentPatch}
