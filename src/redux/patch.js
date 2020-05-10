@@ -1,5 +1,27 @@
 import { controls } from '../mininova';
 
+const PATCH_CONTROL_CHANGED = 'PATCH_CONTROL_CHANGED';
+const PATCH_DUMP_RECEIVED = 'PATCH_DUMP_RECEIVED';
+
+export const patchControlChanged = (id, value) => (
+  {
+    type: PATCH_CONTROL_CHANGED,
+    payload: {
+      id,
+      value,
+    },
+  }
+);
+
+export const patchDumpReceived = data => (
+  {
+    type: PATCH_DUMP_RECEIVED,
+    payload: {
+      data,
+    },
+  }
+);
+
 const initialState = [];
 for (let [id, control] of Object.entries(controls)) {
   initialState[id] = control.init;
@@ -7,7 +29,7 @@ for (let [id, control] of Object.entries(controls)) {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'PATCH_DUMP_RECEIVED':
+    case PATCH_DUMP_RECEIVED:
       return {
         ...state,
         'osc-1-wave': action.payload.data[46],
@@ -41,7 +63,7 @@ export const reducer = (state = initialState, action) => {
         'osc-3-pitch': action.payload.data[75],
         'osc-3-wtint': action.payload.data[67],
       };
-    case 'CONTROL_CHANGED':
+    case PATCH_CONTROL_CHANGED:
       return {
         ...state,
         [action.payload.id]: action.payload.value,

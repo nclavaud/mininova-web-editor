@@ -5,6 +5,7 @@ import { PROGRAM_CHANGE } from './midi';
 import { isPatch, selectPatch } from './mininova';
 import { debugMidiMessage } from './debug';
 import { DeviceInput, DeviceOutput, MidiMessage } from './ports';
+import { patchDumpReceived } from './redux/patch';
 
 interface RootState {
   device: {
@@ -21,12 +22,7 @@ function App() {
 
   const decodePatch = (data: Uint8Array) => {
     console.log('Received patch.');
-    dispatch({
-      type: 'PATCH_DUMP_RECEIVED',
-      payload: {
-        data,
-      },
-    });
+    dispatch(patchDumpReceived(data));
   }
 
   const onIncomingMidiMessage = (message: MidiMessage) => {

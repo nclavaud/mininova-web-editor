@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { patchControlChanged } from '../redux/patch';
 
 const inRange = (value, range) => (value >= range[0] && value <= range[1]);
 
@@ -14,14 +15,7 @@ function InputRange({ id, control, emit }) {
       return;
     }
 
-    dispatch({
-      type: 'CONTROL_CHANGED',
-      payload: {
-        id,
-        value,
-      },
-    });
-
+    dispatch(patchControlChanged(id, value));
     emit(control.msg(value));
   };
 

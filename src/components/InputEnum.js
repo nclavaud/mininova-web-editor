@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { patchControlChanged } from '../redux/patch';
 
 function InputEnum({ id, control, emit }) {
   const dispatch = useDispatch();
@@ -13,14 +14,7 @@ function InputEnum({ id, control, emit }) {
       return;
     }
 
-    dispatch({
-      type: 'CONTROL_CHANGED',
-      payload: {
-        id,
-        value,
-      },
-    });
-
+    dispatch(patchControlChanged(id, value));
     emit(control.msg(value));
   };
 
