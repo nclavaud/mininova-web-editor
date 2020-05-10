@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MidiMessage } from '../ports';
 import { findDeviceById, listPorts, requestAccess } from '../webmidi';
 import { midiDevicesDetected } from '../redux/midi';
+import { deviceInputSelected, deviceOutputSelected } from '../redux/device';
 
 type MIDIDeviceSetupProps = {
   onChangeOutput: () => {},
@@ -34,12 +35,7 @@ function MIDIDeviceSetup({
 
   const selectOutput = (id: string) => {
     const device = findDeviceById<WebMidi.MIDIOutput>(id, availableOutputs);
-    dispatch({
-      type: 'DEVICE_SELECT_OUTPUT',
-      payload: {
-        device,
-      },
-    });
+    dispatch(deviceOutputSelected(device));
     onChangeOutput();
   };
 
@@ -53,12 +49,7 @@ function MIDIDeviceSetup({
         onIncomingMidiMessage(e.data);
       }
     }
-    dispatch({
-      type: 'DEVICE_SELECT_INPUT',
-      payload: {
-        device,
-      },
-    });
+    dispatch(deviceInputSelected(device));
   };
 
   useEffect(() => {

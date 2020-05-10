@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { detectUSB } from '../adapters/usb';
 import { DeviceInput, DeviceOutput, MidiMessage } from '../ports';
+import { deviceInputOutputSelected } from '../redux/device';
 
 type USBDeviceSetupProps = {
   onIncomingMidiMessage: (message: MidiMessage) => void,
@@ -34,12 +35,7 @@ function USBDeviceSetup({
   const connectToUSBDevice = async () => {
     const device = await detectUSB();
     device.setIncomingMidiMessageListener(onIncomingMidiMessage);
-    dispatch({
-      type: 'DEVICE_SELECT_IO',
-      payload: {
-        device,
-      },
-    });
+    dispatch(deviceInputOutputSelected(device));
   };
 
   return (
