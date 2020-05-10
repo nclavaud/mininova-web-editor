@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function InputEnum({ id, control, emit }) {
   const dispatch = useDispatch();
-  const value = useSelector(state => state[id]);
+  const value = useSelector(state => state.patch[id]);
 
   const onChange = event => {
     const value = Number(event.target.value);

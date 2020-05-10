@@ -5,7 +5,7 @@ const inRange = (value, range) => (value >= range[0] && value <= range[1]);
 
 function InputRange({ id, control, emit }) {
   const dispatch = useDispatch();
-  const value = useSelector(state => state[id]);
+  const value = useSelector(state => state.patch[id]);
 
   const onChange = event => {
     const value = Number(event.target.value);

@@ -1,4 +1,4 @@
-import { controls } from './mininova';
+import { controls } from '../mininova';
 
 const initialState = [];
 for (let [id, control] of Object.entries(controls)) {
