@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { MidiMessage } from '../ports';
-
-function findDeviceById<T extends WebMidi.MIDIPort>(id: string, devices: Array<T>): T | null {
-  return devices.filter(device => device.id === id)[0] || null;
-};
+import { findDeviceById, listPorts, requestAccess } from '../webmidi';
 
 type MIDIDeviceSetupProps = {
   onChangeOutput: () => {},
@@ -15,6 +12,15 @@ type MIDIDeviceSetupProps = {
   setOutput: (device: WebMidi.MIDIOutput | null) => void,
 };
 
+interface RootState {
+  midi: {
+    isSupported: boolean,
+    detectionComplete: boolean,
+    inputs: WebMidi.MIDIInput[],
+    outputs: WebMidi.MIDIOutput[],
+  },
+};
+
 function MIDIDeviceSetup({
   onChangeOutput,
   onIncomingMidiMessage,
@@ -23,9 +29,11 @@ function MIDIDeviceSetup({
   output,
   setOutput
 }: MIDIDeviceSetupProps) {
-  const [availableInputs, setAvailableInputs] = useState<Array<WebMidi.MIDIInput>>([]);
-  const [availableOutputs, setAvailableOutputs] = useState<Array<WebMidi.MIDIOutput>>([]);
-  const [detectionComplete, setDetectionComplete] = useState(false);
+  const dispatch = useDispatch();
+  const isSupported = useSelector((state: RootState) => state.midi.isSupported);
+  const detectionComplete = useSelector((state: RootState) => state.midi.detectionComplete);
+  const availableInputs = useSelector((state: RootState) => state.midi.inputs);
+  const availableOutputs = useSelector((state: RootState) => state.midi.outputs);
 
   const selectOutput = (id: string) => {
     const device = findDeviceById<WebMidi.MIDIOutput>(id, availableOutputs);
@@ -46,46 +54,32 @@ function MIDIDeviceSetup({
     setInput(device);
   };
 
-  interface RootState {
-    midi: {
-      isSupported: boolean,
-    },
-  };
-
-  const isSupported = useSelector((state: RootState) => state.midi.isSupported);
-
   useEffect(() => {
     if (!isSupported) {
       return;
     }
 
-    const detectDevices = (access: WebMidi.MIDIAccess) => {
-      console.log('Detecting devices');
-
-      const outputDevicesFound = [];
-      const outputs = access.outputs.values();
-      for (let output = outputs.next(); output && !output.done; output = outputs.next()) {
-        outputDevicesFound.push(output.value);
-      }
-      setAvailableOutputs(outputDevicesFound);
-
-      const inputDevicesFound = [];
-      const inputs = access.inputs.values();
-      for (let input = inputs.next(); input && !input.done; input = inputs.next()) {
-        inputDevicesFound.push(input.value);
-      }
-      setAvailableInputs(inputDevicesFound);
-
-      setDetectionComplete(true);
+    const registerAvailablePorts = (access: WebMidi.MIDIAccess) => {
+      const [inputs, outputs] = listPorts(access);
+      dispatch({
+        type: 'MIDI_DEVICES_DETECTED',
+        payload: {
+          inputs,
+          outputs,
+        },
+      });
     };
 
-    navigator.requestMIDIAccess({ sysex: true }).then(access => {
+    const detectAvailablePorts = async () => {
+      const access = await requestAccess();
       access.onstatechange = e => {
-        detectDevices(access);
+        registerAvailablePorts(access);
       }
-      detectDevices(access);
-    });
-  }, [isSupported]);
+      registerAvailablePorts(access);
+    };
+
+    detectAvailablePorts();
+  }, [isSupported, dispatch]);
 
   if (!isSupported) {
     return (
