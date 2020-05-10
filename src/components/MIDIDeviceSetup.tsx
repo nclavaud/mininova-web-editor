@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MidiMessage } from '../ports';
 import { findDeviceById, listPorts, requestAccess } from '../webmidi';
+import { midiDevicesDetected } from '../redux/midi';
 
 type MIDIDeviceSetupProps = {
   onChangeOutput: () => {},
@@ -67,13 +68,7 @@ function MIDIDeviceSetup({
 
     const registerAvailablePorts = (access: WebMidi.MIDIAccess) => {
       const [inputs, outputs] = listPorts(access);
-      dispatch({
-        type: 'MIDI_DEVICES_DETECTED',
-        payload: {
-          inputs,
-          outputs,
-        },
-      });
+      dispatch(midiDevicesDetected(inputs, outputs));
     };
 
     const detectAvailablePorts = async () => {
