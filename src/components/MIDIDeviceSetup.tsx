@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import NotSupported from './NotSupported.js';
+import { useSelector } from 'react-redux';
 import { MidiMessage } from '../ports';
 
 function findDeviceById<T extends WebMidi.MIDIPort>(id: string, devices: Array<T>): T | null {
@@ -15,12 +15,6 @@ type MIDIDeviceSetupProps = {
   setOutput: (device: WebMidi.MIDIOutput | null) => void,
 };
 
-enum MidiSupport {
-  No = 0,
-  Yes = 1,
-  Unknown = 2,
-}
-
 function MIDIDeviceSetup({
   onChangeOutput,
   onIncomingMidiMessage,
@@ -29,7 +23,6 @@ function MIDIDeviceSetup({
   output,
   setOutput
 }: MIDIDeviceSetupProps) {
-  const [midiSupport, setMidiSupport] = useState(MidiSupport.Unknown);
   const [availableInputs, setAvailableInputs] = useState<Array<WebMidi.MIDIInput>>([]);
   const [availableOutputs, setAvailableOutputs] = useState<Array<WebMidi.MIDIOutput>>([]);
   const [detectionComplete, setDetectionComplete] = useState(false);
@@ -53,7 +46,18 @@ function MIDIDeviceSetup({
     setInput(device);
   };
 
+  interface RootState {
+    midi: {
+      isSupported: boolean,
+    },
+  };
+
+  const isSupported = useSelector((state: RootState) => state.midi.isSupported);
+
   useEffect(() => {
+    if (!isSupported) {
+      return;
+    }
 
     const detectDevices = (access: WebMidi.MIDIAccess) => {
       console.log('Detecting devices');
@@ -75,25 +79,21 @@ function MIDIDeviceSetup({
       setDetectionComplete(true);
     };
 
-    if (!navigator.requestMIDIAccess) {
-      setMidiSupport(MidiSupport.No);
-      return;
-    } else {
-      setMidiSupport(MidiSupport.Yes);
-    }
-
     navigator.requestMIDIAccess({ sysex: true }).then(access => {
       access.onstatechange = e => {
         detectDevices(access);
       }
       detectDevices(access);
     });
-  }, []);
+  }, [isSupported]);
 
-  if (midiSupport === MidiSupport.Unknown) {
-    return <p>Detecting MIDI support...</p>;
-  } else if (midiSupport === MidiSupport.No) {
-    return <NotSupported />;
+  if (!isSupported) {
+    return (
+      <div>
+        <p>It looks like your browser does not support MIDI.</p>
+        <p>MIDI access is an experimental technology. Check the list of compatible browsers in the <a href="https://developer.mozilla.org/en-US/docs/Web/API/MIDIAccess#Browser_compatibility">Browser compatibility table </a>.</p>
+      </div>
+    );
   }
 
   if (!detectionComplete) {
