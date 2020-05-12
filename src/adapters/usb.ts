@@ -26,13 +26,13 @@ class USBDeviceIO implements DeviceIO
     this.incomingMessageBuffer = new Uint8Array(0);
   }
 
-  public setIncomingMidiMessageListener(onIncomingMidiMessage: MidiMessageFunc) {
+  public setIncomingMidiMessageListener(onIncomingMidiMessage: MidiMessageFunc): void {
     this.onIncomingMidiMessage = onIncomingMidiMessage;
 
     this.listen();
   }
 
-  private async listen() {
+  private async listen(): Promise<void> {
     const result = await this.device.transferIn(MININOVA_ENDPOINT_IN, MININOVA_BUFFER_LENGTH);
     if (result?.data?.buffer) {
       const message = new Uint8Array(result.data.buffer);
@@ -42,25 +42,34 @@ class USBDeviceIO implements DeviceIO
       } else if (this.incomingMessageBuffer.byteLength > 0) {
         // end part of a message that has been stored in the buffer
         this.appendToIncomingMessageBuffer(message);
-        this.onIncomingMidiMessage(this.incomingMessageBuffer);
+        this.dispatchIncomingMessage(this.incomingMessageBuffer);
         this.incomingMessageBuffer = new Uint8Array(0);
       } else {
         // complete message, no buffer involved
-        this.onIncomingMidiMessage(message);
+        this.dispatchIncomingMessage(message);
       }
     }
 
     this.listen();
   };
 
-  private appendToIncomingMessageBuffer(message: Uint8Array) {
+  private appendToIncomingMessageBuffer(message: Uint8Array): void {
     const b = new Uint8Array(this.incomingMessageBuffer.byteLength + message.byteLength);
     b.set(this.incomingMessageBuffer, 0);
     b.set(message, this.incomingMessageBuffer.byteLength);
     this.incomingMessageBuffer = b;
   }
 
-  public send(message: Uint8Array) {
+  private dispatchIncomingMessage(message: MidiMessage): void {
+    const messages = this.ungroup(message);
+    messages.forEach(this.onIncomingMidiMessage);
+  }
+
+  private ungroup(message: MidiMessage): MidiMessage[] {
+    return [message];
+  }
+
+  public send(message: Uint8Array): void {
     this.device.transferOut(MININOVA_ENDPOINT_OUT, message);
   }
 }
