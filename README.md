@@ -6,6 +6,12 @@ This application runs in any web browser that supports the Web MIDI API specific
 [list of compatible browsers](https://developer.mozilla.org/en-US/docs/Web/API/MIDIAccess#Browser_compatibility)
 ).
 
+## Prerequisites
+
+On Linux, connecting to the Mininova through USB requires a udev rule, otherwise access to the device will be denied.
+
+To do so, copy the content of [99-novation.rules](./linux/99-novation.rules) into directory `/etc/udev/rules.d/`.
+
 ## Development
 
 In the project directory, you can run:
