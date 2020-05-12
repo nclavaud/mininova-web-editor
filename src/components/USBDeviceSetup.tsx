@@ -33,7 +33,19 @@ function USBDeviceSetup({
   }
 
   const connectToUSBDevice = async () => {
-    const device = await detectUSB();
+    const device = await detectUSB().catch(e => {
+      if (e instanceof DOMException && e.code === DOMException.SECURITY_ERR) {
+        console.log(e);
+        console.log("Is the device registered in the list of udev rules?");
+      } else {
+        throw e;
+      }
+    });
+
+    if (!device) {
+      return;
+    }
+
     device.setIncomingMidiMessageListener(onIncomingMidiMessage);
     dispatch(deviceInputOutputSelected(device));
   };

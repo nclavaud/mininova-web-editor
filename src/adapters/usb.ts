@@ -83,10 +83,10 @@ export const detectUSB = async () => {
       }
     ],
   });
-  console.log(`Connected to ${device.productName}`);
   await device.open();
   await device.selectConfiguration(MININOVA_CONFIGURATION);
   await device.claimInterface(MININOVA_INTERFACE);
+  console.log(`Connected to ${device.productName}`);
 
   return new USBDeviceIO(device);
 };
