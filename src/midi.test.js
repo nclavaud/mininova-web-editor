@@ -1,4 +1,4 @@
-import { cc, nrpn, sysex } from './midi';
+import { cc, nrpn, ungroup, sysex } from './midi';
 
 test('build a CC message', () => {
   const expected = new Uint8Array([0xB0, 13, 0]);
@@ -25,4 +25,26 @@ test('throw an invalid sysex value', () => {
   const buildSequence = () => sysex([0x7F, 0x40, 0xF8]);
 
   expect(buildSequence).toThrow(new RangeError('Sequence contains invalid sysex value'));
+});
+
+test('ungroup inlined messages', () => {
+  const raw = new Uint8Array([
+    0xB0, 0x20, 0x01,
+    0xC0, 0x01,
+    0xB0, 0x63, 0x3F,
+    0xB0, 0x62, 0x01,
+    0xB0, 0x06, 0x01,
+    0xB0, 0x26, 0x01,
+  ]);
+
+  const expected = [
+    new Uint8Array([0xB0, 0x20, 0x01]),
+    new Uint8Array([0xC0, 0x01]),
+    new Uint8Array([0xB0, 0x63, 0x3F]),
+    new Uint8Array([0xB0, 0x62, 0x01]),
+    new Uint8Array([0xB0, 0x06, 0x01]),
+    new Uint8Array([0xB0, 0x26, 0x01]),
+  ];
+
+  expect(ungroup(raw)).toEqual(expected);
 });

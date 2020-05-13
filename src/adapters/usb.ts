@@ -1,4 +1,5 @@
 import { DeviceIO, MidiMessage, MidiMessageFunc } from '../ports';
+import { ungroup } from '../midi';
 
 const MININOVA_VENDOR_ID = 0x1235;
 const MININOVA_PRODUCT_ID = 0x001e;
@@ -61,12 +62,8 @@ class USBDeviceIO implements DeviceIO
   }
 
   private dispatchIncomingMessage(message: MidiMessage): void {
-    const messages = this.ungroup(message);
+    const messages = ungroup(message);
     messages.forEach(this.onIncomingMidiMessage);
-  }
-
-  private ungroup(message: MidiMessage): MidiMessage[] {
-    return [message];
   }
 
   public send(message: Uint8Array): void {
