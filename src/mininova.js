@@ -1,5 +1,6 @@
 import * as R from 'ramda';
 import { cc, nrpn, sysex } from './midi';
+import { CommandType } from './midi.command';
 
 // is it really handshake?
 const sequenceHandshake = [0x7F, 0x60, 0x21, 0x00, 0x00, 0x00, 0x00];
@@ -103,6 +104,18 @@ const waveforms = [
 ];
 
 export const controls = {
+  'tempo': {
+    label: 'Tempo',
+    range: [40, 250],
+    init: 40,
+    type: CommandType.NRPN,
+    mapFrom: [
+      [2, 63, 0, [40, 127]],
+      [2, 63, 1, [0, 122]],
+    ],
+    decode: ([, , x, y]) => y + x*128,
+    msg: x => nrpn(2, 63, x < 128 ? 0 : 1, x%128),
+  },
   'osc-1-wave': {
     label: 'Wave',
     enum: waveforms,
@@ -283,4 +296,27 @@ export const controls = {
     init: 76,
     msg: _cc(50),
   },
+};
+
+export const findControl = (command) => {
+  for (let [controlId, control] of Object.entries(controls)) {
+    if (!control.mapFrom) {
+      continue;
+    }
+    const maps = Array.isArray(control.mapFrom[0]) ? control.mapFrom : [control.mapFrom];
+    if (maps.some(map => map.every((expectedValue, i) => {
+      if (Array.isArray(expectedValue)) {
+        return command.values[i] >= expectedValue[0]
+          && command.values[i] <= expectedValue[1];
+      } else {
+        return command.values[i] === expectedValue;
+      }
+    }))) {
+      return {
+        id: controlId,
+        value: control.decode(command.values),
+      }
+    }
+  }
+  return undefined;
 };

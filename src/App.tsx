@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Controls, DeviceSetup, Intro } from './components';
 import { Command, CommandType, getCommand } from './midi.command';
-import { isPatch, selectPatch } from './mininova';
+import { findControl, isPatch, selectPatch } from './mininova';
 import { debugMidiMessage } from './debug';
 import { DeviceInput, DeviceOutput, MidiMessage } from './ports';
-import { patchDumpReceived } from './redux/patch';
+import { patchControlChanged, patchDumpReceived } from './redux/patch';
 
 interface RootState {
   device: {
@@ -39,6 +39,10 @@ function App() {
         break;
       case CommandType.NRPN:
         console.log('NRPN: ' + command.values);
+        const control = findControl(command);
+        if (control) {
+          dispatch(patchControlChanged(control.id, control.value));
+        }
         break;
       case CommandType.SysEx:
         if (isPatch(message)) {

@@ -1,7 +1,8 @@
 import React from 'react';
 import { cc, nrpn } from '../midi';
-import { loadPatch } from '../mininova';
+import { controls, loadPatch } from '../mininova';
 import Oscillator from './Oscillator';
+import Control from './Control';
 
 function Controls({ currentPatch, emit }) {
   const changeOctave = () => emit(cc(13, 0));
@@ -18,6 +19,12 @@ function Controls({ currentPatch, emit }) {
       <button onClick={selectNextPatch}>Next patch</button>
       <button onClick={() => emit(loadPatch)}>Load patch</button>
       <h3>Oct / Arp</h3>
+      <Control
+        id="tempo"
+        control={controls['tempo']}
+        emit={emit}
+        readonly
+      />
       <button onClick={changeOctave}>Change octave</button>
       <button onClick={activateArp}>Arp ON</button>
       <button onClick={deactivateArp}>Arp OFF</button>

@@ -4,7 +4,7 @@ import { patchControlChanged } from '../redux/patch';
 
 const inRange = (value, range) => (value >= range[0] && value <= range[1]);
 
-function InputRange({ id, control, emit }) {
+function InputRange({ id, control, emit, readonly }) {
   const dispatch = useDispatch();
   const value = useSelector(state => state.patch[id]);
 
@@ -30,6 +30,7 @@ function InputRange({ id, control, emit }) {
         max={control.range[1]}
         onChange={onChange}
         value={value}
+        readOnly={readonly}
       />
     </div>
   );
