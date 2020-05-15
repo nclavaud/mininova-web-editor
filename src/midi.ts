@@ -3,8 +3,8 @@ export const NRPN_MSB = 0x63;
 export const NRPN_LSB = 0x62;
 export const NRPN_VAL = 0x06;
 export const NRPN_ADJ = 0x26;
-const SYSEX_START = 0xF0;
-const SYSEX_END = 0xF7;
+export const SYSEX_START = 0xF0;
+export const SYSEX_END = 0xF7;
 export const PROGRAM_CHANGE = 0xC0;
 
 const _cc = (control: number, value: number): number[] => [CC, control, value];
