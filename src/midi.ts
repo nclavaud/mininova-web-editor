@@ -7,15 +7,16 @@ const SYSEX_START = 0xF0;
 const SYSEX_END = 0xF7;
 export const PROGRAM_CHANGE = 0xC0;
 
-export const cc = (control: number, value: number): Uint8Array => new Uint8Array([
-  CC, control, value,
-]);
+const _cc = (control: number, value: number): number[] => [CC, control, value];
 
-export const nrpn = (msb: number, lsb: number, value: number): Uint8Array => new Uint8Array([
-  CC, NRPN_MSB, msb,
-  CC, NRPN_LSB, lsb,
-  CC, NRPN_VAL, value,
-]);
+export const cc = (control: number, value: number): Uint8Array => new Uint8Array(_cc(control, value));
+
+export const nrpn = (msb: number, lsb: number, value: number, adjustment?: number): Uint8Array => new Uint8Array(
+  _cc(NRPN_MSB, msb)
+    .concat(_cc(NRPN_LSB, lsb))
+    .concat(_cc(NRPN_VAL, value))
+    .concat(adjustment ? [CC, NRPN_ADJ, adjustment] : [])
+);
 
 const isValidSysexValue = (value: number) => value >= 0x00 && value <= 0x7F;
 
