@@ -25,6 +25,8 @@ export const selectPatch = emit => {
 
 const _cc = R.curry(cc);
 
+const decodeCC = ([, x]) => x;
+
 const waveforms = [
   'Sine',
   'Triangle',
@@ -295,6 +297,46 @@ export const controls = {
     range: [52, 76],
     init: 76,
     msg: _cc(50),
+  },
+  'osc-vibrato-depth': {
+    short: 'ModVib',
+    label: 'Vibrato Depth',
+    range: [0, 127],
+    init: 0,
+    msg: _cc(77),
+    type: CommandType.ControlChange,
+    mapFrom: [77, [0, 127]],
+    decode: decodeCC,
+  },
+  'osc-vibrato-speed': {
+    short: 'MVibRate',
+    label: 'Vibrato Rate',
+    range: [0, 127],
+    init: 65,
+    msg: _cc(76),
+    type: CommandType.ControlChange,
+    mapFrom: [76, [0, 127]],
+    decode: decodeCC,
+  },
+  'osc-drift': {
+    short: 'OscDrift',
+    label: 'Oscillator Drift',
+    range: [0, 127],
+    init: 0,
+    msg: _cc(16),
+    type: CommandType.ControlChange,
+    mapFrom: [16, [0, 127]],
+    decode: decodeCC,
+  },
+  'osc-phase': {
+    short: 'OscPhase',
+    label: 'Oscillator Phase',
+    range: [0, 350],
+    init: 0,
+    msg: _cc(17),
+    type: CommandType.ControlChange,
+    mapFrom: [17, [0, 120]],
+    decode: decodeCC,
   },
 };
 
