@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Controls, DeviceSetup, Intro } from './components';
 import { Command, CommandType, getCommand } from './midi.command';
-import { findControl, isPatch, selectPatch } from './mininova';
+import { findControl, isPatch, loadPatch, selectPatch } from './mininova';
 import { debugMidiMessage } from './debug';
 import { DeviceInput, DeviceOutput, MidiMessage } from './ports';
 import { patchControlChanged, patchDumpReceived } from './redux/patch';
@@ -19,6 +19,10 @@ function App() {
   const output = useSelector((state: RootState) => state.device.output);
   const [currentPatch, setCurrentPatch] = useState<number | undefined>(undefined);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    emit(loadPatch);
+  }, [currentPatch]);
 
   const decodePatch = (data: Uint8Array) => {
     console.log('Received patch.');
