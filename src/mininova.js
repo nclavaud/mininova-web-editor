@@ -298,6 +298,8 @@ export const controls = {
   },
 };
 
+const inRange = (x, [min, max]) => x >= min && x <= max;
+
 export const findControl = (command) => {
   for (let [controlId, control] of Object.entries(controls)) {
     if (!control.mapFrom) {
@@ -309,8 +311,7 @@ export const findControl = (command) => {
     const maps = Array.isArray(control.mapFrom[0]) ? control.mapFrom : [control.mapFrom];
     if (maps.some(map => map.every((expectedValue, i) => {
       if (Array.isArray(expectedValue)) {
-        return command.values[i] >= expectedValue[0]
-          && command.values[i] <= expectedValue[1];
+        return inRange(command.values[i], expectedValue);
       } else {
         return command.values[i] === expectedValue;
       }
