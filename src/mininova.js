@@ -113,8 +113,8 @@ export const controls = {
       [2, 63, 0, [40, 127]],
       [2, 63, 1, [0, 122]],
     ],
-    decode: ([, , x, y]) => y + x*128,
-    msg: x => nrpn(2, 63, x < 128 ? 0 : 1, x%128),
+    decode: ([, , x, y]) => (x<<7)|y,
+    msg: x => nrpn(2, 63, x>>7, x&127),
   },
   'osc-1-wave': {
     label: 'Wave',
