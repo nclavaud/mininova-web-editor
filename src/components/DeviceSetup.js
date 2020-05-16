@@ -11,11 +11,16 @@ function DeviceSetup(props) {
     );
   }
 
+  const close = () => setVisible(false);
+
   return (
     <div className="deviceSetup">
-      <USBDeviceSetup {...props} />
+      <USBDeviceSetup
+        {...props}
+        onDone={close}
+      />
       <MIDIDeviceSetup {...props} />
-      <button onClick={() => setVisible(false)}>Close</button>
+      <button onClick={close}>Close</button>
     </div>
   );
 }

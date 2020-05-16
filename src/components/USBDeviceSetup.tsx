@@ -5,6 +5,7 @@ import { DeviceInput, DeviceOutput, MidiMessage } from '../ports';
 import { deviceInputOutputSelected } from '../redux/device';
 
 type USBDeviceSetupProps = {
+  onDone: () => void,
   onIncomingMidiMessage: (message: MidiMessage) => void,
   input: DeviceInput,
   output: DeviceOutput,
@@ -12,6 +13,7 @@ type USBDeviceSetupProps = {
 
 function USBDeviceSetup({
   input,
+  onDone,
   onIncomingMidiMessage,
 }: USBDeviceSetupProps) {
   interface RootState {
@@ -48,6 +50,7 @@ function USBDeviceSetup({
 
     device.setIncomingMidiMessageListener(onIncomingMidiMessage);
     dispatch(deviceInputOutputSelected(device));
+    onDone();
   };
 
   return (
