@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "93731632d61965705fda77273a0954f9",
+    "revision": "8c846c6299e265649d20f382ae6f53dc",
     "url": "/mininova-web-editor/index.html"
   },
   {
-    "revision": "b7f9086678230ecf78d3",
+    "revision": "85de6aec19931a0dc948",
     "url": "/mininova-web-editor/static/css/main.3bb17a14.chunk.css"
   },
   {
-    "revision": "dfd87208947f099f37b0",
-    "url": "/mininova-web-editor/static/js/2.b09a1f48.chunk.js"
+    "revision": "05c888164196ccc46291",
+    "url": "/mininova-web-editor/static/js/2.ed85b7ed.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/mininova-web-editor/static/js/2.b09a1f48.chunk.js.LICENSE.txt"
+    "url": "/mininova-web-editor/static/js/2.ed85b7ed.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b7f9086678230ecf78d3",
-    "url": "/mininova-web-editor/static/js/main.8f5e8b5f.chunk.js"
+    "revision": "85de6aec19931a0dc948",
+    "url": "/mininova-web-editor/static/js/main.95f6e9d4.chunk.js"
   },
   {
     "revision": "7015e616a69026761638",
