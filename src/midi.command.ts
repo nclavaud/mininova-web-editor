@@ -1,4 +1,4 @@
-import { PROGRAM_CHANGE, SYSEX_START, SYSEX_END } from './midi';
+import { CC, PROGRAM_CHANGE, SYSEX_START, SYSEX_END } from './midi';
 import { MidiMessage } from './ports';
 import { isNRPNStart, isNRPNMiddle, isNRPNEnd } from './mininova.nrpn';
 
@@ -43,6 +43,13 @@ export const getCommand = (message: MidiMessage, previous: Command): Command => 
     return {
       type: CommandType.IncompleteNRPN,
       values: [message[2]],
+    };
+  }
+
+  if (message[0] === CC) {
+    return {
+      type: CommandType.ControlChange,
+      values: Array.from(message.slice(1)),
     };
   }
 

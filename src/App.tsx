@@ -43,6 +43,8 @@ function App() {
         break;
       case CommandType.NRPN:
         console.log('NRPN: ' + command.values);
+        // omit break
+      case CommandType.ControlChange:
         const control = findControl(command);
         if (control) {
           dispatch(patchControlChanged(control.id, control.value));
