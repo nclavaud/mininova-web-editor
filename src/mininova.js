@@ -305,7 +305,7 @@ export const findControl = (command) => {
     if (!control.mapFrom) {
       continue;
     }
-    if (!control.type || control.type !== command.type) {
+    if (undefined === control.type || control.type !== command.type) {
       continue;
     }
     const maps = Array.isArray(control.mapFrom[0]) ? control.mapFrom : [control.mapFrom];
