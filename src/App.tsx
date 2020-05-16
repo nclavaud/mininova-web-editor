@@ -82,6 +82,7 @@ function App() {
         currentPatch={currentPatch}
         emit={emit}
       />
+      <p><a href="https://github.com/nclavaud/mininova-web-editor/">Contribute on GitHub</a></p>
     </div>
   );
 }
