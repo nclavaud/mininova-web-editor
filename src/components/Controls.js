@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { cc, nrpn } from '../midi';
 import { controls, loadPatch } from '../mininova';
-import Oscillator from './Oscillator';
+import Oscillators from './Oscillators';
 import Control from './Control';
 import { patchControlChanged } from '../redux/patch';
 
@@ -46,15 +46,7 @@ function Controls({ currentPatch, emit }) {
       <button onClick={deactivateArp}>Arp OFF</button>
       <h3>Oscillators</h3>
       <button onClick={randomize}>Randomize</button>
-      <div className="oscillators">
-        {[1, 2, 3].map(i => (
-          <Oscillator
-            key={i}
-            emit={emit}
-            number={i}
-          />
-        ))}
-      </div>
+      <Oscillators emit={emit} />
     </div>
   );
 }
