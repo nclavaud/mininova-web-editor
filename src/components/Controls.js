@@ -6,7 +6,7 @@ import Oscillator from './Oscillator';
 import Control from './Control';
 import { patchControlChanged } from '../redux/patch';
 
-const randomInt = ([min, max]) => Math.floor(Math.random() * (max + 1 - min)) + min;
+const randomInt = (min, max) => Math.floor(Math.random() * (max + 1 - min)) + min;
 
 function Controls({ currentPatch, emit }) {
   const dispatch = useDispatch();
@@ -21,10 +21,7 @@ function Controls({ currentPatch, emit }) {
       if (!controlId.startsWith('osc-')) {
         continue;
       }
-      if (!control.range) {
-        continue;
-      }
-      const value = randomInt(control.range);
+      const value = control.range ? randomInt(...control.range) : randomInt(0, control.enum.length);
       emit(control.msg(value));
       dispatch(patchControlChanged(controlId, value));
     }
