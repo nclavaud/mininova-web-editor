@@ -1,27 +1,20 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { patchControlChanged } from '../redux/patch';
 
-function InputEnum({ id, control, emit }) {
-  const dispatch = useDispatch();
-  const value = useSelector(state => state.patch[id]);
-
-  const onChange = event => {
+function InputEnum({ id, control, onChange, value }) {
+  const onSelectChange = event => {
     const value = Number(event.target.value);
 
     if (!Array.from(control.enum.keys()).includes(value)) {
-      console.log('Wrong value: ' + value);
       return;
     }
 
-    dispatch(patchControlChanged(id, value));
-    emit(control.msg(value));
+    onChange(value);
   };
 
   return (
     <div className="control">
       <label htmlFor={control.id} className="control-label">{control.label}</label>
-      <select onChange={onChange} value={value} className="control-input">
+      <select onChange={onSelectChange} value={value} className="control-input">
         {control.enum.map((label, value) => (
           <option key={value} value={value}>{label}</option>
         ))}

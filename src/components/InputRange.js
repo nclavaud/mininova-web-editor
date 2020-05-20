@@ -1,22 +1,16 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { patchControlChanged } from '../redux/patch';
 
 const inRange = (value, range) => (value >= range[0] && value <= range[1]);
 
-function InputRange({ id, control, emit, readonly }) {
-  const dispatch = useDispatch();
-  const value = useSelector(state => state.patch[id]);
-
-  const onChange = event => {
+function InputRange({ id, control, onChange, readonly, value }) {
+  const onInputChange = event => {
     const value = Number(event.target.value);
 
     if (!inRange(value, control.range)) {
       return;
     }
 
-    dispatch(patchControlChanged(id, value));
-    emit(control.msg(value));
+    onChange(value);
   };
 
   return (
@@ -28,7 +22,7 @@ function InputRange({ id, control, emit, readonly }) {
         type="number"
         min={control.range[0]}
         max={control.range[1]}
-        onChange={onChange}
+        onChange={onInputChange}
         value={value}
         readOnly={readonly}
       />
