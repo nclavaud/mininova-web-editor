@@ -28,7 +28,7 @@ function Oscillators({ emit }) {
       </div>
       <div>
         <h4>Mixer</h4>
-        {['osc-1-level', 'osc-2-level', 'ring-mod-level-1-3', 'ring-mod-level-2-3', 'noise-level', 'noise-type'].map(id => (
+        {['osc-1-level', 'osc-2-level', 'osc-3-level', 'ring-mod-level-1-3', 'ring-mod-level-2-3', 'noise-level', 'noise-type'].map(id => (
           <Control
             key={id}
             id={id}
