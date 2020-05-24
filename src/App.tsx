@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Controls, DeviceSetup, Intro } from './components';
 import { Command, CommandType, getCommand } from './midi.command';
@@ -19,10 +19,6 @@ function App() {
   const output = useSelector((state: RootState) => state.device.output);
   const [currentPatch, setCurrentPatch] = useState<number | undefined>(undefined);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    emit(loadPatch);
-  }, [currentPatch]);
 
   const decodePatch = (data: Uint8Array) => {
     console.log('Received patch.');
@@ -65,6 +61,12 @@ function App() {
   };
 
   const onChangeOutput = () => selectPatch(emit);
+
+  const memoizedEmit = useCallback(emit, []);
+
+  useEffect(() => {
+    memoizedEmit(loadPatch);
+  }, [currentPatch, memoizedEmit]);
 
   return (
     <div>
