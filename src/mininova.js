@@ -194,7 +194,7 @@ export const controls = {
     label: 'Pulse Width / Wave Table index',
     range: [0, 127],
     init: 64,
-    msg: _cc(43),
+    msg: _cc(31),
   },
   'osc-2-vsync': {
     label: 'Virtual Sync',
