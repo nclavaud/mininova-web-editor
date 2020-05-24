@@ -32,6 +32,11 @@ export const reducer = (state = initialState, action) => {
     case PATCH_DUMP_RECEIVED:
       return {
         ...state,
+        'osc-vibrato-depth': action.payload.data[42],
+        'osc-vibrato-speed': action.payload.data[41],
+        'osc-drift': action.payload.data[43],
+        'osc-phase': action.payload.data[44],
+        'osc-fixed-note': action.payload.data[45],
         'osc-1-wave': action.payload.data[46],
         'osc-1-semitones': action.payload.data[53],
         'osc-1-cents': action.payload.data[54],
@@ -62,6 +67,13 @@ export const reducer = (state = initialState, action) => {
         'osc-3-densitydetune': action.payload.data[72],
         'osc-3-pitch': action.payload.data[75],
         'osc-3-wtint': action.payload.data[67],
+        'osc-1-level': action.payload.data[76],
+        'osc-2-level': action.payload.data[77],
+        'osc-3-level': action.payload.data[78],
+        'ring-mod-level-1-3': action.payload.data[79],
+        'ring-mod-level-2-3': action.payload.data[80],
+        'noise-level': action.payload.data[81],
+        'noise-type': action.payload.data[82],
       };
     case PATCH_CONTROL_CHANGED:
       return {
