@@ -27,6 +27,24 @@ const _cc = R.curry(cc);
 
 const decodeCC = ([, x]) => x;
 
+const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+const notesSequence = (noteFrom, octaveFrom, noteTo, octaveTo) => {
+  const indexFrom = notes.indexOf(noteFrom);
+  const indexTo = notes.indexOf(noteTo);
+  const sequence = [];
+  let index = indexFrom;
+  let octave = octaveFrom;
+  while (octave < octaveTo || (octave === octaveTo && index <= indexTo)) {
+    sequence.push(`${notes[index]}${octave || ''}`);
+    index++;
+    if (index === notes.length) {
+      index = 0;
+      octave++;
+    }
+  }
+  return sequence;
+};
+
 const waveforms = [
   'Sine',
   'Triangle',
@@ -341,8 +359,7 @@ export const controls = {
   'osc-fixed-note': {
     short: 'FixNote',
     label: 'Single Fixed Note',
-    // todo enum [Off, C#-2, ..., G8]
-    range: [0, 127],
+    enum: ['Off'].concat(notesSequence('C#', -2, 'G', 8)),
     init: 0,
     msg: _cc(18),
     type: CommandType.ControlChange,
