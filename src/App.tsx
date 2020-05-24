@@ -42,8 +42,6 @@ function App() {
         setCurrentPatch(command.values[0]);
         break;
       case CommandType.NRPN:
-        console.log('NRPN: ' + command.values);
-        // omit break
       case CommandType.ControlChange:
         const control = findControl(command);
         if (control) {
