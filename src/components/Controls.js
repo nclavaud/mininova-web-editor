@@ -18,7 +18,7 @@ function Controls({ currentPatch, emit }) {
   const selectNextPatch = () => emit(nrpn(63, 0, 2));
   const randomize = () => {
     for (let [controlId, control] of Object.entries(controls)) {
-      if (!controlId.startsWith('osc-')) {
+      if (['tempo', 'osc-fixed-note'].includes(controlId)) {
         continue;
       }
       const value = control.range ? randomInt(...control.range) : randomInt(0, control.enum.length);
