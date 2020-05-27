@@ -16,6 +16,15 @@ function Controls({ currentPatch, emit }) {
   const deactivateArp = () => emit(nrpn(0, 122, 46));
   const selectPrevPatch = () => emit(nrpn(63, 0, 0));
   const selectNextPatch = () => emit(nrpn(63, 0, 2));
+
+  const resetDefaults = () => {
+    for (let [controlId, control] of Object.entries(controls)) {
+      const value = control.init;
+      emit(control.msg(value));
+      dispatch(patchControlChanged(controlId, value));
+    }
+  };
+
   const randomize = () => {
     for (let [controlId, control] of Object.entries(controls)) {
       if (['tempo', 'osc-fixed-note'].includes(controlId)) {
@@ -46,6 +55,7 @@ function Controls({ currentPatch, emit }) {
       <button onClick={deactivateArp}>Arp OFF</button>
       <h3>Oscillators</h3>
       <button onClick={randomize}>Randomize</button>
+      <button onClick={resetDefaults}>Reset defaults</button>
       <Oscillators emit={emit} />
     </div>
   );
