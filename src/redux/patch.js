@@ -81,6 +81,8 @@ export const reducer = (state = initialState, action) => {
         'ring-mod-level-2-3': action.payload.data[80],
         'noise-level': action.payload.data[81],
         'noise-type': action.payload.data[82],
+        'pre-fx-level': action.payload.data[83]-64,
+        'post-fx-level': action.payload.data[84]-64,
         'filter-routing': action.payload.data[86],
         'filter-balance': action.payload.data[87]-64,
         'filter-freqlink':action.payload.data[88]&1,
@@ -237,6 +239,22 @@ export const reducer = (state = initialState, action) => {
         'lfo-3-delay-trigger': action.payload.data[225]&8 > 0 ? 1 : 0,
         'lfo-3-fade-mode': action.payload.data[225]>4,
 
+        'fx-pan-position': action.payload.data[105]-64,
+        'fx-pan-rate': action.payload.data[106],
+        'fx-pan-sync': action.payload.data[107],
+        'fx-pan-mod-depth': action.payload.data[108],
+        'fx-routing': action.payload.data[226],
+        'fx-feedback': action.payload.data[227],
+        'fx-1-level': action.payload.data[233],
+        'fx-2-level': action.payload.data[234],
+        'fx-3-level': action.payload.data[235],
+        'fx-4-level': action.payload.data[236],
+        'fx-5-level': action.payload.data[237],
+        'fx-1-select': action.payload.data[228],
+        'fx-2-select': action.payload.data[229],
+        'fx-3-select': action.payload.data[230],
+        'fx-4-select': action.payload.data[231],
+        'fx-5-select': action.payload.data[232],
 
 
       };

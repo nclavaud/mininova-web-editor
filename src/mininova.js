@@ -550,6 +550,26 @@ export const controls = {
     mapFrom: [57, [0, 3]],
     decode: decodeCC,
   },
+  'pre-fx-level': {
+      label: 'Pre FX Level',
+      range: [-12,18],
+      init:0,
+      msg: _cc(58),
+      type: CommandType.ControlChange,
+      mapFrom: [58,[52,82]],
+      offset:-64,
+      decode: ([, x]) => x-64,
+  },
+  'post-fx-level': {
+      label: 'Post FX Level',
+      range: [-12,18],
+      init:0,
+      msg: _cc(59),
+      type: CommandType.ControlChange,
+      mapFrom: [59,[52,82]],
+      offset:-64,
+      decode: ([, x]) => x-64,
+  },
   'filter-routing': {
       label: 'Filter Routing',
       enum: ['Bypass', 'Single', 'Series', 'Parallel', 'Parallel 2', 'Drum'],
@@ -2158,21 +2178,184 @@ export const controls = {
       decode: ([, , y]) => y-8,
       msg: x => nrpn(0, 123, (x+8)&127),
   },
+  'fx-pan-position': {
+    label: 'Pan Position',
+    range: [-64, 63],
+    init: 0,
+    msg: _cc(10),
+    type: CommandType.ControlChange,
+    mapFrom: [10, [0, 127]],
+    offset:-64,
+    decode: ([, x]) => x-64,
+  },
+  'fx-pan-rate': {
+    label: 'Pan Rate',
+    range: [0, 127],
+    init: 0,
+    msg: _cc(88),
+    type: CommandType.ControlChange,
+    mapFrom: [88, [0, 127]],
+    decode: decodeCC,
+
+  },
+  'fx-pan-sync': {
+    label: 'Pan Sync',
+    enum: sync,
+    init: 0,
+    msg: _cc(89),
+    type: CommandType.ControlChange,
+    mapFrom: [89, [0, 35]],
+    decode: decodeCC,
+  },
+  'fx-pan-mod-depth': {
+    label: 'Pan Mod Depth',
+    range: [0, 127],
+    init: 0,
+    msg: _cc(90),
+    type: CommandType.ControlChange,
+    mapFrom: [90, [0, 127]],
+    decode: decodeCC,
+  },
+  'fx-routing': {
+      label: 'Routing',
+      enum: ['R1','R2','R3','R4', 'R5','R6', 'R7','R8'],
+      type: CommandType.NRPN,
+      init: 0,
+      mapFrom: [
+        [0, 97, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 97, (x)&127),
+
+  },
+  'fx-feedback': {
+      label: 'Feedback',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 98, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 98, (x)&127),
+  },
+  'fx-1-level': {
+    label: 'FX1 Level',
+    range: [0, 127],
+    init: 0,
+    msg: _cc(91),
+    type: CommandType.ControlChange,
+    mapFrom: [91, [0, 127]],
+    decode: decodeCC,
+  },
+  'fx-2-level': {
+    label: 'FX2 Level',
+    range: [0, 127],
+    init: 0,
+    msg: _cc(92),
+    type: CommandType.ControlChange,
+    mapFrom: [92, [0, 127]],
+    decode: decodeCC,
+  },
+  'fx-3-level':{
+    label: 'FX3 Level',
+    range: [0, 127],
+    init: 0,
+    msg: _cc(93),
+    type: CommandType.ControlChange,
+    mapFrom: [93, [0, 127]],
+    decode: decodeCC,
+  },
+  'fx-4-level':{
+    label: 'FX4 Level',
+    range: [0, 127],
+    init: 0,
+    msg: _cc(94),
+    type: CommandType.ControlChange,
+    mapFrom: [94, [0, 127]],
+    decode: decodeCC,
+  },
+  'fx-5-level':{
+    label: 'FX5 Level',
+    range: [0, 127],
+    init: 0,
+    msg: _cc(95),
+    type: CommandType.ControlChange,
+    mapFrom: [95, [0, 127]],
+    decode: decodeCC,
+  },
+  'fx-1-select': {
+      label: "FX1 Select", 
+      enum: ['Bypass', 'EQ', 'Compres1', 'Compres2', 'Distort1', 'Distort2', 'Delay 1', 'Delay 2', 'Reverb 1', 'Reverb 2', 'Chorus 1', 'Chorus 2', 'Chorus 3', 'Chorus 4', 'Gator'],
+      type: CommandType.NRPN,
+      init: 0,
+      mapFrom: [
+        [0, 99, [0, 14]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 99, (x)&127),
+  },
+  'fx-2-select': {
+      label: "FX2 Select", 
+      enum: ['Bypass', 'EQ', 'Compres1', 'Compres2', 'Distort1', 'Distort2', 'Delay 1', 'Delay 2', 'Reverb 1', 'Reverb 2', 'Chorus 1', 'Chorus 2', 'Chorus 3', 'Chorus 4', 'Gator'],
+      type: CommandType.NRPN,
+      init: 0,
+      mapFrom: [
+        [0, 100, [0, 14]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 100, (x)&127),
+  },
+  'fx-3-select': {
+      label: "FX3 Select", 
+      enum: ['Bypass', 'EQ', 'Compres1', 'Compres2', 'Distort1', 'Distort2', 'Delay 1', 'Delay 2', 'Reverb 1', 'Reverb 2', 'Chorus 1', 'Chorus 2', 'Chorus 3', 'Chorus 4', 'Gator'],
+      type: CommandType.NRPN,
+      init: 0,
+      mapFrom: [
+        [0, 101, [0, 14]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 101, (x)&127),
+  },
+  'fx-4-select': {
+      label: "FX4 Select", 
+      enum: ['Bypass', 'EQ', 'Compres1', 'Compres2', 'Distort1', 'Distort2', 'Delay 1', 'Delay 2', 'Reverb 1', 'Reverb 2', 'Chorus 1', 'Chorus 2', 'Chorus 3', 'Chorus 4', 'Gator'],
+      type: CommandType.NRPN,
+      init: 0,
+      mapFrom: [
+        [0, 102, [0, 14]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 102, (x)&127),
+  },
+  'fx-5-select': {
+      label: "FX5 Select", 
+      enum: ['Bypass', 'EQ', 'Compres1', 'Compres2', 'Distort1', 'Distort2', 'Delay 1', 'Delay 2', 'Reverb 1', 'Reverb 2', 'Chorus 1', 'Chorus 2', 'Chorus 3', 'Chorus 4', 'Gator'],
+      type: CommandType.NRPN,
+      init: 0,
+      mapFrom: [
+        [0, 103, [0, 14]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 103, (x)&127),
+  },
 
 };
-//  'lfo-1-waveform': 
-//  'lfo-1-phase-offset':
-//  'lfo-1-slew-rate':
-//  'lfo-1-delay':
-//  'lfo-1-delay-sync':
-//  'lfo-1-rate':
-//  'lfo-1-rate-sync':
-//  'lfo-1-one-shot':
-//  'lfo-1-key-sync':
-//  'lfo-1-common-sync':
-//  'lfo-1-delay-trigger':
-//  'lfo-1-fade-mode':
-//
+//  'fx-pan-rate':
+//  'fx-pan-sync':
+//  'fx-routing':
+//  'fx-feedback':
+//  'fx-1-level':
+//  'fx-2-level':
+//  'fx-3-level':
+//  'fx-4-level':
+//  'fx-5-level': 
+//  'fx-1-select':
+//  'fx-2-select':
+//  'fx-3-select':
+//  'fx-4-select':
+//  'fx-5-select': 
+
 const inRange = (x, [min, max]) => x >= min && x <= max;
 
 export const findControl = (command) => {
