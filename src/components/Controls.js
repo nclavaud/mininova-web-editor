@@ -4,6 +4,8 @@ import { cc, nrpn } from '../midi';
 import { controls, loadPatch } from '../mininova';
 import Oscillators from './Oscillators';
 import Filters from './Filters';
+import Envelopes from './Envelopes';
+
 
 import Control from './Control';
 import { patchControlChanged } from '../redux/patch';
@@ -67,7 +69,7 @@ function Controls({ currentPatch, emit }) {
       <button onClick={resetDefaults}>Reset defaults</button>
       <Oscillators emit={emit} />
       <Filters emit={emit} />
-
+      <Envelopes emit={emit} />
     </div>
   );
 }

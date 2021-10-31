@@ -123,6 +123,34 @@ const waveforms = [
   'AudioInR',
 ];
 
+const animtrigger = [
+    'Off',
+    'A1 ReTrig',
+    'A2 ReTrig',
+    'A3 ReTrig',
+    'A4 ReTrig',
+    'A5 ReTrig',
+    'A6 ReTrig',
+    'A7 ReTrig',
+    'A8 ReTrig',
+    'A1 Trigger',
+    'A2 Trigger',
+    'A3 Trigger',
+    'A4 Trigger',
+    'A5 Trigger',
+    'A6 Trigger',
+    'A7 Trigger',
+    'A8 Trigger',
+    'A1 Enable',
+    'A2 Enable',
+    'A3 Enable',
+    'A4 Enable',
+    'A5 Enable',
+    'A6 Enable',
+    'A7 Enable',
+    'A8 Enable',
+];
+
 export const controls = {
   'patch-name': {
       label: 'Name',
@@ -624,17 +652,1026 @@ export const controls = {
     decode: decodeCC,
   },
   'filter-2-env2-to-freq': {
-      label: "Env2 To Freq",
-      type: CommandType.ControlChange,
-      range: [-64,63],
+    label: "Env2 To Freq",
+    type: CommandType.ControlChange,
+    range: [-64,63],
+    init: 0,
+    msg: _cc(87),
+    mapFrom: [87,[0,127]],
+    offset: -64,
+    decode: ([, x]) => x-64,
+  },
+
+  'env-1-attack': {
+    label: "Attack",
+    type: CommandType.ControlChange,
+    range: [0,127],
+    init: 0,
+    msg: _cc(73),
+    mapFrom: [73, [0, 127]],
+    decode: decodeCC,
+  },
+  'env-1-decay': {    
+    label: "Decay",
+    type: CommandType.ControlChange,
+    range: [0,127],
+    init: 0,
+    msg: _cc(75),
+    mapFrom: [75, [0, 127]],
+    decode: decodeCC,
+  },
+  'env-1-sustain':{
+    label: "Sustain",
+    type: CommandType.ControlChange,
+    range: [0,127],
+    init: 0,
+    msg: _cc(70),
+    mapFrom: [70, [0, 127]],
+    decode: decodeCC,
+  },
+  'env-1-release': {
+    label: "Release",
+    type: CommandType.ControlChange,
+    range: [0,127],
+    init: 0,
+    msg: _cc(72),
+    mapFrom: [72, [0, 127]],
+    decode: decodeCC,
+  },
+  'env-1-trigger': {
+      label: 'Trigger',
+      enum: ['Single', 'Multi'],
+      type: CommandType.NRPN,
+      range: [0,127],
       init: 0,
-      msg: _cc(87),
-      mapFrom: [87,[0,127]],
-      offset: -64,
-      decode: ([, x]) => x-64,
+      mapFrom: [
+        [0, 122, [0, 1]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 122, (x)&127),
+  },
+  'env-1-velocity': {
+    label: 'Velocity',
+    type: CommandType.ControlChange,
+    range: [-64,63],
+    init: 0,
+    msg: _cc(108),
+    mapFrom: [108,[0,127]],
+    offset: -64,
+    decode: ([, x]) => x-64,
+  },
+  'env-1-sustain-rate': {
+    label: 'Sustain Rate',
+    type: CommandType.ControlChange,
+    range: [-64,63],
+    init: 0,
+    msg: _cc(109),
+    mapFrom: [109,[0,127]],
+    offset: -64,
+    decode: ([, x]) => x-64,
+  },
+  'env-1-sustain-time': {
+    label: 'Sustain Time',
+    type: CommandType.ControlChange,
+    range: [0,127],
+    init: 0,
+    msg: _cc(110),
+    mapFrom: [110,[0,127]],
+    decode: decodeCC
+  },
+  'env-1-ad-repeats': {
+    label: 'AD Repeats',
+    type: CommandType.ControlChange,
+    range: [0,127],
+    init: 0,
+    msg: _cc(111),
+    mapFrom: [111,[0,127]],
+    decode: decodeCC
+  },
+  'env-1-attack-track': {
+    label: 'Attack Track',
+    type: CommandType.ControlChange,
+    range: [-64,63],
+    init: 0,
+    msg: _cc(112),
+    mapFrom: [112,[0,127]],
+    offset: -64,
+    decode: ([, x]) => x-64,
+  },
+  'env-1-decay-track': {
+    label: 'Decay Track',
+    type: CommandType.ControlChange,
+    range: [-64,63],
+    init: 0,
+    msg: _cc(113),
+    mapFrom: [113,[0,127]],
+    offset: -64,
+    decode: ([, x]) => x-64,
+  },
+  'env-1-level-track': {
+    label: 'Level Track',
+    type: CommandType.ControlChange,
+    range: [-64,63],
+    init: 0,
+    msg: _cc(114),
+    mapFrom: [114,[0,127]],
+    offset: -64,
+    decode: ([, x]) => x-64,
+  },
+  'env-1-attack-slope': {
+    label: 'Attack Slope',
+    type: CommandType.ControlChange,
+    range: [0,127],
+    init: 0,
+    msg: _cc(115),
+    mapFrom: [115,[0,127]],
+    decode: decodeCC
+  },
+  'env-1-decay-slope': {
+    label: 'Decay Slope',
+    type: CommandType.ControlChange,
+    range: [0,127],
+    init: 0,
+    msg: _cc(116),
+    mapFrom: [116,[0,127]],
+    decode: decodeCC
+  },
+  'env-1-anim-trigger': {
+    label: 'Anim Trigger',
+    enum: ['Off', 'A1ReTrig', 'A2ReTrig','A3ReTrig', 'A4ReTrig', 'A5ReTrig', 'A6ReTrig','A7ReTrig', 'A8ReTrig'],
+    init: 0,
+    msg: _cc(117),
+    type: CommandType.ControlChange,
+    mapFrom: [117, [0, 8]],
+    decode: decodeCC,
+  },
+
+  'env-2-attack': {
+    label: "Attack",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 1, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 1, x&127),
+  },
+  'env-2-decay': {    
+    label: "Decay",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 2, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 2, x&127),
+  },
+  'env-2-sustain':{
+    label: "Sustain",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 3, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 3, x&127),
+  },
+  'env-2-release': {
+    label: "Release",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 4, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 4, x&127),
+  },
+  'env-2-trigger': {
+      label: 'Trigger',
+      enum: ['Single', 'Multi'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 2,
+      mapFrom: [
+        [0, 122, [2, 3]],
+      ],
+      decode: ([, , y]) => y-2,
+      msg: x => nrpn(0, 122, (x+2)&127),
+  },
+  'env-2-velocity': {
+    label: "Velocity",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 0, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 0, (x+64)&127),
+  },
+  'env-2-sustain-rate': {
+    label: "Sustain Rate",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 5, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 5, (x+64)&127),
+  },
+  'env-2-sustain-time': {
+    label: "Sustain Time",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 6, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 6, x&127),
+  },
+  'env-2-ad-repeats': {
+    label: "AD Repeats",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 7, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 7, x&127),
+  },
+  'env-2-attack-track': {
+    label: "Attack Track",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 8, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 8, (x+64)&127),
+  },
+  'env-2-decay-track': {
+    label: "Decay Track",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 9, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 9, (x+64)&127),
+
+  },
+  'env-2-level-track':{
+    label: "Level Track",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 10, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 10, (x+64)&127),
+  },
+  'env-2-attack-slope': {
+    label: "Attack Slope",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 11, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 11, x&127),
+  },
+  'env-2-decay-slope': {
+    label: "Attack Slope",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 12, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 12, x&127),
+  },
+  'env-2-anim-trigger': {
+      label: 'Anim Trigger',
+      enum: animtrigger,
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 13, [0, 24]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 13, (x)&127),
+  },
+
+  'env-3-delay': {
+    label: "Delay",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 14, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 14, x&127),
+  },
+
+  'env-3-attack': {
+    label: "Attack",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 15, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 15, x&127),
+  },
+  'env-3-decay': {    
+    label: "Decay",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 16, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 16, x&127),
+  },
+  'env-3-sustain':{
+    label: "Sustain",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 17, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 17, x&127),
+  },
+  'env-3-release': {
+    label: "Release",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 18, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 18, x&127),
+  },
+  'env-3-trigger': {
+      label: 'Trigger',
+      enum: ['Single', 'Multi'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 2,
+      mapFrom: [
+        [0, 122, [4, 5]],
+      ],
+      decode: ([, , y]) => y-4,
+      msg: x => nrpn(0, 122, (x+4)&127),
+  },
+  'env-3-sustain-rate': {
+    label: "Sustain Rate",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 19, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 19, (x+64)&127),
+  },
+  'env-3-sustain-time': {
+    label: "Sustain Time",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 20, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 20, x&127),
+  },
+  'env-3-ad-repeats': {
+    label: "AD Repeats",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 21, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 21, x&127),
+  },
+  'env-3-attack-track': {
+    label: "Attack Track",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 22, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 22, (x+64)&127),
+  },
+  'env-3-decay-track': {
+    label: "Decay Track",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 23, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 23, (x+64)&127),
+
+  },
+  'env-3-level-track':{
+    label: "Level Track",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 24, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 24, (x+64)&127),
+  },
+  'env-3-attack-slope': {
+    label: "Attack Slope",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 25, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 25, x&127),
+  },
+  'env-3-decay-slope': {
+    label: "Attack Slope",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 26, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 26, x&127),
+  },
+  'env-3-anim-trigger': {
+      label: 'Anim Trigger',
+      enum: animtrigger,
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 27, [0, 24]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 27, (x)&127),
+  },
+
+  'env-4-delay': {
+    label: "Delay",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 28, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 28, x&127),
+  },
+
+  'env-4-attack': {
+    label: "Attack",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 29, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 29, x&127),
+  },
+  'env-4-decay': {    
+    label: "Decay",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 30, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 30, x&127),
+  },
+  'env-4-sustain':{
+    label: "Sustain",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 31, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 31, x&127),
+  },
+  'env-4-release': {
+    label: "Release",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 32, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 32, x&127),
+  },
+  'env-4-trigger': {
+      label: 'Trigger',
+      enum: ['Single', 'Multi'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 2,
+      mapFrom: [
+        [0, 122, [6, 7]],
+      ],
+      decode: ([, , y]) => y-6,
+      msg: x => nrpn(0, 122, (x+6)&127),
+  },
+  'env-4-sustain-rate': {
+    label: "Sustain Rate",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 33, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 33, (x+64)&127),
+  },
+  'env-4-sustain-time': {
+    label: "Sustain Time",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 34, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 34, x&127),
+  },
+  'env-4-ad-repeats': {
+    label: "AD Repeats",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 35, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 35, x&127),
+  },
+  'env-4-attack-track': {
+    label: "Attack Track",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 36, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 36, (x+64)&127),
+  },
+  'env-4-decay-track': {
+    label: "Decay Track",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 37, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 37, (x+64)&127),
+
+  },
+  'env-4-level-track':{
+    label: "Level Track",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 38, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 38, (x+64)&127),
+  },
+  'env-4-attack-slope': {
+    label: "Attack Slope",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 39, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 39, x&127),
+  },
+  'env-4-decay-slope': {
+    label: "Attack Slope",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 40, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 40, x&127),
+  },
+  'env-4-anim-trigger': {
+      label: 'Anim Trigger',
+      enum: animtrigger,
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 41, [0, 24]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 41, (x)&127),
+  },
+  'env-5-delay': {
+    label: "Delay",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 42, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 42, x&127),
+  },
+  'env-5-attack': {
+    label: "Attack",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 43, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 43, x&127),
+  },
+  'env-5-decay': {    
+    label: "Decay",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 44, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 44, x&127),
+  },
+  'env-5-sustain':{
+    label: "Sustain",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 45, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 45, x&127),
+  },
+  'env-5-release': {
+    label: "Release",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 46, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 46, x&127),
+  },
+  'env-5-trigger': {
+      label: 'Trigger',
+      enum: ['Single', 'Multi'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 2,
+      mapFrom: [
+        [0, 122, [8, 9]],
+      ],
+      decode: ([, , y]) => y-8,
+      msg: x => nrpn(0, 122, (x+8)&127),
+  },
+  'env-5-sustain-rate': {
+    label: "Sustain Rate",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 47, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 47, (x+64)&127),
+  },
+  'env-5-sustain-time': {
+    label: "Sustain Time",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 48, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 48, x&127),
+  },
+  'env-5-ad-repeats': {
+    label: "AD Repeats",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 49, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 49, x&127),
+  },
+  'env-5-attack-track': {
+    label: "Attack Track",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 50, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 50, (x+64)&127),
+  },
+  'env-5-decay-track': {
+    label: "Decay Track",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 51, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 51, (x+64)&127),
+
+  },
+  'env-5-level-track':{
+    label: "Level Track",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 52, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 52, (x+64)&127),
+  },
+  'env-5-attack-slope': {
+    label: "Attack Slope",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 53, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 53, x&127),
+  },
+  'env-5-decay-slope': {
+    label: "Attack Slope",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 54, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 54, x&127),
+  },
+  'env-5-anim-trigger': {
+      label: 'Anim Trigger',
+      enum: animtrigger,
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 55, [0, 24]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 55, (x)&127),
+  },
+
+  'env-6-delay': {
+    label: "Attack",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 56, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0,56, x&127),
+  },
+
+  'env-6-attack': {
+    label: "Attack",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 57, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 57, x&127),
+  },
+  'env-6-decay': {    
+    label: "Decay",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 58, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 58, x&127),
+  },
+  'env-6-sustain':{
+    label: "Sustain",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 59, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 59, x&127),
+  },
+  'env-6-release': {
+    label: "Release",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 60, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 60, x&127),
+  },
+  'env-6-trigger': {
+      label: 'Trigger',
+      enum: ['Single', 'Multi'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 2,
+      mapFrom: [
+        [0, 122, [10, 11]],
+      ],
+      decode: ([, , y]) => y-10,
+      msg: x => nrpn(0, 122, (x+10)&127),
+  },
+  'env-6-sustain-rate': {
+    label: "Sustain Rate",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 61, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 61, (x+64)&127),
+  },
+  'env-6-sustain-time': {
+    label: "Sustain Time",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 62, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 62, x&127),
+  },
+  'env-6-ad-repeats': {
+    label: "AD Repeats",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 63, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 63, x&127),
+  },
+  'env-6-attack-track': {
+    label: "Attack Track",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 64, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 64, (x+64)&127),
+  },
+  'env-6-decay-track': {
+    label: "Decay Track",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 65, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 65, (x+64)&127),
+
+  },
+  'env-6-level-track':{
+    label: "Level Track",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 66, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 66, (x+64)&127),
+  },
+  'env-6-attack-slope': {
+    label: "Attack Slope",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 67, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 67, x&127),
+  },
+  'env-6-decay-slope': {
+    label: "Attack Slope",
+    type: CommandType.NRPN,
+    range: [0,127],
+    init: 0,
+    mapFrom: [
+      [0, 68, [0, 127]],
+    ],
+    decode: ([, , y]) => y,
+    msg: x => nrpn(0, 68, x&127),
+  },
+  'env-6-anim-trigger': {
+      label: 'Anim Trigger',
+      enum: animtrigger,
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 69, [0, 24]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 69, (x)&127),
   },
 
 };
+
+
+//  'env-2-attack':
+//  'env-2-decay':
+//  'env-2-sustain':
+//  'env-2-release':
+//  'env-2-trigger':
+//  'env-2-velocity':
+//  'env-2-sustain-rate':
+//  'env-2-sustain-time':
+//  'env-2-ad-repeats':
+//  'env-2-attack-track':
+//  'env-2-decay-track':
+//  'env-2-level-track':
+//  'env-2-attack-slope':
+//  'env-2-decay-slope':
+//  'env-2-anim-trigger':
+
 
 const inRange = (x, [min, max]) => x >= min && x <= max;
 
