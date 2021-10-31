@@ -35,6 +35,11 @@ code {
   justify-content: space-between;
 }
 
+.lfos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
 
 .control {
   display: flex;

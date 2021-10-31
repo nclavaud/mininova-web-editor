@@ -151,6 +151,86 @@ const animtrigger = [
     'A8 Enable',
 ];
 
+const lfowaveform = [
+    'Sine',
+    'Triange',
+    'Sawtooth',
+    'Square',
+    'Rand S/H',
+    'Time S/H',
+    'PianoEnv',
+    'Seq 1',
+    'Seq 2',
+    'Seq 3',
+    'Seq 4',
+    'Seq 5',
+    'Seq 6',
+    'Seq 7',
+    'Altern 1',
+    'Altern 2',
+    'Altern 3',
+    'Altern 4',
+    'Altern 5',
+    'Altern 6',
+    'Altern 7',
+    'Altern 8',
+    'Chromat',
+    'Chrom 16',
+    'Major',
+    'Major 7',
+    'Minor7',
+    'MinArp1',
+    'MinArp2',
+    'Diminish',
+    'DecMinor',
+    'Minor3rd',
+    'Pedal',
+    '4ths',
+    '4ths x12',
+    '1625 Maj',
+    '1625 Min',
+    '2511'
+];
+
+const sync = [
+    'Off',
+    '32nd T',
+    '32nd',
+    '16th T',
+    '16th',
+    '8th T',
+    '16th D',
+    '8th',
+    '4th T',
+    '8th D',
+    '4th',
+    '1 + 1/3',
+    '4th D',
+    '2nd',
+    '2 + 2/3',
+    '3 beats',
+    '4 beats',
+    '5 + 1/3',
+    '6 beats',
+    '8 beats',
+    '10 + 2/3',
+    '12 beats',
+    '13 + 1/3',
+    '16 beats',
+    '18 beats',
+    '18 + 2/3',
+    '20 beats',
+    '21 + 1/3',
+    '24 beats',
+    '28 beats',
+    '30 beats',
+    '32 beats',
+    '36 beats',
+    '42 beats',
+    '48 beats',
+    '64 beats',
+];
+
 export const controls = {
   'patch-name': {
       label: 'Name',
@@ -1653,26 +1733,446 @@ export const controls = {
       msg: x => nrpn(0, 69, (x)&127),
   },
 
+  'lfo-1-waveform': {
+      label: 'Waveform',
+      enum: lfowaveform,
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 70, [0, 24]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 70, (x)&127),
+
+  },
+  'lfo-1-phase-offset': {
+      label: 'Phase Offset',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 71, [0, 119]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 71, (x)&127),
+  },
+  'lfo-1-slew-rate': {
+      label: 'Slew Rate',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 72, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 72, (x)&127),
+  },
+  'lfo-1-delay': {
+      label: 'Delay',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 74, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 74, (x)&127),
+  },
+  'lfo-1-delay-sync': {
+      label: 'Delay Sync',
+      enum: sync,
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 75, [0, 35]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 75, (x)&127),
+  },
+  'lfo-1-rate': {
+      label: 'Rate',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 76, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 76, (x)&127),
+  },
+  'lfo-1-rate-sync': {
+      label: 'Rate Sync',
+      enum: sync,
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 77, [0, 35]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 77, (x)&127),
+  },
+  'lfo-1-one-shot': {
+      label: 'OneShot',
+      enum: ['Normal', 'OneShot'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 12,
+      mapFrom: [
+        [0, 122, [12, 13]],
+      ],
+      decode: ([, , y]) => y-12,
+      msg: x => nrpn(0, 122, (x+12)&127),
+  },
+  'lfo-1-key-sync': {
+      label: 'KeySync',
+      enum: ['Freerun', 'KeySync'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 14,
+      mapFrom: [
+        [0, 122, [14, 15]],
+      ],
+      decode: ([, , y]) => y-14,
+      msg: x => nrpn(0, 122, (x+14)&127),
+  },
+  'lfo-1-common-sync': {
+      label: 'Common Sync',
+      enum: ['Normal', 'Common'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 16,
+      mapFrom: [
+        [0, 122, [16, 17]],
+      ],
+      decode: ([, , y]) => y-16,
+      msg: x => nrpn(0, 122, (x+16)&127),
+  },
+  'lfo-1-delay-trigger': {
+      label: 'Delay Trigger',
+      enum: ['Single', 'Multi'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 18,
+      mapFrom: [
+        [0, 122, [18, 19]],
+      ],
+      decode: ([, , y]) => y-18,
+      msg: x => nrpn(0, 122, (x+18)&127),
+  },
+  'lfo-1-fade-mode': {
+      label: 'Fade Mode',
+      enum: ['Fade In', 'Fade Out', 'Gate In', 'Gate Out'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 123, [0, 3]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 123, (x)&127),
+  },
+
+  'lfo-2-waveform': {
+      label: 'Waveform',
+      enum: lfowaveform,
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 79, [0, 24]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 79, (x)&127),
+
+  },
+  'lfo-2-phase-offset': {
+      label: 'Phase Offset',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 80, [0, 119]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 80, (x)&127),
+  },
+  'lfo-2-slew-rate': {
+      label: 'Slew Rate',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 81, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 81, (x)&127),
+  },
+  'lfo-2-delay': {
+      label: 'Delay',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 83, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 83, (x)&127),
+  },
+  'lfo-2-delay-sync': {
+      label: 'Delay Sync',
+      enum: sync,
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 84, [0, 35]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 84, (x)&127),
+  },
+  'lfo-2-rate': {
+      label: 'Rate',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 85, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 85, (x)&127),
+  },
+  'lfo-2-rate-sync': {
+      label: 'Rate Sync',
+      enum: sync,
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 86, [0, 35]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 86, (x)&127),
+  },
+  'lfo-2-one-shot': {
+      label: 'OneShot',
+      enum: ['Normal', 'OneShot'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 12,
+      mapFrom: [
+        [0, 122, [22, 23]],
+      ],
+      decode: ([, , y]) => y-22,
+      msg: x => nrpn(0, 122, (x+22)&127),
+  },
+  'lfo-2-key-sync': {
+      label: 'KeySync',
+      enum: ['Freerun', 'KeySync'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 14,
+      mapFrom: [
+        [0, 122, [24, 25]],
+      ],
+      decode: ([, , y]) => y-24,
+      msg: x => nrpn(0, 122, (x+24)&127),
+  },
+  'lfo-2-common-sync': {
+      label: 'Common Sync',
+      enum: ['Normal', 'Common'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 16,
+      mapFrom: [
+        [0, 122, [26, 27]],
+      ],
+      decode: ([, , y]) => y-26,
+      msg: x => nrpn(0, 122, (x+26)&127),
+  },
+  'lfo-2-delay-trigger': {
+      label: 'Delay Trigger',
+      enum: ['Single', 'Multi'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 18,
+      mapFrom: [
+        [0, 122, [28, 29]],
+      ],
+      decode: ([, , y]) => y-28,
+      msg: x => nrpn(0, 122, (x+28)&127),
+  },
+  'lfo-2-fade-mode': {
+      label: 'Fade Mode',
+      enum: ['Fade In', 'Fade Out', 'Gate In', 'Gate Out'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 18,
+      mapFrom: [
+        [0, 123, [4, 7]],
+      ],
+      decode: ([, , y]) => y-4,
+      msg: x => nrpn(0, 123, (x+4)&127),
+  },
+
+  'lfo-3-waveform': {
+      label: 'Waveform',
+      enum: lfowaveform,
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 88, [0, 24]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 88, (x)&127),
+
+  },
+  'lfo-3-phase-offset': {
+      label: 'Phase Offset',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 89, [0, 119]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 89, (x)&127),
+  },
+  'lfo-3-slew-rate': {
+      label: 'Slew Rate',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 90, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 90, (x)&127),
+  },
+  'lfo-3-delay': {
+      label: 'Delay',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 92, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 92, (x)&127),
+  },
+  'lfo-3-delay-sync': {
+      label: 'Delay Sync',
+      enum: sync,
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 93, [0, 35]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 93, (x)&127),
+  },
+  'lfo-3-rate': {
+      label: 'Rate',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 94, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 94, (x)&127),
+  },
+  'lfo-3-rate-sync': {
+      label: 'Rate Sync',
+      enum: sync,
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 95, [0, 35]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 95, (x)&127),
+  },
+  'lfo-3-one-shot': {
+      label: 'OneShot',
+      enum: ['Normal', 'OneShot'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 12,
+      mapFrom: [
+        [0, 122, [32, 33]],
+      ],
+      decode: ([, , y]) => y-32,
+      msg: x => nrpn(0, 122, (x+32)&127),
+  },
+  'lfo-3-key-sync': {
+      label: 'KeySync',
+      enum: ['Freerun', 'KeySync'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 14,
+      mapFrom: [
+        [0, 122, [34, 35]],
+      ],
+      decode: ([, , y]) => y-34,
+      msg: x => nrpn(0, 122, (x+34)&127),
+  },
+  'lfo-3-common-sync': {
+      label: 'Common Sync',
+      enum: ['Normal', 'Common'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 16,
+      mapFrom: [
+        [0, 122, [36, 37]],
+      ],
+      decode: ([, , y]) => y-36,
+      msg: x => nrpn(0, 122, (x+36)&127),
+  },
+  'lfo-3-delay-trigger': {
+      label: 'Delay Trigger',
+      enum: ['Single', 'Multi'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 18,
+      mapFrom: [
+        [0, 122, [38, 39]],
+      ],
+      decode: ([, , y]) => y-38,
+      msg: x => nrpn(0, 122, (x+38)&127),
+  },
+  'lfo-3-fade-mode': {
+      label: 'Fade Mode',
+      enum: ['Fade In', 'Fade Out', 'Gate In', 'Gate Out'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 123, [8, 11]],
+      ],
+      decode: ([, , y]) => y-8,
+      msg: x => nrpn(0, 123, (x+8)&127),
+  },
+
 };
-
-
-//  'env-2-attack':
-//  'env-2-decay':
-//  'env-2-sustain':
-//  'env-2-release':
-//  'env-2-trigger':
-//  'env-2-velocity':
-//  'env-2-sustain-rate':
-//  'env-2-sustain-time':
-//  'env-2-ad-repeats':
-//  'env-2-attack-track':
-//  'env-2-decay-track':
-//  'env-2-level-track':
-//  'env-2-attack-slope':
-//  'env-2-decay-slope':
-//  'env-2-anim-trigger':
-
-
+//  'lfo-1-waveform': 
+//  'lfo-1-phase-offset':
+//  'lfo-1-slew-rate':
+//  'lfo-1-delay':
+//  'lfo-1-delay-sync':
+//  'lfo-1-rate':
+//  'lfo-1-rate-sync':
+//  'lfo-1-one-shot':
+//  'lfo-1-key-sync':
+//  'lfo-1-common-sync':
+//  'lfo-1-delay-trigger':
+//  'lfo-1-fade-mode':
+//
 const inRange = (x, [min, max]) => x >= min && x <= max;
 
 export const findControl = (command) => {

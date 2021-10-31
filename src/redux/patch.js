@@ -35,6 +35,7 @@ export const reducer = (state = initialState, action) => {
           name += String.fromCharCode(action.payload.data[i]);
       }
       console.log("NAME: ",name);
+      console.log("LFO", action.payload.data[79]);
       return {
         ...state,
         'patch-name':name,
@@ -196,6 +197,47 @@ export const reducer = (state = initialState, action) => {
         'env-6-attack-slope': action.payload.data[196],
         'env-6-decay-slope': action.payload.data[197],
         'env-6-anim-trigger': action.payload.data[198],
+
+        'lfo-1-waveform': action.payload.data[199],
+        'lfo-1-phase-offset': action.payload.data[200],
+        'lfo-1-slew-rate': action.payload.data[201],
+        'lfo-1-delay': action.payload.data[203],
+        'lfo-1-delay-sync': action.payload.data[204],
+        'lfo-1-rate': action.payload.data[205],
+        'lfo-1-rate-sync': action.payload.data[206],
+        'lfo-1-one-shot': action.payload.data[207]&1 > 0 ? 1 : 0,
+        'lfo-1-key-sync': action.payload.data[207]&2 > 0 ? 1 : 0,
+        'lfo-1-common-sync': action.payload.data[207]&4 > 0 ? 1 : 0,
+        'lfo-1-delay-trigger': action.payload.data[207]&8 > 0 ? 1 : 0,
+        'lfo-1-fade-mode': (action.payload.data[207]>>4),
+
+        'lfo-2-waveform': action.payload.data[208],
+        'lfo-2-phase-offset': action.payload.data[209],
+        'lfo-2-slew-rate': action.payload.data[210],
+        'lfo-2-delay': action.payload.data[212],
+        'lfo-2-delay-sync': action.payload.data[213],
+        'lfo-2-rate': action.payload.data[214],
+        'lfo-2-rate-sync': action.payload.data[215],
+        'lfo-2-one-shot': action.payload.data[216]&1 > 0 ? 1 : 0,
+        'lfo-2-key-sync': action.payload.data[216]&2 > 0 ? 1 : 0,
+        'lfo-2-common-sync': action.payload.data[216]&4 > 0 ? 1 : 0,
+        'lfo-2-delay-trigger': action.payload.data[216]&8 > 0 ? 1 : 0,
+        'lfo-2-fade-mode': action.payload.data[216]>>4,
+
+        'lfo-3-waveform': action.payload.data[217],
+        'lfo-3-phase-offset': action.payload.data[218],
+        'lfo-3-slew-rate': action.payload.data[219],
+        'lfo-3-delay': action.payload.data[221],
+        'lfo-3-delay-sync': action.payload.data[222],
+        'lfo-3-rate': action.payload.data[223],
+        'lfo-3-rate-sync': action.payload.data[224],
+        'lfo-3-one-shot': action.payload.data[225]&1 > 0 ? 1 : 0,
+        'lfo-3-key-sync': action.payload.data[225]&2 > 0 ? 1 : 0,
+        'lfo-3-common-sync': action.payload.data[225]&4 > 0 ? 1 : 0,
+        'lfo-3-delay-trigger': action.payload.data[225]&8 > 0 ? 1 : 0,
+        'lfo-3-fade-mode': action.payload.data[225]>4,
+
+
 
       };
     case PATCH_CONTROL_CHANGED:
