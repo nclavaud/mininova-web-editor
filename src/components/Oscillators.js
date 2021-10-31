@@ -15,6 +15,7 @@ function Oscillators({ emit }) {
           />
         ))}
       </div>
+    <div className="oscillators_common">
       <div>
         <h4>Common Oscillator parameters</h4>
         {['osc-vibrato-depth', 'osc-vibrato-speed', 'osc-drift', 'osc-phase', 'osc-fixed-note'].map(id => (
@@ -37,6 +38,7 @@ function Oscillators({ emit }) {
           />
         ))}
       </div>
+    </div>
     </div>
   );
 }

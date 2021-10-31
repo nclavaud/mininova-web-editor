@@ -17,6 +17,17 @@ code {
   flex-wrap: wrap;
   justify-content: space-between;
 }
+.oscillators_common {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
 
 .control {
   display: flex;

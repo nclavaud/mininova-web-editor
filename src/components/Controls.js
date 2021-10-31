@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 import { cc, nrpn } from '../midi';
 import { controls, loadPatch } from '../mininova';
 import Oscillators from './Oscillators';
+import Filters from './Filters';
+
 import Control from './Control';
 import { patchControlChanged } from '../redux/patch';
 
@@ -27,7 +29,7 @@ function Controls({ currentPatch, emit }) {
 
   const randomize = () => {
     for (let [controlId, control] of Object.entries(controls)) {
-      if (['tempo', 'osc-fixed-note'].includes(controlId)) {
+      if (['patch-name', 'tempo', 'osc-fixed-note'].includes(controlId)) {
         continue;
       }
       const value = control.range ? randomInt(...control.range) : randomInt(0, control.enum.length);
@@ -40,6 +42,13 @@ function Controls({ currentPatch, emit }) {
     <div className="controls">
       <h3>Patch</h3>
       <p>Current patch: {currentPatch}</p>
+      <Control
+        id="patch-name"
+        control={controls['patch-name']}
+        readonly
+      />
+
+
       <button onClick={selectPrevPatch}>Prev patch</button>
       <button onClick={selectNextPatch}>Next patch</button>
       <button onClick={() => emit(loadPatch)}>Load patch</button>
@@ -57,6 +66,8 @@ function Controls({ currentPatch, emit }) {
       <button onClick={randomize}>Randomize</button>
       <button onClick={resetDefaults}>Reset defaults</button>
       <Oscillators emit={emit} />
+      <Filters emit={emit} />
+
     </div>
   );
 }
