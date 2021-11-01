@@ -41,6 +41,13 @@ code {
   justify-content: space-between;
 }
 
+.effects {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+
 .control {
   display: flex;
   align-items: baseline;

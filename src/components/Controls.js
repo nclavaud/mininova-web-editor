@@ -6,6 +6,7 @@ import Oscillators from './Oscillators';
 import Filters from './Filters';
 import Envelopes from './Envelopes';
 import Lfos from './Lfos';
+import Effects from './Effects';
 
 import Control from './Control';
 import { patchControlChanged } from '../redux/patch';
@@ -71,7 +72,7 @@ function Controls({ currentPatch, emit }) {
       <Filters emit={emit} />
       <Envelopes emit={emit} />
       <Lfos emit={emit} />
-
+      <Effects emit={emit} />
     </div>
   );
 }

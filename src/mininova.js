@@ -231,6 +231,24 @@ const sync = [
     '64 beats',
 ];
 
+const fxnames = [
+    'Bypass', 
+    'EQ', 
+    'Compres1', 
+    'Compres2', 
+    'Distort1', 
+    'Distort2', 
+    'Delay1', 
+    'Delay2', 
+    'Reverb1', 
+    'Reverb2', 
+    'Chorus1', 
+    'Chorus2', 
+    'Chorus3', 
+    'Chorus4', 
+    'Gator'
+];
+
 export const controls = {
   'patch-name': {
       label: 'Name',
@@ -2286,7 +2304,7 @@ export const controls = {
   },
   'fx-1-select': {
       label: "FX1 Select", 
-      enum: ['Bypass', 'EQ', 'Compres1', 'Compres2', 'Distort1', 'Distort2', 'Delay 1', 'Delay 2', 'Reverb 1', 'Reverb 2', 'Chorus 1', 'Chorus 2', 'Chorus 3', 'Chorus 4', 'Gator'],
+      enum: fxnames,
       type: CommandType.NRPN,
       init: 0,
       mapFrom: [
@@ -2297,7 +2315,7 @@ export const controls = {
   },
   'fx-2-select': {
       label: "FX2 Select", 
-      enum: ['Bypass', 'EQ', 'Compres1', 'Compres2', 'Distort1', 'Distort2', 'Delay 1', 'Delay 2', 'Reverb 1', 'Reverb 2', 'Chorus 1', 'Chorus 2', 'Chorus 3', 'Chorus 4', 'Gator'],
+      enum: fxnames,
       type: CommandType.NRPN,
       init: 0,
       mapFrom: [
@@ -2308,7 +2326,7 @@ export const controls = {
   },
   'fx-3-select': {
       label: "FX3 Select", 
-      enum: ['Bypass', 'EQ', 'Compres1', 'Compres2', 'Distort1', 'Distort2', 'Delay 1', 'Delay 2', 'Reverb 1', 'Reverb 2', 'Chorus 1', 'Chorus 2', 'Chorus 3', 'Chorus 4', 'Gator'],
+      enum: fxnames,
       type: CommandType.NRPN,
       init: 0,
       mapFrom: [
@@ -2319,7 +2337,7 @@ export const controls = {
   },
   'fx-4-select': {
       label: "FX4 Select", 
-      enum: ['Bypass', 'EQ', 'Compres1', 'Compres2', 'Distort1', 'Distort2', 'Delay 1', 'Delay 2', 'Reverb 1', 'Reverb 2', 'Chorus 1', 'Chorus 2', 'Chorus 3', 'Chorus 4', 'Gator'],
+      enum: fxnames,
       type: CommandType.NRPN,
       init: 0,
       mapFrom: [
@@ -2330,7 +2348,7 @@ export const controls = {
   },
   'fx-5-select': {
       label: "FX5 Select", 
-      enum: ['Bypass', 'EQ', 'Compres1', 'Compres2', 'Distort1', 'Distort2', 'Delay 1', 'Delay 2', 'Reverb 1', 'Reverb 2', 'Chorus 1', 'Chorus 2', 'Chorus 3', 'Chorus 4', 'Gator'],
+      enum: fxnames,
       type: CommandType.NRPN,
       init: 0,
       mapFrom: [
