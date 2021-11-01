@@ -3112,15 +3112,528 @@ export const controls = {
       msg: x => nrpn(1, 47, (x)&127),
   },
 
+  'gator-on': {
+      label: 'On',
+      enum: ['Off', 'on'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 52,
+      mapFrom: [
+        [0, 122, [52, 53]],
+      ],
+      decode: ([, , y]) => y-52,
+      msg: x => nrpn(0, 122, (x+52)&127),
+  },
+  'gator-key-sync': {
+      label: 'Key Sync',
+      enum: ['Freerun', 'KeySync'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 54,
+      mapFrom: [
+        [0, 122, [54, 55]],
+      ],
+      decode: ([, , y]) => y-54,
+      msg: x => nrpn(0, 122, (x+54)&127),
+  },
+  'gator-key-latch': {
+      label: 'Key Latch',
+      enum: ['Off', 'On'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 56,
+      mapFrom: [
+        [0, 122, [56, 57]],
+      ],
+      decode: ([, , y]) => y-56,
+      msg: x => nrpn(0, 122, (x+56)&127),
+  },
+  'gator-rate-sync': {
+      label: 'Rate Sync',
+      enum: sync,
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 49, [0, 35]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 49, (x)&127),
+  },
+  'gator-mode': {
+      label: 'Mode',
+      enum: ['Mono16', 'MonoAlt1','MonoAlt2', 'Stereo16', 'SterAlt1', 'SterAlt2'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 50, [0, 5]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 50, (x)&127),
+  },
+  'gator-edge-slew': {
+      label: 'Edge Slew',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 52, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 52, (x)&127),
+  },
+  'gator-hold': {
+      label: 'Hold',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 53, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 53, (x)&127),
+  },
+  'gator-lr-delay': {
+    label: 'LR Delay',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [1, 54, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(1, 54, (x+64)&127),
+  },
+  'gator-level-1': {
+      label: 'Level 1',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 0, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 0, (x)&127),
+  },
+  'gator-level-2': {
+      label: 'Level 2',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 1, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 1, (x)&127),
+  },
+
+  'gator-level-3': {
+      label: 'Level 3',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 2, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 2, (x)&127),
+  },
+
+  'gator-level-4': {
+      label: 'Level 4',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 3, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 3, (x)&127),
+  },
+
+  'gator-level-5': {
+      label: 'Level 5',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 4, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 4, (x)&127),
+  },
+
+  'gator-level-6': {
+      label: 'Level 6',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 5, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 5, (x)&127),
+  },
+
+  'gator-level-7': {
+      label: 'Level 7',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 6, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 6, (x)&127),
+  },
+
+  'gator-level-8': {
+      label: 'Level 7',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 7, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 7, (x)&127),
+  },
+
+  'gator-level-9': {
+      label: 'Level 9',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 8, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 8, (x)&127),
+  },
+
+  'gator-level-10': {
+      label: 'Level 10',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 9, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 9, (x)&127),
+  },
+
+  'gator-level-11': {
+      label: 'Level 11',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 10, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 10, (x)&127),
+  },
+
+  'gator-level-12': {
+      label: 'Level 12',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 11, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 11, (x)&127),
+  },
+
+  'gator-level-13': {
+      label: 'Level 13',
+
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 12, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 12, (x)&127),
+  },
+
+  'gator-level-14': {
+      label: 'Level 14',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 13, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 13, (x)&127),
+  },
+
+  'gator-level-15': {
+      label: 'Level 15',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 14, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 14, (x)&127),
+  },
+
+  'gator-level-16': {
+      label: 'Level 16',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 15, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 15, (x)&127),
+  },
+
+  'gator-level-17': {
+      label: 'Level 17',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 16, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 16, (x)&127),
+  },
+
+  'gator-level-18': {
+      label: 'Level 18',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 17, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 17, (x)&127),
+  },
+
+  'gator-level-19': {
+      label: 'Level 19',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 18, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 18, (x)&127),
+  },
+
+  'gator-level-20': {
+      label: 'Level 20',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 19, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 19, (x)&127),
+  },
+
+  'gator-level-21': {
+      label: 'Level 21', 
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 20, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 20, (x)&127),
+  },
+
+  'gator-level-22': {
+      label: 'Level 22',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 21, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 21, (x)&127),
+  },
+
+  'gator-level-23': {
+      label: 'Level 23',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 22, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 22, (x)&127),
+  },
+
+  'gator-level-24': {
+      label: 'Level 24',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 23, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 23, (x)&127),
+  },
+
+  'gator-level-25': {
+      label: 'Level 25',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 24, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 24, (x)&127),
+  },
+
+  'gator-level-26': {
+      label: 'Level 26',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 25, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 25, (x)&127),
+  },
+
+  'gator-level-27': {
+      label: 'Level 27',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 26, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 26, (x)&127),
+  },
+
+  'gator-level-28': {
+      label: 'Level 28',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 27, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 27, (x)&127),
+  },
+
+  'gator-level-29': {
+      label: 'Level 29',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 28, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 28, (x)&127),
+  },
+
+  'gator-level-30': {
+      label: 'Level 30',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 29, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 29, (x)&127),
+  },
+
+  'gator-level-31': {
+      label: 'Level 31',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 30, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 30, (x)&127),
+  },
+
+  'gator-level-32': {
+      label: 'Level 32',
+      type: CommandType.NRPN,
+      range: [0,7],
+      init: 0,
+      mapFrom: [
+        [5, 32, [0, 7]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(5, 32, (x)&127),
+  },
+
+
 };
 
 
-//  'chorus-1-type':
-//  'chorus-1-rate':
-//  'chorus-1-rate-sync':
-//  'chorus-1-feedback':
-//  'chrous-1-mod-depth':
-//  'chorus-1-delay':
+//  'gator-on':
+//  'gator-key-sync':
+//  'gator-key-latch':
+//  'gator-rate-sync':
+//  'gator-mode':
+//  'gator-edge-slew':
+//  'gator-hold':
+//  'gator-lr-delay':
+//  'gator-level-1':
+//  'gator-level-2':
+//  'gator-level-3':
+//  'gator-level-4':
+//  'gator-level-5':
+//  'gator-level-6':
+//  'gator-level-7':
+//  'gator-level-8':
+//  'gator-level-9':
+//  'gator-level-10':
+//  'gator-level-11':
+//  'gator-level-12':
+//  'gator-level-13':
+//  'gator-level-14':
+//  'gator-level-15':
+//  'gator-level-16':
+//  'gator-level-17':
+//  'gator-level-18':
+//  'gator-level-19':
+//  'gator-level-20':
+//  'gator-level-21':
+//  'gator-level-22':
+//  'gator-level-23':
+//  'gator-level-24':
+//  'gator-level-25':
+//  'gator-level-26':
+//  'gator-level-27':
+//  'gator-level-28':
+//  'gator-level-29':
+//  'gator-level-30':
+//  'gator-level-31':
+//  'gator-level-32':
+
 
 const inRange = (x, [min, max]) => x >= min && x <= max;
 
