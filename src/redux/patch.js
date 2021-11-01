@@ -263,6 +263,26 @@ export const reducer = (state = initialState, action) => {
         'eq-treble-frequency': action.payload.data[242],
         'eq-treble-level': action.payload.data[243]-64,
 
+        'compres-1-ratio': action.payload.data[244],
+        'compres-1-treshold': action.payload.data[245]-60,
+        'compres-1-attack': action.payload.data[246],
+        'compres-1-release': action.payload.data[247],
+        'compres-1-hold': action.payload.data[248],
+        'compres-1-gain': action.payload.data[249],
+
+        'compres-2-ratio': action.payload.data[250],
+        'compres-2-treshold': action.payload.data[251]-60,
+        'compres-2-attack': action.payload.data[252],
+        'compres-2-release': action.payload.data[253],
+        'compres-2-hold': action.payload.data[254],
+        'compres-2-gain': action.payload.data[255],
+
+        'distort-1-type': action.payload.data[256],
+        'distort-1-compensation': action.payload.data[257],
+        'distort-1-level': action.payload.data[258]-60,
+        'distort-2-type': action.payload.data[259],
+        'distort-2-compensation': action.payload.data[260],
+        'distort-2-level': action.payload.data[261]-60,
       };
     case PATCH_CONTROL_CHANGED:
       return {

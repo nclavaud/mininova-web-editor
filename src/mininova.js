@@ -2426,16 +2426,212 @@ export const controls = {
 
   },
 
+  'compres-1-ratio': {
+      label: 'Ratio',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 110, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 110, (x)&127),
+  },
+  'compres-1-treshold': {
+    label: "Treble Level",
+    type: CommandType.NRPN,
+    range: [-60,0],
+    init: 0,
+    mapFrom: [
+      [0, 111, [0, 60]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 111, (x+60)&127),
+  },
+  'compres-1-attack': {
+      label: 'Attack',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 112, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 112, (x)&127),
+  },
+  'compres-1-release': {
+      label: 'Release',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 113, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 113, (x)&127),
+
+  },
+    'compres-1-hold': {
+        label: 'Hold',
+        type: CommandType.NRPN,
+        range: [0,127],
+        init: 0,
+        mapFrom: [
+            [0, 114, [0, 127]],
+        ],
+        decode: ([, , y]) => y,
+        msg: x => nrpn(0, 114, (x)&127),
+  },
+  'compres-1-gain': {
+      label: 'Gain',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 115, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 115, (x)&127),
+  },
+
+  'compres-2-ratio': {
+      label: 'Ratio',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 116, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 116, (x)&127),
+  },
+  'compres-2-treshold': {
+    label: "Treble Level",
+    type: CommandType.NRPN,
+    range: [-60,0],
+    init: 0,
+    mapFrom: [
+      [0, 117, [0, 60]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 117, (x+60)&127),
+  },
+  'compres-2-attack': {
+      label: 'Attack',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 118, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 118, (x)&127),
+  },
+  'compres-2-release': {
+      label: 'Release',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 119, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 119, (x)&127),
+
+  },
+    'compres-2-hold': {
+        label: 'Hold',
+        type: CommandType.NRPN,
+        range: [0,127],
+        init: 0,
+        mapFrom: [
+            [0, 120, [0, 127]],
+        ],
+        decode: ([, , y]) => y,
+        msg: x => nrpn(0, 120, (x)&127),
+  },
+  'compres-2-gain': {
+      label: 'Gain',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 121, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 121, (x)&127),
+  },
+  'distort-1-type': {
+      label: "Type", 
+      enum: ['Diode', 'Valve', 'Clipper', 'XOver','Rectify', 'BitsDown', 'RateDown'],
+      type: CommandType.NRPN,
+      init: 0,
+      mapFrom: [
+        [1, 0, [0, 6]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 0, (x)&127),
+  },
+  'distort-1-compensation': {
+      label: 'Compensation',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 1, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 1, (x)&127),
+  },
+  'distort-1-level': {
+      label: 'Level',
+      type: CommandType.NRPN,
+      range: [-12,18],
+      init: 0,
+      mapFrom: [
+        [1, 2, [52, 82]],
+      ],
+      decode: ([, , y]) => y-60,
+      msg: x => nrpn(1, 2, (x+60)&127),
+  },
+  'distort-2-type': {
+      label: "Type", 
+      enum: ['Diode', 'Valve', 'Clipper', 'XOver','Rectify', 'BitsDown', 'RateDown'],
+      type: CommandType.NRPN,
+      init: 0,
+      mapFrom: [
+        [1, 3, [0, 6]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 3, (x)&127),
+  },
+  'distort-2-compensation': {
+      label: 'Compensation',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 4, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 4, (x)&127),
+  },
+  'distort-2-level': {
+      label: 'Level',
+      type: CommandType.NRPN,
+      range: [-12,18],
+      init: 0,
+      mapFrom: [
+        [1, 5, [52, 82]],
+      ],
+      decode: ([, , y]) => y-60,
+      msg: x => nrpn(1, 5, (x+60)&127),
+  },
+
 };
-
-//  'eq-bass-frequency':
-//  'eq-bass-level':
-//  'eq-mid-frequency':
-//  'eq-mid-level'
-//  'eq-treble-frequency':
-//  'eq-treble-level:
-
-
+//  'distort-1-type':
+//  'distort-1-compensation':
+//  'distort-1-level':
 
 const inRange = (x, [min, max]) => x >= min && x <= max;
 
