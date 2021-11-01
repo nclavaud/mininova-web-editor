@@ -3812,26 +3812,771 @@ export const controls = {
       decode: ([, , y]) => (y > 0 ? 1 : 0),
       msg: x => nrpn(60, 39, (x)&127),
   },
+
+  'vocoder-level': {
+      label: 'Level',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 71, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 71, (x)&127),
+  },
+  'vocoder-carier-level': {
+      label: 'Carier Level',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 72, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 72, (x)&127),
+
+  },
+  'vocoder-modulator-level': {
+      label: 'Modulator Level',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 73, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 73, (x)&127),
+  },
+  'vocoder-resonance': {
+      label: 'Resonance',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 74, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 74, (x)&127),
+
+  },
+  'vocoder-decay': {
+      label: 'Decay',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 75, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 75, (x)&127),
+  },
+  'vocoder-gate-threshold': {
+      label: 'Gate Threshold',
+      type: CommandType.NRPN,
+      range: [-96,0],
+      init: 0,
+      mapFrom: [
+        [1, 76, [0, 96]],
+      ],
+      decode: ([, , y]) => y-96,
+      msg: x => nrpn(1, 76, (x+96)&127),
+  },
+  'vocoder-gate-release': {
+      label: 'Gate Release',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 77, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 77, (x)&127),
+
+  },
+  'vocoder-spectrum-level-1': {
+      label: 'Spectrum Level 1',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 0, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 0, (x)&127),
+  },
+  'vocoder-spectrum-level-2': {
+      label: 'Spectrum Level 2',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 1, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 1, (x)&127),
+  },
+  'vocoder-spectrum-level-3': {
+      label: 'Spectrum Level 3',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 2, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 2, (x)&127),
+  },
+  'vocoder-spectrum-level-4': {
+      label: 'Spectrum Level 4',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 3, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 3, (x)&127),
+  },
+  'vocoder-spectrum-level-5': {
+      label: 'Spectrum Level 5',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 4, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 4, (x)&127),
+  },
+  'vocoder-spectrum-level-6': {
+      label: 'Spectrum Level 6',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 5, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 5, (x)&127),
+  },
+  'vocoder-spectrum-level-7': {
+      label: 'Spectrum Level 7',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 6, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 6, (x)&127),
+  },
+  'vocoder-spectrum-level-8': {
+      label: 'Spectrum Level 8',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 7, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 7, (x)&127),
+  },
+  'vocoder-spectrum-level-9': {
+      label: 'Spectrum Level 9',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 8, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 8, (x)&127),
+  },
+  'vocoder-spectrum-level-10': {
+      label: 'Spectrum Level 10',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 9, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 9, (x)&127),
+  },
+  'vocoder-spectrum-level-11': {
+      label: 'Spectrum Level 11',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 10, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 10, (x)&127),
+  },
+  'vocoder-spectrum-level-12': {
+      label: 'Spectrum Level 12',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 11, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 11, (x)&127),
+  },
+  'vocoder-spectrum-level-13': {
+      label: 'Spectrum Level 13',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 12, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 12, (x)&127),
+  },
+  'vocoder-spectrum-level-14': {
+      label: 'Spectrum Level 14',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 13, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 13, (x)&127),
+  },
+  'vocoder-spectrum-level-15': {
+      label: 'Spectrum Level 15',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 14, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 14, (x)&127),
+  },
+  'vocoder-spectrum-level-16': {
+      label: 'Spectrum Level 16',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 15, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 15, (x)&127),
+  },
+  'vocoder-spectrum-level-17': {
+      label: 'Spectrum Level 17',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 16, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 16, (x)&127),
+  },
+  'vocoder-spectrum-level-18': {
+      label: 'Spectrum Level 18',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 17, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 17, (x)&127),
+  },
+  'vocoder-spectrum-level-19': {
+      label: 'Spectrum Level 19',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 18, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 18, (x)&127),
+  },
+  'vocoder-spectrum-level-20': {
+      label: 'Spectrum Level 20',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 19, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 19, (x)&127),
+  },
+  'vocoder-spectrum-level-21': {
+      label: 'Spectrum Level 21',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 20, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 20, (x)&127),
+  },
+  'vocoder-spectrum-level-22': {
+      label: 'Spectrum Level 22',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 21, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 21, (x)&127),
+  },
+  'vocoder-spectrum-level-23': {
+      label: 'Spectrum Level 23',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 22, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 22, (x)&127),
+  },
+  'vocoder-spectrum-level-24': {
+      label: 'Spectrum Level 24',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 23, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 23, (x)&127),
+  },
+  'vocoder-spectrum-level-25': {
+      label: 'Spectrum Level 25',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 24, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 24, (x)&127),
+  },
+  'vocoder-spectrum-level-26': {
+      label: 'Spectrum Level 26',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 25, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 25, (x)&127),
+  },
+  'vocoder-spectrum-level-27': {
+      label: 'Spectrum Level 27',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 26, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 26, (x)&127),
+  },
+  'vocoder-spectrum-level-28': {
+      label: 'Spectrum Level 28',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 27, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 27, (x)&127),
+  },
+  'vocoder-spectrum-level-29': {
+      label: 'Spectrum Level 29',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 28, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 28, (x)&127),
+  },
+  'vocoder-spectrum-level-30': {
+      label: 'Spectrum Level 30',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 29, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 29, (x)&127),
+  },
+  'vocoder-spectrum-level-31': {
+      label: 'Spectrum Level 31',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 30, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 30, (x)&127),
+  },
+  'vocoder-spectrum-level-32': {
+      label: 'Spectrum Level 32',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [6, 31, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 31, (x)&127),
+  },
+  'vocoder-spectrum-resample': {
+      label: 'Spectrum Resample',
+      type: CommandType.NRPN,
+      range: [0,1],
+      init: 0,
+      mapFrom: [
+        [6, 32, [0, 1]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(6, 32, (x)&127),
+  },
+  'chorder-transpose': {
+      label: 'Transpose',
+      type: CommandType.NRPN,
+      range: [-11,11],
+      init: 0,
+      mapFrom: [
+        [1, 78, [53,75]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(1, 78, (x+64)&127),
+  },
+  'chorder-on': {
+      label: 'On',
+      enum: ['Off', 'On'],
+      type: CommandType.NRPN,
+      init: 0,
+      mapFrom: [
+        [1, 79, [0,1]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 79, (x)&127),
+  },
+  'chorder-count': {
+      label: 'Count',
+      range: [0,10],
+      type: CommandType.NRPN,
+      init: 0,
+      mapFrom: [
+        [7, 16, [0,10]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(7, 16, (x)&127),
+  },
+  'chorder-key-2': {
+      label: 'Key 2',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [7, 17, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(7, 17, (x)&127),
+  },
+  'chorder-key-3': {
+      label: 'Key 3',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [7, 18, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(7, 18, (x)&127),
+  },
+  'chorder-key-4': {
+      label: 'Key 4',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [7, 19, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(7, 19, (x)&127),
+  },
+  'chorder-key-5': {
+      label: 'Key 5',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [7, 20, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(7, 20, (x)&127),
+  },
+  'chorder-key-6': {
+      label: 'Key 6',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [7, 21, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(7, 21, (x)&127),
+  },
+  'chorder-key-7': {
+      label: 'Key 7',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [7, 22, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(7, 22, (x)&127),
+  },
+  'chorder-key-8': {
+      label: 'Key 8',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [7, 23, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(7, 23, (x)&127),
+  },
+  'chorder-key-9': {
+      label: 'Key 9',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [7, 24, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(7, 24, (x)&127),
+  },
+  'chorder-key-10': {
+      label: 'Key 10',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [7, 25, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(7, 25, (x)&127),
+  },
+
+  'vocal-tune-shift': {
+      label: 'Shift',
+      type: CommandType.NRPN,
+      range: [-24,24],
+      init: 0,
+      mapFrom: [
+        [1, 80, [40, 88]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(1, 80, (x+64)&127),
+  },
+  'vocal-tune-bend': {
+      label: 'Bend',
+      type: CommandType.NRPN,
+      range: [-24,24],
+      init: 0,
+      mapFrom: [
+        [1, 81, [40, 88]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(1, 81, (x+64)&127),
+  },
+  'vocal-tune-mode': {
+     label: 'Mode',
+      type: CommandType.NRPN,
+      enum: [ 'Off', 'Scale Correction', 'KBCtrl', 'Pitch'],
+      init: 0,
+      mapFrom: [
+        [0, 123, [16, 19]],
+      ],
+      decode: ([, , y]) => y-16,
+      msg: x => nrpn(0, 123, (x+16)&127),
+  },
+  'vocal-tune-insert': {
+     label: 'Insert',
+      type: CommandType.NRPN,
+      enum: [ 'PreFilter', 'PostFilter','PreFx' ],
+      init: 0,
+      mapFrom: [
+        [0, 123, [20, 22]],
+      ],
+      decode: ([, , y]) => y-20,
+      msg: x => nrpn(0, 123, (x+20)&127),
+  },
+  'vocal-tune-scale-type': {
+     label: 'Scale Type',
+      type: CommandType.NRPN,
+      enum: [ 'Played', 'Chromatic', 'Major', 'NatMinor', 'HarMinor', 'MelMinor'],
+      init: 0,
+      mapFrom: [
+        [2, 56, [0, 5]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 56, (x)&127),
+
+  },
+  'vocal-tune-scale-key': {
+     label: 'Scale Key',
+      type: CommandType.NRPN,
+      enum: [ 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'],
+      init: 0,
+      mapFrom: [
+        [2, 57, [0, 11]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 57, (x)&127),
+
+  },
+  'vocal-tune-correction-time': {
+      label: 'Correction Time',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [2, 58, [0, 127]],
+      ],
+      decode: ([, , y]) => 127-y,
+      msg: x => nrpn(2, 58, (127-x)&127),
+  },
+  'vocal-tune-level': {
+      label: 'Level',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [2, 59, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 59, (x)&127),
+  },
+  'vocal-tune-vibrato': {
+      label: 'Vibrato',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [2, 60, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 60, (x)&127),
+  },
+  'vocal-tune-vibrato-mod-wheel': {
+      label: 'Vibrato Mod Wheel',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [2, 61, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 61, (x)&127),
+  },
+  'vocal-tune-vibrato-rate': {
+      label: 'Vibrato Rate',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [2, 62, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 62, (x)&127),
+  },
 };
 
-//  'arp-on':
-//  'arp-key-latch':
-//  'arp-octaves':
-//  'arp-rate-sync':
-//  'arp-gate':
-//  'arp-mode':
-//  'arp-pattern':
-//  'arp-swing':
-//  'arp-length':
-//  'arp-step-1':
-//  'arp-step-2':
-//  'arp-step-3':
-//  'arp-step-4':
-//  'arp-step-5':
-//  'arp-step-6':
-//  'arp-step-7':
-//  'arp-step-8':
-
+//  'vocoder-level':
+//  'vocoder-carier-level':
+//  'vocoder-modulator-level':
+//  'vocoder-resonance':
+//  'vocoder-decay':
+//  'vocoder-gate-threshold':
+//  'vocoder-gate-release':
+//  'vocoder-spectrum-level-1':
+//  'vocoder-spectrum-level-2':
+//  'vocoder-spectrum-level-3':
+//  'vocoder-spectrum-level-4':
+//  'vocoder-spectrum-level-5':
+//  'vocoder-spectrum-level-6':
+//  'vocoder-spectrum-level-7':
+//  'vocoder-spectrum-level-8':
+//  'vocoder-spectrum-level-9':
+//  'vocoder-spectrum-level-10':
+//  'vocoder-spectrum-level-11':
+//  'vocoder-spectrum-level-12':
+//  'vocoder-spectrum-level-13':
+//  'vocoder-spectrum-level-14':
+//  'vocoder-spectrum-level-15':
+//  'vocoder-spectrum-level-16':
+//  'vocoder-spectrum-level-17':
+//  'vocoder-spectrum-level-18':
+//  'vocoder-spectrum-level-19':
+//  'vocoder-spectrum-level-20':
+//  'vocoder-spectrum-level-21':
+//  'vocoder-spectrum-level-22':
+//  'vocoder-spectrum-level-23':
+//  'vocoder-spectrum-level-24':
+//  'vocoder-spectrum-level-25':
+//  'vocoder-spectrum-level-26':
+//  'vocoder-spectrum-level-27':
+//  'vocoder-spectrum-level-28':
+//  'vocoder-spectrum-level-29':
+//  'vocoder-spectrum-level-30':
+//  'vocoder-spectrum-level-31':
+//  'vocoder-spectrum-level-32':
+//  'vocoder-spectrum-resample':
+//  'chorder-transpose':
+//  'chorder-on':
+//  'chorder-count':
+//  'chorder-key-2':
+//  'chorder-key-3':
+//  'chorder-key-4':
+//  'chorder-key-5':
+//  'chorder-key-6':
+//  'chorder-key-7':
+//  'chorder-key-8':
+//  'chorder-key-9':
+//  'chorder-key-10':
+//  'vocal-tune-shift':
+//  'vocal-tune-bend':
+//  'vocal-tune-mode':
+//  'vocal-tune-insert':
+//  'vocal-tune-scale-type':
+//  'vocal-tune-scale-key':
+//  'vocal-tune-correction-time':
+//  'vocal-tune-level':
+//  'vocal-tune-vibrato':
+//  'vocal-tune-vibrato-mod-wheel':
+//  'vocal-tune-vibrato-rate':
 
 const inRange = (x, [min, max]) => x >= min && x <= max;
 
