@@ -1,9 +1,18 @@
 import React from 'react';
+import Control from '../Control';
+import {controls} from '../../mininova.js';
 
 function Reverb1({id,emit}) {
+    const params = [ 'reverb-1-type', 'reverb-1-decay', 'reverb-1-damping' ];
     return (
         <div>
-        <h4>Reverb1</h4>
+        {params.map(param => (
+          <Control
+            key={param}
+            id={param}
+            control={controls[param]}
+            emit={emit}/>
+        ))}
         </div>
     );
 }

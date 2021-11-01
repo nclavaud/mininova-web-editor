@@ -2628,10 +2628,222 @@ export const controls = {
       msg: x => nrpn(1, 5, (x+60)&127),
   },
 
+  'delay-1-time': {
+      label: 'Time',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 6, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 6, (x)&127),
+  },
+  'delay-1-sync': {
+      label: 'Sync',
+      enum: sync,
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 7, [0, 35]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 7, (x)&127),
+  },
+  'delay-1-feedback': {
+      label: 'Feedback',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 8, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 8, (x)&127),
+  },
+  'delay-1-width': {
+      label: 'Width',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 9, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 9, (x)&127),
+  },
+  'delay-1-lr-ratio': {
+      label: 'LR Ratio',
+      enum: ['L 1:1 R', 'L 4:3 R', 'L 3:4 R', 'L 3:2 R', 'L 2:3 R', 'L 2:1 R', 'L 1:2 R', 'L 3:1 R', 'L 1:3 R', 'L 4:1 R', 'L 1:4 R', 'L 1:Off', 'Off:1 R'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 10, [0, 12]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 10, (x)&127),
+  },
+  'delay-1-slew-rate': {
+      label: 'Slew Rate',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 11, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 11, (x)&127),
+  },
+
+  'delay-2-time': {
+      label: 'Time',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 12, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 12, (x)&127),
+  },
+  'delay-2-sync': {
+      label: 'Sync',
+      enum: sync,
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 13, [0, 35]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 13, (x)&127),
+  },
+  'delay-2-feedback': {
+      label: 'Feedback',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 14, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 14, (x)&127),
+  },
+  'delay-2-width': {
+      label: 'Width',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 15, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 15, (x)&127),
+  },
+  'delay-2-lr-ratio': {
+      label: 'LR Ratio',
+      enum: ['L 1:1 R', 'L 4:3 R', 'L 3:4 R', 'L 3:2 R', 'L 2:3 R', 'L 2:1 R', 'L 1:2 R', 'L 3:1 R', 'L 1:3 R', 'L 4:1 R', 'L 1:4 R', 'L 1:Off', 'Off:1 R'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 16, [0, 12]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 16, (x)&127),
+  },
+  'delay-2-slew-rate': {
+      label: 'Slew Rate',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 17, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 17, (x)&127),
+  },
+
+  'reverb-1-type': {
+      label: 'Type',
+      enum: ['Chamber', 'SmlRoom', 'LrgRoom', 'SmlHall', 'LrgHall', 'GrtHall'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 18, [0, 5]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 18, (x)&127),
+
+  },
+  'reverb-1-decay': {
+      label: 'Decay',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 19, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 19, (x)&127),
+
+  },
+  'reverb-1-damping': {
+      label: 'Damping',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 20, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 20, (x)&127),
+  },
+  'reverb-2-type': {
+      label: 'Type',
+      enum: ['Chamber', 'SmlRoom', 'LrgRoom', 'SmlHall', 'LrgHall', 'GrtHall'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 21, [0, 5]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 21, (x)&127),
+
+  },
+  'reverb-2-decay': {
+      label: 'Decay',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 22, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 22 , (x)&127),
+
+  },
+  'reverb-2-damping': {
+      label: 'Damping',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 23, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 23, (x)&127),
+  },
+
 };
-//  'distort-1-type':
-//  'distort-1-compensation':
-//  'distort-1-level':
+
+//  'reverb-1-type':
+//  'reverb-1-decay':
+//  'reverb-1-damping':
 
 const inRange = (x, [min, max]) => x >= min && x <= max;
 

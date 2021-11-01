@@ -283,6 +283,28 @@ export const reducer = (state = initialState, action) => {
         'distort-2-type': action.payload.data[259],
         'distort-2-compensation': action.payload.data[260],
         'distort-2-level': action.payload.data[261]-60,
+
+        'delay-1-time': action.payload.data[262],
+        'delay-1-sync': action.payload.data[263],
+        'delay-1-feedback': action.payload.data[264],
+        'delay-1-width': action.payload.data[265],
+        'delay-1-lr-ratio': action.payload.data[266],
+        'delay-1-slew-rate': action.payload.data[267],
+
+        'delay-2-time': action.payload.data[268],
+        'delay-2-sync': action.payload.data[269],
+        'delay-2-feedback': action.payload.data[270],
+        'delay-2-width': action.payload.data[271],
+        'delay-2-lr-ratio': action.payload.data[272],
+        'delay-2-slew-rate': action.payload.data[273],
+
+        'reverb-1-type': action.payload.data[274],
+        'reverb-1-decay': action.payload.data[275],
+        'reverb-1-damping': action.payload.data[276],
+        'reverb-2-type': action.payload.data[277],
+        'reverb-2-decay': action.payload.data[278],
+        'reverb-2-damping': action.payload.data[279],
+
       };
     case PATCH_CONTROL_CHANGED:
       return {
