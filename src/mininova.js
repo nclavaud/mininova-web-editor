@@ -5860,13 +5860,97 @@ export const controls = {
       msg: x => nrpn(2, 54, (x)&127),
   },
 
+  'tweak-1': {
+     label: 'Tweak 1',
+      type: CommandType.NRPN,
+      enum: tweak,
+      init: 0,
+      mapFrom: [
+        [4, 0, [0, 125]],
+      ],
+      decode: ([, ,x, y]) => y,
+      msg: x => nrpn(4, 0, 0, (x)&127),
+  },
+  'tweak-2': {
+     label: 'Tweak 2',
+      type: CommandType.NRPN,
+      enum: tweak,
+      init: 0,
+      mapFrom: [
+        [4, 1, [0, 125]],
+      ],
+      decode: ([, , x, y]) => y,
+      msg: x => nrpn(4, 1, 0, (x)&127),
+  },
+  'tweak-3': {
+     label: 'Tweak 3',
+      type: CommandType.NRPN,
+      enum: tweak,
+      init: 0,
+      mapFrom: [
+        [4, 2, [0, 125]],
+      ],
+      decode: ([, ,x, y]) => y,
+      msg: x => nrpn(4, 2, 0, (x)&127),
+  },
+  'tweak-4': {
+     label: 'Tweak 4',
+      type: CommandType.NRPN,
+      enum: tweak,
+      init: 0,
+      mapFrom: [
+        [4, 3, [0, 125]],
+      ],
+      decode: ([, ,x, y]) => y,
+      msg: x => nrpn(4, 3, 0, (x)&127),
+  },
+  'tweak-5': {
+     label: 'Tweak 5',
+      type: CommandType.NRPN,
+      enum: tweak,
+      init: 0,
+      mapFrom: [
+        [4, 4, [0, 125]],
+      ],
+      decode: ([, ,x, y]) => y,
+      msg: x => nrpn(4, 4, 0, (x)&127),
+  },
+  'tweak-6': {
+     label: 'Tweak 6',
+      type: CommandType.NRPN,
+      enum: tweak,
+      init: 0,
+      mapFrom: [
+        [4, 5, [0, 125]],
+      ],
+      decode: ([, ,x, y]) => y,
+      msg: x => nrpn(4, 5, 0, (x)&127),
+  },
+  'tweak-7': {
+        label: 'Tweak 7',
+        type: CommandType.NRPN,
+        enum: tweak,
+        init: 0,
+        mapFrom: [
+            [4, 6, [0, 125]],
+        ],
+        decode: ([, , x, y]) => y,
+        msg: x => nrpn(4, 6, 0, (x)&127),
+    },
+    'tweak-8': {
+        label: 'Tweak 8',
+        type: CommandType.NRPN,
+        enum: tweak,
+        init: 0,
+        mapFrom: [
+            [4, 7, [0, 125]],
+        ],
+        decode: ([, ,x, y]) => y,
+        msg: x => nrpn(4, 7,0, (x)&127),
+    },
+
 };
 
-//  'mod-1-src-1':
-//  'mod-1-src-2':
-//  'mod-1-anim':
-//  'mod-1-depth':
-//  'mod-1-dest':
 
 
 const inRange = (x, [min, max]) => x >= min && x <= max;

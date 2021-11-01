@@ -9,6 +9,7 @@ import Lfos from './Lfos';
 import Effects from './Effects';
 import ArpVocoder from './ArpVocoder';
 import Modmatrix from './Modmatrix';
+import Tweaks from './Tweaks';
 import Control from './Control';
 import { patchControlChanged } from '../redux/patch';
 
@@ -76,6 +77,8 @@ function Controls({ currentPatch, emit }) {
       <Effects emit={emit} />
       <ArpVocoder emit={emit} />
       <Modmatrix emit={emit} />
+      <Tweaks emit={emit} />
+
     </div>
   );
 }

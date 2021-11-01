@@ -557,6 +557,16 @@ export const reducer = (state = initialState, action) => {
         'mod-20-anim': action.payload.data[436],
         'mod-20-depth': action.payload.data[437]-64,
         'mod-20-dest': action.payload.data[438],
+
+        'tweak-1': action.payload.data[510],
+        'tweak-2': action.payload.data[512],
+        'tweak-3': action.payload.data[514],
+        'tweak-4': action.payload.data[516],
+        'tweak-5': action.payload.data[518],
+        'tweak-6': action.payload.data[520],
+        'tweak-7': action.payload.data[522],
+        'tweak-8': action.payload.data[524],
+
       };
     case PATCH_CONTROL_CHANGED:
       return {

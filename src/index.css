@@ -53,6 +53,13 @@ code {
   justify-content: space-between;
 }
 
+.tweaks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+
 .modmatrix {
     margin-top: 20px;
 }
