@@ -1,5 +1,4 @@
 import React from 'react';
-import { controls } from '../mininova';
 import Effect from './fx/Effect.js';
 
 function Effects({ emit }) {

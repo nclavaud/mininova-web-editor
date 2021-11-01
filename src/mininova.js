@@ -3589,50 +3589,248 @@ export const controls = {
       msg: x => nrpn(5, 32, (x)&127),
   },
 
-
+  'arp-on': {
+      label: 'On',
+      enum: ['Off', 'On'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 46,
+      mapFrom: [
+        [0, 122, [46, 47]],
+      ],
+      decode: ([, , y]) => y-46,
+      msg: x => nrpn(0, 122, (x+46)&127),
+  },
+  'arp-key-latch': {
+      label: 'Key Latch',
+      enum: ['Off', 'On'],
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 50,
+      mapFrom: [
+        [0, 122, [50, 51]],
+      ],
+      decode: ([, , y]) => y-50,
+      msg: x => nrpn(0, 122, (x+50)&127),
+  },
+  'arp-octaves': {
+      label: 'Octaves',
+      type: CommandType.NRPN,
+      range: [1,8],
+      init: 1,
+      mapFrom: [
+        [1, 62, [0, 7]],
+      ],
+      decode: ([, , y]) => y+1,
+      msg: x => nrpn(1, 62, (x-1)&127),
+  },
+  'arp-rate-sync': {
+      label: 'Rate Sync',
+      type: CommandType.NRPN,
+      range: [0,18],
+      init: 0,
+      mapFrom: [
+        [1, 63, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 63, (x)&127),
+  },
+  'arp-gate': {
+      label: 'Gate',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 64, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 64, (x)&127),
+  },
+  'arp-mode': {
+      label: 'Mode',
+      type: CommandType.NRPN,
+      enum: ['Up', 'Down', 'Up Down', 'Up Down 2', 'Played', 'Random', 'Chord'],
+      init: 0,
+      mapFrom: [
+        [1, 65, [0, 6]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 65, (x)&127),
+  },
+  'arp-pattern': {
+      label: 'Pattern',
+      type: CommandType.NRPN,
+      enum: [
+          'Ptn Edit', 
+          'Ptn 2',
+          'Ptn 3',
+          'Ptn 4',
+          'Ptn 5',
+          'Ptn 6',
+          'Ptn 7',
+          'Ptn 8',
+          'Ptn 9',
+          'Ptn 10',
+          'Ptn 11',
+          'Ptn 12',
+          'Ptn 13',
+          'Ptn 14',
+          'Ptn 15',
+          'Ptn 16',
+          'Ptn 17',
+          'Ptn 18',
+          'Ptn 19',
+          'Ptn 20',
+          'Ptn 21',
+          'Ptn 22',
+          'Ptn 23',
+          'Ptn 24',
+          'Ptn 25',
+          'Ptn 26',
+          'Ptn 27',
+          'Ptn 28',
+          'Ptn 29',
+          'Ptn 30',
+          'Ptn 31',
+          'Ptn 32',
+          'Ptn 33',
+      ],
+      init: 0,
+      mapFrom: [
+        [1, 66, [0, 32]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 66, (x)&127),
+   },
+  'arp-swing': {
+      label: 'Swing',
+      type: CommandType.NRPN,
+      range: [1,99],
+      init: 1,
+      mapFrom: [
+        [1, 68, [1, 99]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 68, (x)&127),
+  },
+  'arp-length': {
+      label: 'Length',
+      type: CommandType.NRPN,
+      range: [2,8],
+      init: 1,
+      mapFrom: [
+        [60, 40, [2, 8]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(60, 40, (x)&127),
+  },
+  'arp-step-1': {
+      label: 'Step 1',
+      type: CommandType.NRPN,
+      enum: ['Off', 'On'],
+      init: 0,
+      mapFrom: [
+        [60, 32, [0, 127]],
+      ],
+      decode: ([, , y]) => y > 0 ? 1 : 0,
+      msg: x => nrpn(60, 32, (x)&127),
+  },
+  'arp-step-2': {
+      label: 'Step 2',
+      type: CommandType.NRPN,
+      enum: ['Off', 'On'],
+      init: 0,
+      mapFrom: [
+        [60, 33, [0, 127]],
+      ],
+      decode: ([, , y]) => y > 0 ? 1 : 0,
+      msg: x => nrpn(60, 33, (x)&127),
+  },
+  'arp-step-3': {
+      label: 'Step 3',
+      type: CommandType.NRPN,
+      enum: ['Off', 'On'],
+      init: 0,
+      mapFrom: [
+        [60, 34, [0, 127]],
+      ],
+      decode: ([, , y]) => y > 0 ? 1 : 0,
+      msg: x => nrpn(60, 34, (x)&127),
+  },
+  'arp-step-4': {
+      label: 'Step 4',
+      type: CommandType.NRPN,
+      enum: ['Off', 'On'],
+      init: 0,
+      mapFrom: [
+        [60, 35, [0, 127]],
+      ],
+      decode: ([, , y]) => y > 0 ? 1 : 0,
+      msg: x => nrpn(60, 35, (x)&127),
+  },
+  'arp-step-5': {
+      label: 'Step 5',
+      type: CommandType.NRPN,
+      enum: ['Off', 'On'],
+      init: 0,
+      mapFrom: [
+        [60, 36, [0, 127]],
+      ],
+      decode: ([, , y]) => y > 0 ? 1: 0 ,
+      msg: x => nrpn(60, 36, (x)&127),
+  },
+  'arp-step-6': {
+      label: 'Step 6',
+      type: CommandType.NRPN,
+      enum: ['Off', 'On'],
+      init: 0,
+      mapFrom: [
+        [60, 37, [0, 127]],
+      ],
+      decode: ([, , y]) => y > 0 ? 1 : 0,
+      msg: x => nrpn(60, 37, (x)&127),
+  },
+  'arp-step-7': {
+      label: 'Step 7',
+      type: CommandType.NRPN,
+      enum: ['Off', 'On'],
+      init: 0,
+      mapFrom: [
+        [60, 38, [0, 127]],
+      ],
+      decode: ([, , y]) => y > 0 ? 1 : 0,
+      msg: x => nrpn(60, 38, (x)&127),
+  },
+  'arp-step-8': {
+      label: 'Step 8',
+      type: CommandType.NRPN,
+      enum: ['Off', 'On'],
+      init: 0,
+      mapFrom: [
+        [60, 39, [0, 127]],
+      ],
+      decode: ([, , y]) => (y > 0 ? 1 : 0),
+      msg: x => nrpn(60, 39, (x)&127),
+  },
 };
 
-
-//  'gator-on':
-//  'gator-key-sync':
-//  'gator-key-latch':
-//  'gator-rate-sync':
-//  'gator-mode':
-//  'gator-edge-slew':
-//  'gator-hold':
-//  'gator-lr-delay':
-//  'gator-level-1':
-//  'gator-level-2':
-//  'gator-level-3':
-//  'gator-level-4':
-//  'gator-level-5':
-//  'gator-level-6':
-//  'gator-level-7':
-//  'gator-level-8':
-//  'gator-level-9':
-//  'gator-level-10':
-//  'gator-level-11':
-//  'gator-level-12':
-//  'gator-level-13':
-//  'gator-level-14':
-//  'gator-level-15':
-//  'gator-level-16':
-//  'gator-level-17':
-//  'gator-level-18':
-//  'gator-level-19':
-//  'gator-level-20':
-//  'gator-level-21':
-//  'gator-level-22':
-//  'gator-level-23':
-//  'gator-level-24':
-//  'gator-level-25':
-//  'gator-level-26':
-//  'gator-level-27':
-//  'gator-level-28':
-//  'gator-level-29':
-//  'gator-level-30':
-//  'gator-level-31':
-//  'gator-level-32':
+//  'arp-on':
+//  'arp-key-latch':
+//  'arp-octaves':
+//  'arp-rate-sync':
+//  'arp-gate':
+//  'arp-mode':
+//  'arp-pattern':
+//  'arp-swing':
+//  'arp-length':
+//  'arp-step-1':
+//  'arp-step-2':
+//  'arp-step-3':
+//  'arp-step-4':
+//  'arp-step-5':
+//  'arp-step-6':
+//  'arp-step-7':
+//  'arp-step-8':
 
 
 const inRange = (x, [min, max]) => x >= min && x <= max;

@@ -1,7 +1,5 @@
 import React from 'react';
 import Envelope from './Envelope';
-import Control from './Control';
-import { controls } from '../mininova';
 
 function Envelopes({ emit }) {
   return (

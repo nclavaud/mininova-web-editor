@@ -47,6 +47,11 @@ code {
   justify-content: space-between;
 }
 
+.arp_vocoder {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
 
 .control {
   display: flex;

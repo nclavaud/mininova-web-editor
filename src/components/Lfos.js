@@ -1,7 +1,5 @@
 import React from 'react';
 import Lfo from './Lfo';
-import Control from './Control';
-import { controls } from '../mininova';
 
 function Lfos({ emit }) {
   return (
