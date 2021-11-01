@@ -256,6 +256,12 @@ export const reducer = (state = initialState, action) => {
         'fx-4-select': action.payload.data[231],
         'fx-5-select': action.payload.data[232],
 
+        'eq-bass-frequency': action.payload.data[238],
+        'eq-bass-level': action.payload.data[239]-64,
+        'eq-mid-frequency': action.payload.data[240],
+        'eq-mid-level': action.payload.data[241]-64,
+        'eq-treble-frequency': action.payload.data[242],
+        'eq-treble-level': action.payload.data[243]-64,
 
       };
     case PATCH_CONTROL_CHANGED:

@@ -2357,22 +2357,85 @@ export const controls = {
       decode: ([, , y]) => y,
       msg: x => nrpn(0, 103, (x)&127),
   },
+  'eq-bass-frequency': {
+      label: 'Bass Frequency',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 104, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 104, (x)&127),
+  },
+  'eq-bass-level': {
+    label: "Bass Level",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 105, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 105, (x+64)&127),
+   },
+  'eq-mid-frequency': {
+      label: 'Mid Frequency',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 106, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 106, (x)&127),
+  },
+  'eq-mid-level': {
+    label: "Mid Level",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 107, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 107, (x+64)&127),
+
+  },
+  'eq-treble-frequency': {
+      label: 'Treble Frequency',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [0, 108, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(0, 108, (x)&127),
+  },
+  'eq-treble-level': {
+    label: "Treble Level",
+    type: CommandType.NRPN,
+    range: [-64,63],
+    init: 0,
+    mapFrom: [
+      [0, 109, [0, 127]],
+    ],
+    decode: ([, , y]) => y-64,
+    msg: x => nrpn(0, 109, (x+64)&127),
+
+  },
 
 };
-//  'fx-pan-rate':
-//  'fx-pan-sync':
-//  'fx-routing':
-//  'fx-feedback':
-//  'fx-1-level':
-//  'fx-2-level':
-//  'fx-3-level':
-//  'fx-4-level':
-//  'fx-5-level': 
-//  'fx-1-select':
-//  'fx-2-select':
-//  'fx-3-select':
-//  'fx-4-select':
-//  'fx-5-select': 
+
+//  'eq-bass-frequency':
+//  'eq-bass-level':
+//  'eq-mid-frequency':
+//  'eq-mid-level'
+//  'eq-treble-frequency':
+//  'eq-treble-level:
+
+
 
 const inRange = (x, [min, max]) => x >= min && x <= max;
 
