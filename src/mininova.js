@@ -249,6 +249,242 @@ const fxnames = [
     'Gator'
 ];
 
+const modsrc = [
+'Direct',
+'ModWheel',
+'AftTouch',
+'Express',
+'Velocity',
+'Keyboard',
+'LFO1 +',
+'LFO1 +/-',
+'LFO2 +',
+'LFO2 +/-',
+'LFO3 +',
+'LFO3 +/-',
+'Env Amp',
+'Env Filt',
+'Env 3',
+'Env 4',
+'Env 5',
+'Env 6',
+'AudInEnv'
+];
+
+const modanim = [
+'Off',
+'A1ReTrig',
+'A2ReTrig',
+'A3ReTrig',
+'A4ReTrig',
+'A5ReTrig',
+'A6ReTrig',
+'A7ReTrig',
+'A8ReTrig',
+]
+
+const moddest = [
+'O123Ptch',
+'O1 Pitch',
+'O2 Pitch',
+'O3 Pitch',
+'O1 VSync',
+'O2 VSync',
+'O3 VSync',
+'O1PW/Idx',
+'O2PW/Idx',
+'O3PW/Idx',
+'O1 Hard',
+'O2 Hard',
+'O3 Hard',
+'O1 Level',
+'O2 Level',
+'O3 Level',
+'NoiseLvl',
+'RM1*3Lvl',
+'RM2*3Lvl',
+'F1 DAmnt',
+'F2 DAmnt',
+'F1 Freq',
+'F2 Freq',
+'F1 Res',
+'F2 Res',
+'FBalance',
+'L1 Rate',
+'L2 Rate',
+'L3 Rate',
+'AEnv Dec',
+'FEnv Dec',
+'FX1 Amnt',
+'FX2 Amnt',
+'FX3 Amnt',
+'FX4 Amnt',
+'FX5 Amnt',
+'FXFeedbk',
+'FXWetLvl',
+'Ch1 Rate',
+'Ch1Depth',
+'Ch1Delay',
+'Ch1Fback',
+'Ch2 Rate',
+'Ch2Depth',
+'Ch2Delay',
+'Ch2Fback',
+'Ch3 Rate',
+'Ch3Depth',
+'Ch3Delay',
+'Ch3Fback',
+'Ch4 Rate',
+'Ch4Depth',
+'Ch4Delay',
+'Ch4Fback',
+'Dly1Time',
+'Dly1Fdbk',
+'Dly2Time',
+'Dly2Fdbk',
+'EQBasLvl',
+'EQBasFrq',
+'EQMidLvl',
+'EQMidFrq',
+'EQTrbLvl',
+'EQTrbFrq',
+'Pan Posn',
+'VocShift',
+'VocSpred',
+'VocRes',
+'PreFXLvl',
+'PtchShft'
+];
+
+const tweak = [
+'No Assign',
+'VoicePortamentoRate',
+'MixerWetLevel',
+'MixerPostFXLevel',
+'FXPanPosition',
+'VoiceUnisonDetune',
+'Osc1WaveInterpolate',
+'Osc1PulseWidthIndex',
+'Osc1VirtualSyncDepth',
+'Osc1Hardness',
+'Osc1Density',
+'Osc1DensityDetune',
+'Osc1Semitones',
+'Osc1Cents',
+'Osc2WaveInterpolate',
+'Osc2PulseWidthIndex',
+'Osc2VirtualSyncDepth',
+'Osc2Hardness',
+'Osc2Density',
+'Osc2DensityDetune',
+'Osc2Semitones',
+'Osc2Cents',
+'Osc3WaveInterpolate',
+'Osc3PulseWidthIndex',
+'Osc3VirtualSyncDepth',
+'Osc3Hardness',
+'Osc3Density',
+'Osc3DensityDetune',
+'Osc3Semitones',
+'Osc3Cents',
+'MixerOsc1Level',
+'MixerOsc2Level',
+'MixerOsc3Level',
+'MixerRingModLevel13',
+'MixerRingModLevel23',
+'MixerNoiseLevel',
+'FilterBalance',
+'Filter1Frequency',
+'Filter1Resonance',
+'Filter1Drive',
+'Filter1Track',
+'Filter2Frequency',
+'Filter2Resonance',
+'Filter2Drive',
+'Filter2Track',
+'Filter1Env2ToFreq',
+'Filter2Env2ToFreq',
+'Envelope1Attack',
+'Envelope1Decay',
+'Envelope1Sustain',
+'Envelope1Release',
+'Envelope2Attack',
+'Envelope2Decay',
+'Envelope2Sustain',
+'Envelope2Release',
+'Envelope3Delay',
+'Envelope3Attack',
+'Envelope3Decay',
+'Envelope3Sustain',
+'Envelope3Release',
+'LFO1Rate',
+'LFO1RateSync',
+'LFO1SlewRate',
+'LFO2Rate',
+'LFO2RateSync',
+'LFO2SlewRate',
+'LFO3Rate',
+'LFO3RateSync',
+'LFO3SlewRate',
+'FX1Level',
+'FX2Level',
+'FX3Level',
+'FX4Level',
+'FX5Level',
+'FXFeedback',
+'',
+'',
+'Delay1Time',
+'Delay1TimeSync',
+'Delay1Feedback',
+'Delay1SlewRate',
+'Delay2Time',
+'Delay2TimeSync',
+'Delay2Feedback',
+'Delay2SlewRate',
+'Chorus1Rate',
+'Chorus1Feedback',
+'Chorus1ModDepth',
+'Chorus1Delay',
+'Chorus2Rate',
+'Chorus2Feedback',
+'Chorus2ModDepth',
+'Chorus2Delay',
+'Chorus3Rate',
+'Chorus3Feedback',
+'Chorus3ModDepth',
+'Chorus3Delay',
+'Chorus4Rate',
+'Chorus4Feedback',
+'Chorus4ModDepth',
+'Chorus4Delay',
+'GatorEdgeSlew',
+'GatorHold',
+'GatorLRDelay',
+'ArpGate',
+'ArpSwing',
+'ModMatrix1Depth',
+'ModMatrix2Depth',
+'ModMatrix3Depth',
+'ModMatrix4Depth',
+'ModMatrix5Depth',
+'ModMatrix6Depth',
+'ModMatrix7Depth',
+'ModMatrix8Depth',
+'ModMatrix9Depth',
+'ModMatrix10Depth',
+'ModMatrix11Depth',
+'ModMatrix12Depth',
+'ModMatrix13Depth',
+'ModMatrix14Depth',
+'ModMatrix15Depth',
+'ModMatrix16Depth',
+'ModMatrix17Depth',
+'ModMatrix18Depth',
+'ModMatrix19Depth',
+'ModMatrix20Depth'  
+];
+
 export const controls = {
   'patch-name': {
       label: 'Name',
@@ -4512,71 +4748,1126 @@ export const controls = {
       decode: ([, , y]) => y,
       msg: x => nrpn(2, 62, (x)&127),
   },
+
+  'mod-1-src-1': {
+     label: 'Src 1',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [1, 83, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 83, (x)&127),
+  },
+  'mod-1-src-2':  {
+     label: 'Src 2',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [1, 84, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 84, (x)&127),
+  },
+  'mod-1-anim': {
+     label: 'Anim',
+      type: CommandType.NRPN,
+      enum: modanim,
+      init: 0,
+      mapFrom: [
+        [1, 85, [0, 8]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 85, (x)&127),
+  },
+  'mod-1-depth': {
+      label: 'Depth',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [1, 86, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(1, 86, (x+64)&127),
+  },
+  'mod-1-dest': {
+     label: 'Dest',
+      type: CommandType.NRPN,
+      enum: moddest,
+      init: 0,
+      mapFrom: [
+        [1, 87, [0, 69]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 87, (x)&127),
+  },
+  'mod-2-src-1': {
+     label: 'Src 1',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [1, 88, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 88, (x)&127),
+  },
+  'mod-2-src-2':  {
+     label: 'Src 2',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [1, 89, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 89, (x)&127),
+  },
+  'mod-2-anim': {
+     label: 'Anim',
+      type: CommandType.NRPN,
+      enum: modanim,
+      init: 0,
+      mapFrom: [
+        [1, 90, [0, 8]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 90, (x)&127),
+  },
+  'mod-2-depth': {
+      label: 'Depth',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [1, 91, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(1, 91, (x+64)&127),
+  },
+  'mod-2-dest': {
+     label: 'Dest',
+      type: CommandType.NRPN,
+      enum: moddest,
+      init: 0,
+      mapFrom: [
+        [1, 92, [0, 69]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 92, (x)&127),
+  },
+
+  'mod-3-src-1': {
+     label: 'Src 1',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [1, 93, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 93, (x)&127),
+  },
+  'mod-3-src-2':  {
+     label: 'Src 2',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [1, 94, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 94, (x)&127),
+  },
+  'mod-3-anim': {
+     label: 'Anim',
+      type: CommandType.NRPN,
+      enum: modanim,
+      init: 0,
+      mapFrom: [
+        [1, 95, [0, 8]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 95, (x)&127),
+  },
+  'mod-3-depth': {
+      label: 'Depth',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [1, 96, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(1, 96, (x+64)&127),
+  },
+  'mod-3-dest': {
+     label: 'Dest',
+      type: CommandType.NRPN,
+      enum: moddest,
+      init: 0,
+      mapFrom: [
+        [1, 97, [0, 69]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 97, (x)&127),
+  },
+  'mod-4-src-1': {
+     label: 'Src 1',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [1, 98, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 98, (x)&127),
+  },
+  'mod-4-src-2':  {
+     label: 'Src 2',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [1, 99, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 99, (x)&127),
+  },
+  'mod-4-anim': {
+     label: 'Anim',
+      type: CommandType.NRPN,
+      enum: modanim,
+      init: 0,
+      mapFrom: [
+        [1, 100, [0, 8]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 100, (x)&127),
+  },
+  'mod-4-depth': {
+      label: 'Depth',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [1, 101, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(1, 101, (x+64)&127),
+  },
+  'mod-4-dest': {
+     label: 'Dest',
+      type: CommandType.NRPN,
+      enum: moddest,
+      init: 0,
+      mapFrom: [
+        [1, 102, [0, 69]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 102, (x)&127),
+  },
+  'mod-5-src-1': {
+     label: 'Src 1',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [1, 103, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 103, (x)&127),
+  },
+  'mod-5-src-2':  {
+     label: 'Src 2',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [1, 104, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 104, (x)&127),
+  },
+  'mod-5-anim': {
+     label: 'Anim',
+      type: CommandType.NRPN,
+      enum: modanim,
+      init: 0,
+      mapFrom: [
+        [1, 105, [0, 8]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 105, (x)&127),
+  },
+  'mod-5-depth': {
+      label: 'Depth',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [1, 106, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(1, 106, (x+64)&127),
+  },
+  'mod-5-dest': {
+     label: 'Dest',
+      type: CommandType.NRPN,
+      enum: moddest,
+      init: 0,
+      mapFrom: [
+        [1, 107, [0, 69]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 107, (x)&127),
+  },
+
+
+  'mod-6-src-1': {
+     label: 'Src 1',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [1, 108, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 108, (x)&127),
+  },
+  'mod-6-src-2':  {
+     label: 'Src 2',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [1, 109, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 109, (x)&127),
+  },
+  'mod-6-anim': {
+     label: 'Anim',
+      type: CommandType.NRPN,
+      enum: modanim,
+      init: 0,
+      mapFrom: [
+        [1, 110, [0, 8]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 110, (x)&127),
+  },
+  'mod-6-depth': {
+      label: 'Depth',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [1, 111, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(1, 111, (x+64)&127),
+  },
+  'mod-6-dest': {
+     label: 'Dest',
+      type: CommandType.NRPN,
+      enum: moddest,
+      init: 0,
+      mapFrom: [
+        [1, 112, [0, 69]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 112, (x)&127),
+  },
+  'mod-7-src-1': {
+     label: 'Src 1',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [1, 113, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 113, (x)&127),
+  },
+  'mod-7-src-2':  {
+     label: 'Src 2',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [1, 114, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 114, (x)&127),
+  },
+  'mod-7-anim': {
+     label: 'Anim',
+      type: CommandType.NRPN,
+      enum: modanim,
+      init: 0,
+      mapFrom: [
+        [1,115, [0, 8]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 115, (x)&127),
+  },
+  'mod-7-depth': {
+      label: 'Depth',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [1, 116, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(1, 116, (x+64)&127),
+  },
+  'mod-7-dest': {
+     label: 'Dest',
+      type: CommandType.NRPN,
+      enum: moddest,
+      init: 0,
+      mapFrom: [
+        [1, 117, [0, 69]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 117, (x)&127),
+  },
+
+  'mod-8-src-1': {
+     label: 'Src 1',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [1, 118, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 118, (x)&127),
+  },
+  'mod-8-src-2':  {
+     label: 'Src 2',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [1, 119, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 119, (x)&127),
+  },
+  'mod-8-anim': {
+     label: 'Anim',
+      type: CommandType.NRPN,
+      enum: modanim,
+      init: 0,
+      mapFrom: [
+        [1, 120, [0, 8]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 120, (x)&127),
+  },
+  'mod-8-depth': {
+      label: 'Depth',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [1, 121, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(1, 121, (x+64)&127),
+  },
+  'mod-8-dest': {
+     label: 'Dest',
+      type: CommandType.NRPN,
+      enum: moddest,
+      init: 0,
+      mapFrom: [
+        [1, 122, [0, 69]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 122, (x)&127),
+  },
+  'mod-9-src-1': {
+     label: 'Src 1',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [1, 123, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 123, (x)&127),
+  },
+  'mod-9-src-2':  {
+     label: 'Src 2',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [1, 124, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 124, (x)&127),
+  },
+  'mod-9-anim': {
+     label: 'Anim',
+      type: CommandType.NRPN,
+      enum: modanim,
+      init: 0,
+      mapFrom: [
+        [1, 125, [0, 8]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 125, (x)&127),
+  },
+  'mod-9-depth': {
+      label: 'Depth',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [1, 126, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(1, 126, (x+64)&127),
+  },
+  'mod-9-dest': {
+     label: 'Dest',
+      type: CommandType.NRPN,
+      enum: moddest,
+      init: 0,
+      mapFrom: [
+        [1, 127, [0, 69]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 127, (x)&127),
+  },
+  'mod-10-src-1': {
+     label: 'Src 1',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 0, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 0, (x)&127),
+  },
+  'mod-10-src-2':  {
+     label: 'Src 2',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 1, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 1, (x)&127),
+  },
+  'mod-10-anim': {
+     label: 'Anim',
+      type: CommandType.NRPN,
+      enum: modanim,
+      init: 0,
+      mapFrom: [
+        [2, 2, [0, 8]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 2, (x)&127),
+  },
+  'mod-10-depth': {
+      label: 'Depth',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [2, 3, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(2, 3, (x+64)&127),
+  },
+  'mod-10-dest': {
+     label: 'Dest',
+      type: CommandType.NRPN,
+      enum: moddest,
+      init: 0,
+      mapFrom: [
+        [2, 4, [0, 69]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 4, (x)&127),
+  },
+
+
+  'mod-11-src-1': {
+     label: 'Src 1',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 5, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 5, (x)&127),
+  },
+  'mod-11-src-2':  {
+     label: 'Src 2',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 6, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 6, (x)&127),
+  },
+  'mod-11-anim': {
+     label: 'Anim',
+      type: CommandType.NRPN,
+      enum: modanim,
+      init: 0,
+      mapFrom: [
+        [2, 7, [0, 8]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 7, (x)&127),
+  },
+  'mod-11-depth': {
+      label: 'Depth',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [2, 8, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(2, 8, (x+64)&127),
+  },
+  'mod-11-dest': {
+     label: 'Dest',
+      type: CommandType.NRPN,
+      enum: moddest,
+      init: 0,
+      mapFrom: [
+        [2, 9, [0, 69]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 9, (x)&127),
+  },
+  'mod-12-src-1': {
+     label: 'Src 1',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 10, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 10, (x)&127),
+  },
+  'mod-12-src-2':  {
+     label: 'Src 2',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 11, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 11, (x)&127),
+  },
+  'mod-12-anim': {
+     label: 'Anim',
+      type: CommandType.NRPN,
+      enum: modanim,
+      init: 0,
+      mapFrom: [
+        [2, 12, [0, 8]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 12, (x)&127),
+  },
+  'mod-12-depth': {
+      label: 'Depth',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [2, 13, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(2, 13, (x+64)&127),
+  },
+  'mod-12-dest': {
+     label: 'Dest',
+      type: CommandType.NRPN,
+      enum: moddest,
+      init: 0,
+      mapFrom: [
+        [2, 14, [0, 69]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 14, (x)&127),
+  },
+
+  'mod-13-src-1': {
+     label: 'Src 1',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 15, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 15, (x)&127),
+  },
+  'mod-13-src-2':  {
+     label: 'Src 2',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 16, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 16, (x)&127),
+  },
+  'mod-13-anim': {
+     label: 'Anim',
+      type: CommandType.NRPN,
+      enum: modanim,
+      init: 0,
+      mapFrom: [
+        [2, 17, [0, 8]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 17, (x)&127),
+  },
+  'mod-13-depth': {
+      label: 'Depth',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [2, 18, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(2, 18, (x+64)&127),
+  },
+  'mod-13-dest': {
+     label: 'Dest',
+      type: CommandType.NRPN,
+      enum: moddest,
+      init: 0,
+      mapFrom: [
+        [2, 19, [0, 69]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 19, (x)&127),
+  },
+  'mod-14-src-1': {
+     label: 'Src 1',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 20, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 20, (x)&127),
+  },
+  'mod-14-src-2':  {
+     label: 'Src 2',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 21, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 21, (x)&127),
+  },
+  'mod-14-anim': {
+     label: 'Anim',
+      type: CommandType.NRPN,
+      enum: modanim,
+      init: 0,
+      mapFrom: [
+        [2, 22, [0, 8]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 22, (x)&127),
+  },
+  'mod-14-depth': {
+      label: 'Depth',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [2, 23, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(2, 23, (x+64)&127),
+  },
+  'mod-14-dest': {
+     label: 'Dest',
+      type: CommandType.NRPN,
+      enum: moddest,
+      init: 0,
+      mapFrom: [
+        [2, 24, [0, 69]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 24, (x)&127),
+  },
+  'mod-15-src-1': {
+     label: 'Src 1',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 25, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 25, (x)&127),
+  },
+  'mod-15-src-2':  {
+     label: 'Src 2',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 26, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 26, (x)&127),
+  },
+  'mod-15-anim': {
+     label: 'Anim',
+      type: CommandType.NRPN,
+      enum: modanim,
+      init: 0,
+      mapFrom: [
+        [2, 27, [0, 8]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2,27, (x)&127),
+  },
+  'mod-15-depth': {
+      label: 'Depth',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [2, 28, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(2, 28, (x+64)&127),
+  },
+  'mod-15-dest': {
+     label: 'Dest',
+      type: CommandType.NRPN,
+      enum: moddest,
+      init: 0,
+      mapFrom: [
+        [2, 29, [0, 69]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 29, (x)&127),
+  },
+
+
+  'mod-16-src-1': {
+     label: 'Src 1',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 30, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 30, (x)&127),
+  },
+  'mod-16-src-2':  {
+     label: 'Src 2',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 31, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 31, (x)&127),
+  },
+  'mod-16-anim': {
+     label: 'Anim',
+      type: CommandType.NRPN,
+      enum: modanim,
+      init: 0,
+      mapFrom: [
+        [2, 32, [0, 8]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 32, (x)&127),
+  },
+  'mod-16-depth': {
+      label: 'Depth',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [2, 33, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(2, 33, (x+64)&127),
+  },
+  'mod-16-dest': {
+     label: 'Dest',
+      type: CommandType.NRPN,
+      enum: moddest,
+      init: 0,
+      mapFrom: [
+        [2, 34, [0, 69]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 34, (x)&127),
+  },
+  'mod-17-src-1': {
+     label: 'Src 1',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 35, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 35, (x)&127),
+  },
+  'mod-17-src-2':  {
+     label: 'Src 2',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 36, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 36, (x)&127),
+  },
+  'mod-17-anim': {
+     label: 'Anim',
+      type: CommandType.NRPN,
+      enum: modanim,
+      init: 0,
+      mapFrom: [
+        [2, 37, [0, 8]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 37, (x)&127),
+  },
+  'mod-17-depth': {
+      label: 'Depth',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [2, 38, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(2, 38, (x+64)&127),
+  },
+  'mod-17-dest': {
+     label: 'Dest',
+      type: CommandType.NRPN,
+      enum: moddest,
+      init: 0,
+      mapFrom: [
+        [2, 39, [0, 69]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 39, (x)&127),
+  },
+
+  'mod-18-src-1': {
+     label: 'Src 1',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 40, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 40, (x)&127),
+  },
+  'mod-18-src-2':  {
+     label: 'Src 2',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 41, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 41, (x)&127),
+  },
+  'mod-18-anim': {
+     label: 'Anim',
+      type: CommandType.NRPN,
+      enum: modanim,
+      init: 0,
+      mapFrom: [
+        [2, 42, [0, 8]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 42, (x)&127),
+  },
+  'mod-18-depth': {
+      label: 'Depth',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [2, 43, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(2, 43, (x+64)&127),
+  },
+  'mod-18-dest': {
+     label: 'Dest',
+      type: CommandType.NRPN,
+      enum: moddest,
+      init: 0,
+      mapFrom: [
+        [2, 44, [0, 69]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 44, (x)&127),
+  },
+  'mod-19-src-1': {
+     label: 'Src 1',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 45, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 45, (x)&127),
+  },
+  'mod-19-src-2':  {
+     label: 'Src 2',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 46, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 46, (x)&127),
+  },
+  'mod-19-anim': {
+     label: 'Anim',
+      type: CommandType.NRPN,
+      enum: modanim,
+      init: 0,
+      mapFrom: [
+        [2, 47, [0, 8]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 47, (x)&127),
+  },
+  'mod-19-depth': {
+      label: 'Depth',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [2, 48, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(1, 48, (x+64)&127),
+  },
+  'mod-19-dest': {
+     label: 'Dest',
+      type: CommandType.NRPN,
+      enum: moddest,
+      init: 0,
+      mapFrom: [
+        [2, 49, [0, 69]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 49, (x)&127),
+  },
+  'mod-20-src-1': {
+     label: 'Src 1',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 50, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 50, (x)&127),
+  },
+  'mod-20-src-2':  {
+     label: 'Src 2',
+      type: CommandType.NRPN,
+      enum: modsrc,
+      init: 0,
+      mapFrom: [
+        [2, 51, [0, 18]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 51, (x)&127),
+  },
+  'mod-20-anim': {
+     label: 'Anim',
+      type: CommandType.NRPN,
+      enum: modanim,
+      init: 0,
+      mapFrom: [
+        [2, 52, [0, 8]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 52, (x)&127),
+  },
+  'mod-20-depth': {
+      label: 'Depth',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [2, 53, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(2, 53, (x+64)&127),
+  },
+  'mod-20-dest': {
+     label: 'Dest',
+      type: CommandType.NRPN,
+      enum: moddest,
+      init: 0,
+      mapFrom: [
+        [2, 54, [0, 69]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(2, 54, (x)&127),
+  },
+
 };
 
-//  'vocoder-level':
-//  'vocoder-carier-level':
-//  'vocoder-modulator-level':
-//  'vocoder-resonance':
-//  'vocoder-decay':
-//  'vocoder-gate-threshold':
-//  'vocoder-gate-release':
-//  'vocoder-spectrum-level-1':
-//  'vocoder-spectrum-level-2':
-//  'vocoder-spectrum-level-3':
-//  'vocoder-spectrum-level-4':
-//  'vocoder-spectrum-level-5':
-//  'vocoder-spectrum-level-6':
-//  'vocoder-spectrum-level-7':
-//  'vocoder-spectrum-level-8':
-//  'vocoder-spectrum-level-9':
-//  'vocoder-spectrum-level-10':
-//  'vocoder-spectrum-level-11':
-//  'vocoder-spectrum-level-12':
-//  'vocoder-spectrum-level-13':
-//  'vocoder-spectrum-level-14':
-//  'vocoder-spectrum-level-15':
-//  'vocoder-spectrum-level-16':
-//  'vocoder-spectrum-level-17':
-//  'vocoder-spectrum-level-18':
-//  'vocoder-spectrum-level-19':
-//  'vocoder-spectrum-level-20':
-//  'vocoder-spectrum-level-21':
-//  'vocoder-spectrum-level-22':
-//  'vocoder-spectrum-level-23':
-//  'vocoder-spectrum-level-24':
-//  'vocoder-spectrum-level-25':
-//  'vocoder-spectrum-level-26':
-//  'vocoder-spectrum-level-27':
-//  'vocoder-spectrum-level-28':
-//  'vocoder-spectrum-level-29':
-//  'vocoder-spectrum-level-30':
-//  'vocoder-spectrum-level-31':
-//  'vocoder-spectrum-level-32':
-//  'vocoder-spectrum-resample':
-//  'chorder-transpose':
-//  'chorder-on':
-//  'chorder-count':
-//  'chorder-key-2':
-//  'chorder-key-3':
-//  'chorder-key-4':
-//  'chorder-key-5':
-//  'chorder-key-6':
-//  'chorder-key-7':
-//  'chorder-key-8':
-//  'chorder-key-9':
-//  'chorder-key-10':
-//  'vocal-tune-shift':
-//  'vocal-tune-bend':
-//  'vocal-tune-mode':
-//  'vocal-tune-insert':
-//  'vocal-tune-scale-type':
-//  'vocal-tune-scale-key':
-//  'vocal-tune-correction-time':
-//  'vocal-tune-level':
-//  'vocal-tune-vibrato':
-//  'vocal-tune-vibrato-mod-wheel':
-//  'vocal-tune-vibrato-rate':
+//  'mod-1-src-1':
+//  'mod-1-src-2':
+//  'mod-1-anim':
+//  'mod-1-depth':
+//  'mod-1-dest':
+
 
 const inRange = (x, [min, max]) => x >= min && x <= max;
 
