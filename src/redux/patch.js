@@ -305,6 +305,32 @@ export const reducer = (state = initialState, action) => {
         'reverb-2-decay': action.payload.data[278],
         'reverb-2-damping': action.payload.data[279],
 
+        'chorus-1-type': action.payload.data[280],
+        'chorus-1-rate': action.payload.data[281],
+        'chorus-1-rate-sync': action.payload.data[282],
+        'chorus-1-feedback': action.payload.data[283]-64,
+        'chrous-1-mod-depth': action.payload.data[284],
+        'chorus-1-delay': action.payload.data[285],
+        'chorus-2-type': action.payload.data[286],
+        'chorus-2-rate': action.payload.data[287],
+        'chorus-2-rate-sync': action.payload.data[288],
+        'chorus-2-feedback': action.payload.data[289]-64,
+        'chrous-2-mod-depth': action.payload.data[290],
+        'chorus-2-delay': action.payload.data[291],
+        'chorus-3-type': action.payload.data[292],
+        'chorus-3-rate': action.payload.data[293],
+        'chorus-3-rate-sync': action.payload.data[294],
+        'chorus-3-feedback': action.payload.data[295]-64,
+        'chrous-3-mod-depth': action.payload.data[296],
+        'chorus-3-delay': action.payload.data[297],
+        'chorus-4-type': action.payload.data[298],
+        'chorus-4-rate': action.payload.data[299],
+        'chorus-4-rate-sync': action.payload.data[300],
+        'chorus-4-feedback': action.payload.data[301]-64,
+        'chrous-4-mod-depth': action.payload.data[302],
+        'chorus-4-delay': action.payload.data[303],
+
+
       };
     case PATCH_CONTROL_CHANGED:
       return {

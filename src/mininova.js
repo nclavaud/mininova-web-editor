@@ -2839,11 +2839,288 @@ export const controls = {
       msg: x => nrpn(1, 23, (x)&127),
   },
 
+  'chorus-1-type': {
+      label: 'Type',
+      enum: ['Phaser', 'Chorus'],
+      type: CommandType.NRPN,
+      range: [0,1],
+      init: 0,
+      mapFrom: [
+        [1, 24, [0, 1]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 24, (x)&127),
+  },
+  'chorus-1-rate': {
+      label: 'Rate',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 25, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 25, (x)&127),
+  },
+  'chorus-1-rate-sync': {
+      label: 'Rate Sync',
+      enum: sync,
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 26, [0, 35]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 26, (x)&127),
+  },
+  'chorus-1-feedback': {
+      label: 'Feedback',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [1, 27, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(1, 27, (x+64)&127),
+   },
+  'chrous-1-mod-depth': {
+      label: 'Mod Depth',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 28, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 28, (x)&127),
+  },
+  'chorus-1-delay': {
+      label: 'Delay',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 29, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 29, (x)&127),
+  },
+  'chorus-2-type': {
+      label: 'Type',
+      enum: ['Phaser', 'Chorus'],
+      type: CommandType.NRPN,
+      range: [0,1],
+      init: 0,
+      mapFrom: [
+        [1, 30, [0, 1]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 30, (x)&127),
+  },
+  'chorus-2-rate': {
+      label: 'Rate',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 31, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 31, (x)&127),
+  },
+  'chorus-2-rate-sync': {
+      label: 'Rate Sync',
+      enum: sync,
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 32, [0, 35]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 32, (x)&127),
+  },
+  'chorus-2-feedback': {
+      label: 'Feedback',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [1, 33, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(1, 33, (x+64)&127),
+   },
+  'chrous-2-mod-depth': {
+      label: 'Mod Depth',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 34, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 34, (x)&127),
+  },
+  'chorus-2-delay': {
+      label: 'Delay',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 35, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 35, (x)&127),
+  },
+  'chorus-3-type': {
+      label: 'Type',
+      enum: ['Phaser', 'Chorus'],
+      type: CommandType.NRPN,
+      range: [0,1],
+      init: 0,
+      mapFrom: [
+        [1, 36, [0, 1]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 36, (x)&127),
+  },
+  'chorus-3-rate': {
+      label: 'Rate',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 37, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 37, (x)&127),
+  },
+  'chorus-3-rate-sync': {
+      label: 'Rate Sync',
+      enum: sync,
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 38, [0, 35]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 38, (x)&127),
+  },
+  'chorus-3-feedback': {
+      label: 'Feedback',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [1, 39, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(1, 39, (x+64)&127),
+   },
+  'chrous-3-mod-depth': {
+      label: 'Mod Depth',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 40, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 40, (x)&127),
+  },
+  'chorus-3-delay': {
+      label: 'Delay',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 41, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 41, (x)&127),
+  },
+  'chorus-4-type': {
+      label: 'Type',
+      enum: ['Phaser', 'Chorus'],
+      type: CommandType.NRPN,
+      range: [0,1],
+      init: 0,
+      mapFrom: [
+        [1, 42, [0, 1]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 42, (x)&127),
+  },
+  'chorus-4-rate': {
+      label: 'Rate',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 43, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 43, (x)&127),
+  },
+  'chorus-4-rate-sync': {
+      label: 'Rate Sync',
+      enum: sync,
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 44, [0, 35]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 44, (x)&127),
+  },
+  'chorus-4-feedback': {
+      label: 'Feedback',
+      type: CommandType.NRPN,
+      range: [-64,63],
+      init: 0,
+      mapFrom: [
+        [1, 45, [0, 127]],
+      ],
+      decode: ([, , y]) => y-64,
+      msg: x => nrpn(1, 45, (x+64)&127),
+   },
+  'chrous-4-mod-depth': {
+      label: 'Mod Depth',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 46, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 46, (x)&127),
+  },
+  'chorus-4-delay': {
+      label: 'Delay',
+      type: CommandType.NRPN,
+      range: [0,127],
+      init: 0,
+      mapFrom: [
+        [1, 47, [0, 127]],
+      ],
+      decode: ([, , y]) => y,
+      msg: x => nrpn(1, 47, (x)&127),
+  },
+
 };
 
-//  'reverb-1-type':
-//  'reverb-1-decay':
-//  'reverb-1-damping':
+
+//  'chorus-1-type':
+//  'chorus-1-rate':
+//  'chorus-1-rate-sync':
+//  'chorus-1-feedback':
+//  'chrous-1-mod-depth':
+//  'chorus-1-delay':
 
 const inRange = (x, [min, max]) => x >= min && x <= max;
 
