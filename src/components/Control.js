@@ -1,8 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { patchControlChanged } from '../redux/patch';
+import { CommandType } from '../midi.command';
 import InputEnum from './InputEnum';
 import InputRange from './InputRange';
+import InputText from './InputText';
 
 function Control(props) {
   const { control, emit, id } = props;
@@ -12,10 +14,14 @@ function Control(props) {
 
   const onChange = value => {
     dispatch(patchControlChanged(id, value));
-    emit(control.msg(value));
+    const ofs = control.hasOwnProperty("offset") ? control.offset : 0;
+    emit(control.msg(value - ofs));
   };
 
-  const Component = control.hasOwnProperty('enum') ? InputEnum : InputRange;
+  let Component = control.hasOwnProperty('enum') ? InputEnum : InputRange;
+  if (control.type === CommandType.None) {
+      Component = InputText
+  }
 
   return (
     <Component
