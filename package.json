@@ -4,23 +4,23 @@
   "private": true,
   "homepage": "https://nclavaud.github.io/mininova-web-editor",
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "@types/jest": "^25.2.1",
-    "@types/node": "^13.13.5",
-    "@types/react": "^16.9.34",
-    "@types/react-dom": "^16.9.7",
-    "@types/react-redux": "^7.1.8",
-    "@types/w3c-web-usb": "^1.0.4",
-    "@types/webmidi": "^2.0.4",
-    "ramda": "^0.27.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-redux": "^7.2.0",
-    "react-scripts": "3.4.1",
-    "redux": "^4.0.5",
-    "typescript": "^3.8.3"
+    "@testing-library/jest-dom": "^5.15.0",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.7",
+    "@types/react": "^17.0.35",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-redux": "^7.1.20",
+    "@types/w3c-web-usb": "^1.0.5",
+    "@types/webmidi": "^2.0.6",
+    "ramda": "^0.27.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
+    "react-scripts": "4.0.3",
+    "redux": "^4.1.2",
+    "typescript": "^4.4.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,7 +46,7 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^2.2.0",
-    "redux-devtools": "^3.5.0"
+    "gh-pages": "^3.2.3",
+    "redux-devtools": "^3.7.0"
   }
 }
