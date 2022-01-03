@@ -28,6 +28,9 @@ function Controls({ currentPatch, emit }) {
 
   const resetDefaults = () => {
     for (let [controlId, control] of Object.entries(controls)) {
+      if (!shouldBeControlled(controlId)) {
+        continue;
+      }
       const value = control.init;
       emit(control.msg(value));
       dispatch(patchControlChanged(controlId, value));
