@@ -15,6 +15,8 @@ import { patchControlChanged } from '../redux/patch';
 
 const randomInt = (min, max) => Math.floor(Math.random() * (max + 1 - min)) + min;
 
+const shouldBeControlled = controlId => !(['patch-name', 'tempo', 'osc-fixed-note'].includes(controlId));
+
 function Controls({ currentPatch, emit }) {
   const dispatch = useDispatch();
 
@@ -26,6 +28,9 @@ function Controls({ currentPatch, emit }) {
 
   const resetDefaults = () => {
     for (let [controlId, control] of Object.entries(controls)) {
+      if (!shouldBeControlled(controlId)) {
+        continue;
+      }
       const value = control.init;
       emit(control.msg(value));
       dispatch(patchControlChanged(controlId, value));
@@ -34,7 +39,7 @@ function Controls({ currentPatch, emit }) {
 
   const randomize = () => {
     for (let [controlId, control] of Object.entries(controls)) {
-      if (['patch-name', 'tempo', 'osc-fixed-note'].includes(controlId)) {
+      if (!shouldBeControlled(controlId)) {
         continue;
       }
       const value = control.range ? randomInt(...control.range) : randomInt(0, control.enum.length);
