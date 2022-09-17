@@ -62,7 +62,7 @@ function App() {
 
   const onChangeOutput = () => selectPatch(emit);
 
-  const memoizedEmit = useCallback(emit, []);
+  const memoizedEmit = useCallback(emit, [output]);
 
   useEffect(() => {
     memoizedEmit(loadPatch);
