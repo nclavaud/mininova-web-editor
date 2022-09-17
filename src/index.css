@@ -72,6 +72,16 @@ code {
   padding: 2px 0;
 }
 
+.control-lock {
+  margin-left: 0.5em;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.control-locked {
+  color: #000;
+}
+
 .mod .control {
   display: inline;
   align-items: baseline;

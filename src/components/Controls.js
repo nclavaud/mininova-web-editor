@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { cc, nrpn } from '../midi';
 import { controls, loadPatch } from '../mininova';
 import Oscillators from './Oscillators';
@@ -15,10 +15,11 @@ import { patchControlChanged } from '../redux/patch';
 
 const randomInt = (min, max) => Math.floor(Math.random() * (max + 1 - min)) + min;
 
-const shouldBeControlled = controlId => !(['patch-name', 'tempo', 'osc-fixed-note'].includes(controlId));
-
 function Controls({ currentPatch, emit }) {
   const dispatch = useDispatch();
+
+  const locks = useSelector(state => state.patch.locks);
+  const shouldBeControlled = controlId => !(locks.includes(controlId));
 
   const changeOctave = () => emit(cc(13, 0));
   const activateArp = () => emit(nrpn(0, 122, 47));

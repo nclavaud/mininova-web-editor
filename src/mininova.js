@@ -487,10 +487,10 @@ const tweak = [
 
 export const controls = {
   'patch-name': {
-      label: 'Name',
-      range: [],
-      type: CommandType.None,
-      init: '',
+    label: 'Name',
+    range: [],
+    type: CommandType.None,
+    init: '',
   },
   'tempo': {
     label: 'Tempo',

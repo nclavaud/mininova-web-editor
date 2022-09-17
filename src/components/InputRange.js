@@ -2,7 +2,7 @@ import React from 'react';
 
 const inRange = (value, range) => (value >= range[0] && value <= range[1]);
 
-function InputRange({ id, control, onChange, readonly, value }) {
+function InputRange({ id, control, locked, onChange, onLockOff, onLockOn, readonly, value }) {
   const onInputChange = event => {
     const value = Number(event.target.value);
 
@@ -26,6 +26,11 @@ function InputRange({ id, control, onChange, readonly, value }) {
         value={value}
         readOnly={readonly}
       />
+      <div
+        className={`control-lock ${locked ? 'control-locked' : ''}`}
+        onClick={locked ? onLockOff : onLockOn}
+        title="Click to lock/unlock value (randomize)"
+      >L</div>
     </div>
   );
 }

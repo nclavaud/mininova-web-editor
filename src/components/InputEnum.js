@@ -1,6 +1,6 @@
 import React from 'react';
 
-function InputEnum({ id, control, onChange, value }) {
+function InputEnum({ id, control, locked, onChange, onLockOff, onLockOn, value }) {
   const onSelectChange = event => {
     const value = Number(event.target.value);
 
@@ -19,6 +19,11 @@ function InputEnum({ id, control, onChange, value }) {
           <option key={value} value={value}>{label}</option>
         ))}
       </select>
+      <div
+        className={`control-lock ${locked ? 'control-locked' : ''}`}
+        onClick={locked ? onLockOff : onLockOn}
+        title="Click to lock/unlock value (randomize)"
+      >L</div>
     </div>
   );
 }

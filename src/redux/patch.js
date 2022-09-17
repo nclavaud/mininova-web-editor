@@ -1,6 +1,8 @@
 import { controls } from '../mininova';
 
 const PATCH_CONTROL_CHANGED = 'PATCH_CONTROL_CHANGED';
+const PATCH_CONTROL_LOCK_OFF = 'PATCH_CONTROL_LOCK_OFF';
+const PATCH_CONTROL_LOCK_ON = 'PATCH_CONTROL_LOCK_ON';
 const PATCH_DUMP_RECEIVED = 'PATCH_DUMP_RECEIVED';
 
 export const patchControlChanged = (id, value) => (
@@ -9,6 +11,24 @@ export const patchControlChanged = (id, value) => (
     payload: {
       id,
       value,
+    },
+  }
+);
+
+export const patchControlLockOff = (id) => (
+  {
+    type: PATCH_CONTROL_LOCK_OFF,
+    payload: {
+      id,
+    },
+  }
+);
+
+export const patchControlLockOn = (id) => (
+  {
+    type: PATCH_CONTROL_LOCK_ON,
+    payload: {
+      id,
     },
   }
 );
@@ -26,6 +46,7 @@ const initialState = [];
 for (let [id, control] of Object.entries(controls)) {
   initialState[id] = control.init;
 }
+initialState.locks = ['patch-name', 'tempo', 'osc-fixed-note'];
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -572,6 +593,16 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         [action.payload.id]: action.payload.value,
+      };
+    case PATCH_CONTROL_LOCK_OFF:
+      return {
+        ...state,
+        locks: state.locks.filter(id => id !== action.payload.id),
+      };
+    case PATCH_CONTROL_LOCK_ON:
+      return {
+        ...state,
+        locks: [...state.locks, action.payload.id],
       };
     default:
       return state;
