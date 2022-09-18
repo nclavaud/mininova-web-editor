@@ -15,8 +15,8 @@ function Control(props) {
 
   const onChange = value => {
     dispatch(patchControlChanged(id, value));
-    const ofs = control.hasOwnProperty("offset") ? control.offset : 0;
-    emit(control.msg(value - ofs));
+    const offset = control.hasOwnProperty("offset") ? control.offset : 0;
+    emit(control.msg(value - offset));
   };
 
   const onLockOff = () => {
