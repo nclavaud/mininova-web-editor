@@ -44,8 +44,14 @@ function Controls({ currentPatch, emit }) {
         continue;
       }
       const value = control.range ? randomInt(...control.range) : randomInt(0, control.enum.length);
-      emit(control.msg(value));
-      dispatch(patchControlChanged(controlId, value));
+      const offset = control.hasOwnProperty("offset") ? control.offset : 0;
+      try {
+        emit(control.msg(value - offset));
+        dispatch(patchControlChanged(controlId, value));
+      } catch (error) {
+        console.log('Could not randomize control "' + controlId +'"');
+        console.log(error);
+      }
     }
   };
 

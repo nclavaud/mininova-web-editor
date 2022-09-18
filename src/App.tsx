@@ -18,10 +18,13 @@ function App() {
   const input = useSelector((state: RootState) => state.device.input);
   const output = useSelector((state: RootState) => state.device.output);
   const [currentPatch, setCurrentPatch] = useState<number | undefined>(undefined);
+  const [debug, setDebug] = useState<boolean>(false);
   const dispatch = useDispatch();
 
   const decodePatch = (data: Uint8Array) => {
-    console.log('Received patch.');
+    if (debug) {
+      console.log('Received patch.');
+    }
     dispatch(patchDumpReceived(data));
   }
 
@@ -31,7 +34,9 @@ function App() {
   };
 
   const onIncomingMidiMessage = (message: MidiMessage) => {
-    debugMidiMessage(message, 'Input: ');
+    if (debug) {
+      debugMidiMessage(message, 'Input: ');
+    }
     command = getCommand(message, command);
     switch (command.type) {
       case CommandType.ProgramChange:
@@ -53,16 +58,18 @@ function App() {
   };
 
   const emit = (message: Uint8Array) => {
+    if (debug) {
+      debugMidiMessage(message, 'Output: ');
+    }
     if (!output) {
       return;
     }
-    debugMidiMessage(message, 'Output: ');
     output.send(message);
   };
 
   const onChangeOutput = () => selectPatch(emit);
 
-  const memoizedEmit = useCallback(emit, [output]);
+  const memoizedEmit = useCallback(emit, [output, debug]);
 
   useEffect(() => {
     memoizedEmit(loadPatch);
@@ -78,6 +85,12 @@ function App() {
         input={input}
         output={output}
       />
+      <div className="debug">
+        <label>
+          <input type="checkbox" checked={debug} onChange={() => setDebug(!debug)} />
+          Debug {debug ? 'on' : 'off'}
+        </label>
+      </div>
       <Controls
         currentPatch={currentPatch}
         emit={emit}
