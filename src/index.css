@@ -12,6 +12,15 @@ code {
     monospace;
 }
 
+.debug {
+  margin-top: 1em;
+  color: #aaa;
+}
+
+.debug label {
+  cursor: pointer;
+}
+
 .oscillators {
   display: flex;
   flex-wrap: wrap;
