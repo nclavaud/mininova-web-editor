@@ -69,6 +69,12 @@ function Controls({ currentPatch, emit }) {
       <button onClick={selectPrevPatch}>Prev patch</button>
       <button onClick={selectNextPatch}>Next patch</button>
       <button onClick={() => emit(loadPatch)}>Load patch</button>
+      
+      <div className="mt-1">
+        <button onClick={randomize}>Randomize</button>
+        <button onClick={resetDefaults}>Reset defaults</button>
+      </div>
+
       <h3>Oct / Arp</h3>
       <Control
         id="tempo"
@@ -79,14 +85,11 @@ function Controls({ currentPatch, emit }) {
       <button onClick={changeOctave}>Change octave</button>
       <button onClick={activateArp}>Arp ON</button>
       <button onClick={deactivateArp}>Arp OFF</button>
-      <h3>Oscillators</h3>
-      <button onClick={randomize}>Randomize</button>
-      <button onClick={resetDefaults}>Reset defaults</button>
       <Oscillators emit={emit} />
+      <Effects emit={emit} />
       <Filters emit={emit} />
       <Envelopes emit={emit} />
       <Lfos emit={emit} />
-      <Effects emit={emit} />
       <ArpVocoder emit={emit} />
       <Modmatrix emit={emit} />
       <Tweaks emit={emit} />

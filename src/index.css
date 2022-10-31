@@ -55,3 +55,7 @@ code {
   width: 100px;
   box-sizing: border-box;
 }
+
+.mt-1 {
+  margin-top: 1em;
+}
