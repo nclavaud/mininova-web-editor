@@ -6,7 +6,7 @@ import { controls } from '../mininova';
 function Oscillators({ emit }) {
   return (
     <div>
-      <div className="oscillators">
+      <div className="rows">
         {[1, 2, 3].map(i => (
           <Oscillator
             key={i}
@@ -15,7 +15,7 @@ function Oscillators({ emit }) {
           />
         ))}
       </div>
-    <div className="oscillators_common">
+    <div className="rows">
       <div>
         <h4>Common Oscillator parameters</h4>
         {['osc-vibrato-depth', 'osc-vibrato-speed', 'osc-drift', 'osc-phase', 'osc-fixed-note'].map(id => (

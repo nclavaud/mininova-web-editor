@@ -98,7 +98,7 @@ function ArpVocoder({ emit }) {
 
   return (
     <div>
-    <div className="arp_vocoder">
+    <div className="rows">
       <div>
         <h4>Arp</h4>
         {arp.map(id => (

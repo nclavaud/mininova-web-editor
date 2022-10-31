@@ -21,58 +21,15 @@ code {
   cursor: pointer;
 }
 
-.oscillators {
+.rows {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.oscillators_common {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.envelopes {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.lfos {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.effects {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.arp_vocoder {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.tweaks {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
 
 .modmatrix {
     margin-top: 20px;
 }
-
 
 .control {
   display: flex;

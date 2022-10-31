@@ -6,7 +6,7 @@ import { controls } from '../mininova';
 function Filters({ emit }) {
   return (
       <div>
-      <div className="filters">
+      <div className="rows">
         {[1, 2].map(i => (
           <Filter
             key={i}
