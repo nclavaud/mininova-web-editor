@@ -27,10 +27,6 @@ code {
   justify-content: space-between;
 }
 
-.modmatrix {
-    margin-top: 20px;
-}
-
 .control {
   display: flex;
   align-items: baseline;
@@ -48,21 +44,11 @@ code {
   color: #000;
 }
 
-.mod .control {
-  display: inline;
-  align-items: baseline;
-  justify-content: space-between;
-  padding: 2px 0;
-}
-
 .control-label {
   flex-grow: 1;
   font-size: 0.9em;
   text-align: right;
   margin-right: 10px;
-}
-.mod .control-label {
-    margin-left: 40px;
 }
 
 .control-input {
