@@ -15,7 +15,7 @@ function Filter({ emit, number }) {
   ];
 
   return (
-    <div className="filter">
+    <div>
       <h4>Filter {number}</h4>
       {params.map(param => (
         <Control

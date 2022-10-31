@@ -12,7 +12,7 @@ function Mod({ emit, number }) {
   ]
 
   return (
-    <div className="mod">
+    <div>
       <h4>Mod {number}</h4>
       {params.map(param => (
         <Control

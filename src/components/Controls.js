@@ -56,7 +56,7 @@ function Controls({ currentPatch, emit }) {
   };
 
   return (
-    <div className="controls">
+    <div>
       <h3>Patch</h3>
       <p>Current patch: {currentPatch}</p>
       <Control
