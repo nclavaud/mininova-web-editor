@@ -19,7 +19,7 @@ function Lfo({ emit, number }) {
   ];
 
   return (
-    <div className="lfo">
+    <div>
       <h4>Lfo {number}</h4>
       {params.map(param => (
         <Control

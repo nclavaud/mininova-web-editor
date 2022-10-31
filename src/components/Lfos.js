@@ -4,7 +4,7 @@ import Lfo from './Lfo';
 function Lfos({ emit }) {
   return (
     <div>
-      <div className="lfos">
+      <div className="rows">
         {[1, 2, 3].map(i => (
           <Lfo
             key={i}

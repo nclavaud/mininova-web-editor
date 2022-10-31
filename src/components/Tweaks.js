@@ -4,7 +4,7 @@ import { controls } from '../mininova';
 
 function Tweaks({ emit }) {
     return (
-        <div className="tweaks">
+        <div className="rows">
         <div>
         <h4>Tweaks</h4>
         {['tweak-1', 'tweak-2', 'tweak-3', 'tweak-4', 'tweak-5', 'tweak-6', 'tweak-7', 'tweak-8'].map(i=>(

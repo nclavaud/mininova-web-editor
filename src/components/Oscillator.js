@@ -17,7 +17,7 @@ function Oscillator({ emit, number }) {
   ];
 
   return (
-    <div className="oscillator">
+    <div>
       <h4>Oscillator {number}</h4>
       {params.map(param => (
         <Control

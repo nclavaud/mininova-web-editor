@@ -14,7 +14,7 @@ function DeviceSetup(props) {
   const close = () => setVisible(false);
 
   return (
-    <div className="deviceSetup">
+    <div>
       <USBDeviceSetup
         {...props}
         onDone={close}

@@ -39,7 +39,7 @@ function Envelope({ emit, number }) {
   ];
 
   return (
-    <div className="envelope">
+    <div>
       <h4>Envelope {number}</h4>
       {params.map(param => (
           <Row key={param} emit={emit} number={number} param={param}/>
