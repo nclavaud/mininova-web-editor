@@ -8,16 +8,16 @@ import { deviceInputSelected, deviceOutputSelected } from '../redux/device';
 type MIDIDeviceSetupProps = {
   onChangeOutput: () => {},
   onIncomingMidiMessage: (message: MidiMessage) => void,
-  input: WebMidi.MIDIInput,
-  output: WebMidi.MIDIOutput,
+  input: MIDIInput,
+  output: MIDIOutput,
 };
 
 interface RootState {
   midi: {
     isSupported: boolean,
     detectionComplete: boolean,
-    inputs: WebMidi.MIDIInput[],
-    outputs: WebMidi.MIDIOutput[],
+    inputs: MIDIInput[],
+    outputs: MIDIOutput[],
   },
 };
 
@@ -34,19 +34,21 @@ function MIDIDeviceSetup({
   const availableOutputs = useSelector((state: RootState) => state.midi.outputs);
 
   const selectOutput = (id: string) => {
-    const device = findDeviceById<WebMidi.MIDIOutput>(id, availableOutputs);
+    const device = findDeviceById<MIDIOutput>(id, availableOutputs);
     dispatch(deviceOutputSelected(device));
     onChangeOutput();
   };
 
   const selectInput = (id: string) => {
     if (input) {
-      input.onmidimessage = (e: WebMidi.MIDIMessageEvent) => {};
+      input.onmidimessage = (e: MIDIMessageEvent) => {};
     }
-    const device = findDeviceById<WebMidi.MIDIInput>(id, availableInputs);
+    const device = findDeviceById<MIDIInput>(id, availableInputs);
     if (device !== null) {
-      device.onmidimessage = (e: WebMidi.MIDIMessageEvent) => {
-        onIncomingMidiMessage(e.data);
+      device.onmidimessage = (e: MIDIMessageEvent) => {
+        if (e.data) {
+          onIncomingMidiMessage(e.data);
+        }
       }
     }
     dispatch(deviceInputSelected(device));
@@ -57,7 +59,7 @@ function MIDIDeviceSetup({
       return;
     }
 
-    const registerAvailablePorts = (access: WebMidi.MIDIAccess) => {
+    const registerAvailablePorts = (access: MIDIAccess) => {
       const [inputs, outputs] = listPorts(access);
       dispatch(midiDevicesDetected(inputs, outputs));
     };
