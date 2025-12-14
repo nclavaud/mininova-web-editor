@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/mininova-web-editor/static/css/main.8777f3c9.css",
-    "main.js": "/mininova-web-editor/static/js/main.3089c5a6.js",
+    "main.js": "/mininova-web-editor/static/js/main.d5b5f8ab.js",
     "index.html": "/mininova-web-editor/index.html",
     "main.8777f3c9.css.map": "/mininova-web-editor/static/css/main.8777f3c9.css.map",
-    "main.3089c5a6.js.map": "/mininova-web-editor/static/js/main.3089c5a6.js.map"
+    "main.d5b5f8ab.js.map": "/mininova-web-editor/static/js/main.d5b5f8ab.js.map"
   },
   "entrypoints": [
     "static/css/main.8777f3c9.css",
-    "static/js/main.3089c5a6.js"
+    "static/js/main.d5b5f8ab.js"
   ]
 }
