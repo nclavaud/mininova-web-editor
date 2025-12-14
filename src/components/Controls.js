@@ -11,7 +11,7 @@ import ArpVocoder from './ArpVocoder';
 import Modmatrix from './Modmatrix';
 import Tweaks from './Tweaks';
 import Control from './Control';
-import { patchControlChanged } from '../redux/patch';
+import { patchControlChanged, patchControlLockOn } from '../redux/patch';
 
 const randomInt = (min, max) => Math.floor(Math.random() * (max + 1 - min)) + min;
 
@@ -35,6 +35,20 @@ function Controls({ currentPatch, emit }) {
       const value = control.init;
       emit(control.msg(value));
       dispatch(patchControlChanged(controlId, value));
+    }
+  };
+
+  const lockAll = () => {
+    for (let [controlId, ] of Object.entries(controls)) {
+      if (!shouldBeControlled(controlId)) {
+        continue;
+      }
+      try {
+        dispatch(patchControlLockOn(controlId));
+      } catch (error) {
+        console.log('Could not lock control "' + controlId +'"');
+        console.log(error);
+      }
     }
   };
 
@@ -71,6 +85,7 @@ function Controls({ currentPatch, emit }) {
       <button onClick={() => emit(loadPatch)}>Load patch</button>
       
       <div className="mt-1">
+        <button onClick={lockAll}>Lock all</button>
         <button onClick={randomize}>Randomize</button>
         <button onClick={resetDefaults}>Reset defaults</button>
       </div>
