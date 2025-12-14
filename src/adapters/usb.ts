@@ -67,7 +67,10 @@ class USBDeviceIO implements DeviceIO
   }
 
   public send(message: Uint8Array): void {
-    this.device.transferOut(MININOVA_ENDPOINT_OUT, message);
+    const buffer = new ArrayBuffer(message.length);
+    const view = new Uint8Array(buffer);
+    view.set(message);
+    this.device.transferOut(MININOVA_ENDPOINT_OUT, view);
   }
 }
 
