@@ -1,20 +1,13 @@
 {
   "files": {
-    "main.css": "/mininova-web-editor/static/css/main.0070ced5.chunk.css",
-    "main.js": "/mininova-web-editor/static/js/main.1d22a082.chunk.js",
-    "main.js.map": "/mininova-web-editor/static/js/main.1d22a082.chunk.js.map",
-    "runtime-main.js": "/mininova-web-editor/static/js/runtime-main.7a6c4b5b.js",
-    "runtime-main.js.map": "/mininova-web-editor/static/js/runtime-main.7a6c4b5b.js.map",
-    "static/js/2.6970973a.chunk.js": "/mininova-web-editor/static/js/2.6970973a.chunk.js",
-    "static/js/2.6970973a.chunk.js.map": "/mininova-web-editor/static/js/2.6970973a.chunk.js.map",
+    "main.css": "/mininova-web-editor/static/css/main.8777f3c9.css",
+    "main.js": "/mininova-web-editor/static/js/main.3089c5a6.js",
     "index.html": "/mininova-web-editor/index.html",
-    "static/css/main.0070ced5.chunk.css.map": "/mininova-web-editor/static/css/main.0070ced5.chunk.css.map",
-    "static/js/2.6970973a.chunk.js.LICENSE.txt": "/mininova-web-editor/static/js/2.6970973a.chunk.js.LICENSE.txt"
+    "main.8777f3c9.css.map": "/mininova-web-editor/static/css/main.8777f3c9.css.map",
+    "main.3089c5a6.js.map": "/mininova-web-editor/static/js/main.3089c5a6.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.7a6c4b5b.js",
-    "static/js/2.6970973a.chunk.js",
-    "static/css/main.0070ced5.chunk.css",
-    "static/js/main.1d22a082.chunk.js"
+    "static/css/main.8777f3c9.css",
+    "static/js/main.3089c5a6.js"
   ]
 }
