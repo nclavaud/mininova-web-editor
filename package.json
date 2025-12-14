@@ -22,7 +22,9 @@
     "typescript": "^5.9.3"
   },
   "scripts": {
+    "predev": "echo \"REACT_APP_BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')\" > .env.development.local",
     "dev": "react-scripts start",
+    "prebuild": "echo \"REACT_APP_BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')\" > .env.production",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "predeploy": "yarn build",

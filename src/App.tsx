@@ -96,6 +96,7 @@ function App() {
         emit={emit}
       />
       <p><a href="https://github.com/nclavaud/mininova-web-editor/">Contribute on GitHub</a></p>
+      <p>Last update: {process.env.REACT_APP_BUILD_DATE}</p>
     </div>
   );
 }
