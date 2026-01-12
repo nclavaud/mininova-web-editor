@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MidiMessage } from '../ports';
+import { MidiInputWrapper, MidiOutputWrapper } from '../adapters/midi';
+import { DeviceInput, DeviceOutput } from '../ports';
 import { findDeviceById, listPorts, requestAccess } from '../webmidi';
 import { midiDevicesDetected } from '../redux/midi';
 import { deviceInputSelected, deviceOutputSelected } from '../redux/device';
@@ -8,16 +10,16 @@ import { deviceInputSelected, deviceOutputSelected } from '../redux/device';
 type MIDIDeviceSetupProps = {
   onChangeOutput: () => {},
   onIncomingMidiMessage: (message: MidiMessage) => void,
-  input: MIDIInput,
-  output: MIDIOutput,
+  input: DeviceInput,
+  output: DeviceOutput,
 };
 
 interface RootState {
   midi: {
     isSupported: boolean,
     detectionComplete: boolean,
-    inputs: MIDIInput[],
-    outputs: MIDIOutput[],
+    inputs: DeviceInput[],
+    outputs: DeviceOutput[],
   },
 };
 
@@ -34,24 +36,19 @@ function MIDIDeviceSetup({
   const availableOutputs = useSelector((state: RootState) => state.midi.outputs);
 
   const selectOutput = (id: string) => {
-    const device = findDeviceById<MIDIOutput>(id, availableOutputs);
-    dispatch(deviceOutputSelected(device));
+    const device = findDeviceById<DeviceOutput>(id, availableOutputs);
+    if (device !== null) {
+      dispatch(deviceOutputSelected(device));
+    }
     onChangeOutput();
   };
 
   const selectInput = (id: string) => {
-    if (input) {
-      input.onmidimessage = (e: MIDIMessageEvent) => {};
-    }
-    const device = findDeviceById<MIDIInput>(id, availableInputs);
+    const device = findDeviceById<DeviceInput>(id, availableInputs);
     if (device !== null) {
-      device.onmidimessage = (e: MIDIMessageEvent) => {
-        if (e.data) {
-          onIncomingMidiMessage(e.data);
-        }
-      }
+      device.setIncomingMidiMessageListener(onIncomingMidiMessage);
+      dispatch(deviceInputSelected(device));
     }
-    dispatch(deviceInputSelected(device));
   };
 
   useEffect(() => {
@@ -61,7 +58,10 @@ function MIDIDeviceSetup({
 
     const registerAvailablePorts = (access: MIDIAccess) => {
       const [inputs, outputs] = listPorts(access);
-      dispatch(midiDevicesDetected(inputs, outputs));
+      // Wrap the MIDI devices to implement DeviceInput/DeviceOutput interfaces
+      const wrappedInputs = inputs.map(input => new MidiInputWrapper(input));
+      const wrappedOutputs = outputs.map(output => new MidiOutputWrapper(output));
+      dispatch(midiDevicesDetected(wrappedInputs, wrappedOutputs));
     };
 
     const detectAvailablePorts = async () => {

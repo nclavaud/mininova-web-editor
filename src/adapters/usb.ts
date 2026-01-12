@@ -27,6 +27,19 @@ class USBDeviceIO implements DeviceIO
     this.incomingMessageBuffer = new Uint8Array(0);
   }
 
+  // DeviceIO interface properties
+  public get id(): string {
+    return this.device.serialNumber || 'usb-device';
+  }
+
+  public get name(): string | null {
+    return this.device.productName || null;
+  }
+
+  public get manufacturer(): string | null {
+    return this.device.manufacturerName || null;
+  }
+
   public setIncomingMidiMessageListener(onIncomingMidiMessage: MidiMessageFunc): void {
     this.onIncomingMidiMessage = onIncomingMidiMessage;
 

@@ -16,6 +16,9 @@ export const debugMidiMessage = (message: MidiMessage, prefix: string) => {
 };
 
 export const noDevice = new class implements DeviceIO {
+  id = 'no-device';
+  name = null;
+  manufacturer = null;
   send(message: MidiMessage) {}
   setIncomingMidiMessageListener() {}
 }();

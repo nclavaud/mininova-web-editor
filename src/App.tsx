@@ -33,7 +33,7 @@ function App() {
     values: [],
   };
 
-  const onIncomingMidiMessage = (message: MidiMessage) => {
+  const onIncomingMidiMessage = useCallback((message: MidiMessage) => {
     if (debug) {
       debugMidiMessage(message, 'Input: ');
     }
@@ -55,7 +55,7 @@ function App() {
         }
         break;
     }
-  };
+  }, [debug, dispatch]);
 
   const emit = (message: Uint8Array) => {
     if (debug) {
@@ -70,6 +70,13 @@ function App() {
   const onChangeOutput = () => selectPatch(emit);
 
   const memoizedEmit = useCallback(emit, [output, debug]);
+
+  // Update the MIDI input listener when debug state changes
+  useEffect(() => {
+    if (input) {
+      input.setIncomingMidiMessageListener(onIncomingMidiMessage);
+    }
+  }, [input, debug, onIncomingMidiMessage]);
 
   useEffect(() => {
     memoizedEmit(loadPatch);
