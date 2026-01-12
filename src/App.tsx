@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Controls, DeviceSetup, Intro } from './components';
 import { Command, CommandType, getCommand } from './midi.command';
@@ -19,25 +19,24 @@ function App() {
   const output = useSelector((state: RootState) => state.device.output);
   const [currentPatch, setCurrentPatch] = useState<number | undefined>(undefined);
   const [debug, setDebug] = useState<boolean>(false);
+  const previousCommandRef = useRef<Command>({ type: CommandType.None, values: [] });
   const dispatch = useDispatch();
 
-  const decodePatch = (data: Uint8Array) => {
-    if (debug) {
-      console.log('Received patch.');
-    }
-    dispatch(patchDumpReceived(data));
-  }
-
-  let command: Command = {
-    type: CommandType.None,
-    values: [],
-  };
-
   const onIncomingMidiMessage = useCallback((message: MidiMessage) => {
+    const decodePatch = (data: Uint8Array) => {
+      if (debug) {
+        console.log('Received patch.');
+      }
+      dispatch(patchDumpReceived(data));
+    };
+
     if (debug) {
       debugMidiMessage(message, 'Input: ');
     }
-    command = getCommand(message, command);
+
+    const command = getCommand(message, previousCommandRef.current);
+    previousCommandRef.current = command;
+
     switch (command.type) {
       case CommandType.ProgramChange:
         setCurrentPatch(command.values[0]);
